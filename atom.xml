@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://www.xihrni.com</id>
+    <title>我的世界</title>
+    <updated>2020-05-29T03:56:54.749Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://www.xihrni.com"/>
+    <link rel="self" href="https://www.xihrni.com/atom.xml"/>
+    <subtitle>温故而知新</subtitle>
+    <logo>https://www.xihrni.com/images/avatar.png</logo>
+    <icon>https://www.xihrni.com/favicon.ico</icon>
+    <rights>All rights reserved 2020, 我的世界</rights>
+    <entry>
+        <title type="html"><![CDATA[关于PHP连接本地localhost上的Redis特别慢的处理记录]]></title>
+        <id>https://www.xihrni.com/post/guan-yu-php-lian-jie-localhost-shang-de-redis-te-bie-man-de-chu-li-ji-lu/</id>
+        <link href="https://www.xihrni.com/post/guan-yu-php-lian-jie-localhost-shang-de-redis-te-bie-man-de-chu-li-ji-lu/">
+        </link>
+        <updated>2020-05-28T05:43:58.000Z</updated>
+        <summary type="html"><![CDATA[<blockquote>
+<p>😳 本地的 Yii2 项目配置 Redis 缓存后接口速度非常慢，检查了一下后发现每次都是在连接 Redis 的时候耗时最长，一开始还以为是 Yii2 框架的扩展问题，后来用 php-cli 执行单个文件也会出现太慢的情况。</p>
+</blockquote>
+]]></summary>
+        <content type="html"><![CDATA[<blockquote>
+<p>😳 本地的 Yii2 项目配置 Redis 缓存后接口速度非常慢，检查了一下后发现每次都是在连接 Redis 的时候耗时最长，一开始还以为是 Yii2 框架的扩展问题，后来用 php-cli 执行单个文件也会出现太慢的情况。</p>
+</blockquote>
+<!-- more -->
+<h3 id="连接-redis">连接 Redis</h3>
+<p>PHP 连接 Redis 代码：</p>
+<pre><code class="language-php">&lt;?php // redis.php
+echo time() . &quot;\r\n&quot;;
+$redis = new Redis();
+$redis-&gt;connect('localhost', 6379);
+echo 'Server is running: ' . $redis-&gt;ping() . &quot;\r\n&quot;;
+echo time() . &quot;\r\n&quot;;
+</code></pre>
+<p>使用 php-cli 执行，发现时间相差2秒：</p>
+<pre><code class="language-shell">PS &gt; php -f redis.php
+1590629905
+Server is running: +PONG
+1590629907
+</code></pre>
+<p>但是将连接地址换成 <code>127.0.0.1</code> 之后却正常：</p>
+<pre><code class="language-shell">PS &gt; php -f redis.php
+1590629918
+Server is running: +PONG
+1590629918
+</code></pre>
+<h3 id="问题原因">问题原因</h3>
+<p>上网查了些资料后发现 Windows 从 Win7 以后优先使用 IPv6 的协议，使 <code>localhost</code> 走了 IPv6 协议：</p>
+<pre><code class="language-shell">PS &gt; hostname
+G-AA00604
+
+PS &gt; ping G-AA00604
+
+正在 Ping G-AA00604 [fe80::5cd6:59d3:ad04:b26f%14] 具有 32 字节的数据:
+来自 fe80::5cd6:59d3:ad04:b26f%14 的回复: 字节=32 时间&lt;1ms TTL=128
+来自 fe80::5cd6:59d3:ad04:b26f%14 的回复: 字节=32 时间&lt;1ms TTL=128
+来自 fe80::5cd6:59d3:ad04:b26f%14 的回复: 字节=32 时间&lt;1ms TTL=128
+来自 fe80::5cd6:59d3:ad04:b26f%14 的回复: 字节=32 时间&lt;1ms TTL=128
+
+fe80::5cd6:59d3:ad04:b26f%14 的 Ping 统计信息:
+    数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，
+往返行程的估计时间(以毫秒为单位):
+    最短 = 0ms，最长 = 0ms，平均 = 0ms
+</code></pre>
+<p>从上面的 <code>ping</code> 命令请求自己本机的主机名称，可以看到返回的是 IPv6 的地址类型，我们再来看一下网络接口的优先级：</p>
+<pre><code class="language-shell">PS &gt; netsh interface ipv6 show prefixpolicies
+查询活动状态...
+
+优先顺序    标签   前缀
+----------  -----  --------------------------------
+        50      0  ::1/128
+        40      1  ::/0
+        35      4  ::ffff:0:0/96
+        30      2  2002::/16
+        5       5  2001::/32
+        3       13  fc00::/7
+        1       11  fec0::/10
+        1       12  3ffe::/16
+        1       3  ::/96
+
+</code></pre>
+<p>可以看到  IPv6 的地址类型在最上面，而 IPv4 的地址类型在最下面</p>
+<h3 id="解决办法">解决办法</h3>
+<p>既然 IPv4 的优先级较低，那么我们就改变一下优先级（使用管理员权限）</p>
+<pre><code class="language-shell">PS &gt; netsh int ipv6 set prefix ::/96 50 0
+确定。
+
+PS &gt; netsh int ipv6 set prefix ::ffff:0:0/96 40 1
+确定。
+
+PS &gt; netsh int ipv6 set prefix 2002::/16 35 2
+确定。
+
+PS &gt; netsh int ipv6 set prefix 2001::/32 30 3
+确定。
+
+PS &gt; netsh int ipv6 set prefix ::1/128 10 4
+确定。
+
+PS &gt; netsh int ipv6 set prefix ::/0 5 5
+确定。
+
+PS &gt; netsh int ipv6 set prefix fc00::/7 3 13
+确定。
+
+PS &gt; netsh int ipv6 set prefix fec0::/10 1 11
+确定。
+
+PS &gt; netsh int ipv6 set prefix 3ffe::/16 1 12
+确定。
+
+</code></pre>
+<p>改完之后我们再看一下网络接口的优先级：</p>
+<pre><code class="language-shell">PS &gt; netsh interface ipv6 show prefixpolicies
+查询活动状态...
+
+优先顺序    标签   前缀
+----------  -----  --------------------------------
+        50      0  ::/96
+        40      1  ::ffff:0:0/96
+        35      2  2002::/16
+        30      3  2001::/32
+        10      4  ::1/128
+         5      5  ::/0
+         3     13  fc00::/7
+         1     12  3ffe::/16
+         1     11  fec0::/10
+
+</code></pre>
+<p>看到 IPv4 的优先级已经在最上方了，那我们再 <code>ping</code> 一下：</p>
+<pre><code class="language-shell">PS &gt; ping G-AA00604
+
+正在 Ping G-AA00604 [192.168.56.1] 具有 32 字节的数据:
+来自 192.168.56.1 的回复: 字节=32 时间&lt;1ms TTL=128
+来自 192.168.56.1 的回复: 字节=32 时间&lt;1ms TTL=128
+来自 192.168.56.1 的回复: 字节=32 时间&lt;1ms TTL=128
+来自 192.168.56.1 的回复: 字节=32 时间&lt;1ms TTL=128
+
+192.168.56.1 的 Ping 统计信息:
+    数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，
+往返行程的估计时间(以毫秒为单位):
+    最短 = 0ms，最长 = 0ms，平均 = 0ms
+</code></pre>
+<p>可以看到已经反回了 IPv4 的地址类型，再试试连接 <code>localhost</code> 的 Redis：</p>
+<pre><code class="language-shell">PS &gt; php -f redis.php
+1590630198
+Server is running: +PONG
+1590630198
+</code></pre>
+<p>到此，已经解决了连接 <code>localhost</code> 慢的问题，其他应用也可使用此方式解决，比如：MySQL、MemCacahe 等<br>
+😬</p>
+]]></content>
+    </entry>
+</feed>
