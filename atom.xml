@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2020-05-29T03:56:54.749Z</updated>
+    <updated>2020-05-29T05:53:46.215Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
-    <subtitle>温故而知新</subtitle>
+    <subtitle>只有自身强大</subtitle>
     <logo>https://www.xihrni.com/images/avatar.png</logo>
     <icon>https://www.xihrni.com/favicon.ico</icon>
     <rights>All rights reserved 2020, 我的世界</rights>
