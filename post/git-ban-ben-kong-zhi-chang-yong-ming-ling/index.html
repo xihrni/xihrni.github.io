@@ -1,166 +1,124 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://www.xihrni.com</id>
-    <title>我的世界</title>
-    <updated>2020-05-29T07:56:48.037Z</updated>
-    <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://www.xihrni.com"/>
-    <link rel="self" href="https://www.xihrni.com/atom.xml"/>
-    <subtitle>只有自身强大</subtitle>
-    <logo>https://www.xihrni.com/images/avatar.png</logo>
-    <icon>https://www.xihrni.com/favicon.ico</icon>
-    <rights>All rights reserved 2020, 我的世界</rights>
-    <entry>
-        <title type="html"><![CDATA[关于PHP连接本地localhost上的Redis特别慢的处理记录]]></title>
-        <id>https://www.xihrni.com/post/guan-yu-php-lian-jie-localhost-shang-de-redis-te-bie-man-de-chu-li-ji-lu/</id>
-        <link href="https://www.xihrni.com/post/guan-yu-php-lian-jie-localhost-shang-de-redis-te-bie-man-de-chu-li-ji-lu/">
-        </link>
-        <updated>2020-05-28T05:43:58.000Z</updated>
-        <summary type="html"><![CDATA[<blockquote>
-<p>😳 本地的 Yii2 项目配置 Redis 缓存后接口速度非常慢，检查了一下后发现每次都是在连接 Redis 的时候耗时最长，一开始还以为是 Yii2 框架的扩展问题，后来用 php-cli 执行单个文件也会出现太慢的情况。</p>
-</blockquote>
-]]></summary>
-        <content type="html"><![CDATA[<blockquote>
-<p>😳 本地的 Yii2 项目配置 Redis 缓存后接口速度非常慢，检查了一下后发现每次都是在连接 Redis 的时候耗时最长，一开始还以为是 Yii2 框架的扩展问题，后来用 php-cli 执行单个文件也会出现太慢的情况。</p>
-</blockquote>
-<!-- more -->
-<h3 id="连接-redis">连接 Redis</h3>
-<p>PHP 连接 Redis 代码：</p>
-<pre><code class="language-php">&lt;?php // redis.php
-echo time() . &quot;\r\n&quot;;
-$redis = new Redis();
-$redis-&gt;connect('localhost', 6379);
-echo 'Server is running: ' . $redis-&gt;ping() . &quot;\r\n&quot;;
-echo time() . &quot;\r\n&quot;;
-</code></pre>
-<p>使用 php-cli 执行，发现时间相差2秒：</p>
-<pre><code class="language-shell">PS &gt; php -f redis.php
-1590629905
-Server is running: +PONG
-1590629907
-</code></pre>
-<p>但是将连接地址换成 <code>127.0.0.1</code> 之后却正常：</p>
-<pre><code class="language-shell">PS &gt; php -f redis.php
-1590629918
-Server is running: +PONG
-1590629918
-</code></pre>
-<h3 id="问题原因">问题原因</h3>
-<p>上网查了些资料后发现 Windows 从 Win7 以后优先使用 IPv6 的协议，使 <code>localhost</code> 走了 IPv6 协议：</p>
-<pre><code class="language-shell">PS &gt; hostname
-G-AA00604
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Git 版本控制常用命令 | 我的世界</title>
+<link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1590739006115">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Git 版本控制常用命令 | 我的世界 - Atom Feed" href="https://www.xihrni.com/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
-PS &gt; ping G-AA00604
 
-正在 Ping G-AA00604 [fe80::5cd6:59d3:ad04:b26f%14] 具有 32 字节的数据:
-来自 fe80::5cd6:59d3:ad04:b26f%14 的回复: 字节=32 时间&lt;1ms TTL=128
-来自 fe80::5cd6:59d3:ad04:b26f%14 的回复: 字节=32 时间&lt;1ms TTL=128
-来自 fe80::5cd6:59d3:ad04:b26f%14 的回复: 字节=32 时间&lt;1ms TTL=128
-来自 fe80::5cd6:59d3:ad04:b26f%14 的回复: 字节=32 时间&lt;1ms TTL=128
 
-fe80::5cd6:59d3:ad04:b26f%14 的 Ping 统计信息:
-    数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，
-往返行程的估计时间(以毫秒为单位):
-    最短 = 0ms，最长 = 0ms，平均 = 0ms
-</code></pre>
-<p>从上面的 <code>ping</code> 命令请求自己本机的主机名称，可以看到返回的是 IPv6 的地址类型，我们再来看一下网络接口的优先级：</p>
-<pre><code class="language-shell">PS &gt; netsh interface ipv6 show prefixpolicies
-查询活动状态...
+    <meta name="description" content="😳准备
 
-优先顺序    标签   前缀
-----------  -----  --------------------------------
-        50      0  ::1/128
-        40      1  ::/0
-        35      4  ::ffff:0:0/96
-        30      2  2002::/16
-        5       5  2001::/32
-        3       13  fc00::/7
-        1       11  fec0::/10
-        1       12  3ffe::/16
-        1       3  ::/96
+帮助
+查看帮助
+git help
 
-</code></pre>
-<p>可以看到  IPv6 的地址类型在最上面，而 IPv4 的地址类型在最下面</p>
-<h3 id="解决办法">解决办法</h3>
-<p>既然 IPv4 的优先级较低，那么我们就改变一下优先级（使用管理员权限）</p>
-<pre><code class="language-shell">PS &gt; netsh int ipv6 set prefix ::/96 50 0
-确定。
+查看所有命令
+git help -a
 
-PS &gt; netsh int ipv6 set prefix ::ffff:0:0/96 40 1
-确定。
+查看使用手册
+git help -g
 
-PS &gt; netsh int ipv6 set prefix 2002::/16 35 2
-确定。
+查看单个命令
 
-PS &gt; netsh int ipv6 set prefix 2001::/32 30 3
-确定。
+使用 F 键向下翻页，使用 B 键向上翻页，使用 Q 键退出
 
-PS &gt; netsh int ipv6 set prefix ::1/128 10 4
-确定。
+git help add
 
-PS &gt; netsh int ipv6 set prefix ::/0 5 5
-确定。
+配置..." />
+    <meta name="keywords" content="git,github" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://www.xihrni.com">
+  <img class="avatar" src="https://www.xihrni.com/images/avatar.png?v=1590739006115" alt="">
+  </a>
+  <h1 class="site-title">
+    我的世界
+  </h1>
+  <p class="site-description">
+    只有自身强大
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/xihrni" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
 
-PS &gt; netsh int ipv6 set prefix fc00::/7 3 13
-确定。
-
-PS &gt; netsh int ipv6 set prefix fec0::/10 1 11
-确定。
-
-PS &gt; netsh int ipv6 set prefix 3ffe::/16 1 12
-确定。
-
-</code></pre>
-<p>改完之后我们再看一下网络接口的优先级：</p>
-<pre><code class="language-shell">PS &gt; netsh interface ipv6 show prefixpolicies
-查询活动状态...
-
-优先顺序    标签   前缀
-----------  -----  --------------------------------
-        50      0  ::/96
-        40      1  ::ffff:0:0/96
-        35      2  2002::/16
-        30      3  2001::/32
-        10      4  ::1/128
-         5      5  ::/0
-         3     13  fc00::/7
-         1     12  3ffe::/16
-         1     11  fec0::/10
-
-</code></pre>
-<p>看到 IPv4 的优先级已经在最上方了，那我们再 <code>ping</code> 一下：</p>
-<pre><code class="language-shell">PS &gt; ping G-AA00604
-
-正在 Ping G-AA00604 [192.168.56.1] 具有 32 字节的数据:
-来自 192.168.56.1 的回复: 字节=32 时间&lt;1ms TTL=128
-来自 192.168.56.1 的回复: 字节=32 时间&lt;1ms TTL=128
-来自 192.168.56.1 的回复: 字节=32 时间&lt;1ms TTL=128
-来自 192.168.56.1 的回复: 字节=32 时间&lt;1ms TTL=128
-
-192.168.56.1 的 Ping 统计信息:
-    数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，
-往返行程的估计时间(以毫秒为单位):
-    最短 = 0ms，最长 = 0ms，平均 = 0ms
-</code></pre>
-<p>可以看到已经反回了 IPv4 的地址类型，再试试连接 <code>localhost</code> 的 Redis：</p>
-<pre><code class="language-shell">PS &gt; php -f redis.php
-1590630198
-Server is running: +PONG
-1590630198
-</code></pre>
-<p>到此，已经解决了连接 <code>localhost</code> 慢的问题，其他应用也可使用此方式解决，比如：MySQL、MemCacahe 等<br>
-😬</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Git 版本控制常用命令]]></title>
-        <id>https://www.xihrni.com/post/git-ban-ben-kong-zhi-chang-yong-ming-ling/</id>
-        <link href="https://www.xihrni.com/post/git-ban-ben-kong-zhi-chang-yong-ming-ling/">
-        </link>
-        <updated>2018-08-18T06:32:46.000Z</updated>
-        <summary type="html"><![CDATA[<h2 id="准备">😳准备</h2>
-]]></summary>
-        <content type="html"><![CDATA[<h2 id="准备">😳准备</h2>
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Git 版本控制常用命令
+            </h2>
+            <div class="post-info">
+              <span>
+                2018-08-18
+              </span>
+              <span>
+                8 min read
+              </span>
+              
+                <a href="https://www.xihrni.com/tag/9RuaOAU4j/" class="post-tag">
+                  # git
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/YhgEKchQRE/" class="post-tag">
+                  # github
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="准备">😳准备</h2>
 <!-- more -->
 <h3 id="帮助">帮助</h3>
 <p>查看帮助</p>
@@ -540,6 +498,157 @@ git tag -a v0.1 xxx -m 'init'
 <h3 id="gitflow-工作流">Gitflow 工作流</h3>
 <p>一个中央远程仓库，一个主分支，一个开发分支，多个功能分支<br>
 😬</p>
-]]></content>
-    </entry>
-</feed>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%87%86%E5%A4%87">😳准备</a>
+<ul>
+<li><a href="#%E5%B8%AE%E5%8A%A9">帮助</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE">配置</a></li>
+<li><a href="#%E5%88%AB%E5%90%8D">别名</a></li>
+<li><a href="#%E5%BF%BD%E7%95%A5%E8%B7%9F%E8%B8%AA%E6%96%87%E4%BB%B6">忽略跟踪文件</a></li>
+<li><a href="#%E5%BF%BD%E7%95%A5%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6">忽略本地文件</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9F%BA%E7%A1%80">基础</a>
+<ul>
+<li><a href="#%E5%88%9D%E5%A7%8B%E5%8C%96">初始化</a></li>
+<li><a href="#%E6%8F%90%E4%BA%A4">提交</a></li>
+<li><a href="#%E5%AF%B9%E6%AF%94">对比</a></li>
+<li><a href="#%E9%87%8D%E5%91%BD%E5%90%8D">重命名</a></li>
+<li><a href="#%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6">删除文件</a></li>
+<li><a href="#%E6%81%A2%E5%A4%8D%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6">恢复删除文件</a></li>
+<li><a href="#%E9%87%8D%E7%BD%AE%E6%8F%90%E4%BA%A4%E6%8E%A7%E5%88%B6%E5%A4%B4%E9%83%A8%E6%8C%87%E9%92%88">重置提交，控制头部指针</a></li>
+<li><a href="#%E5%B7%A5%E4%BD%9C%E8%BF%9B%E5%BA%A6">工作进度</a></li>
+<li><a href="#%E6%97%A5%E5%BF%97">日志</a></li>
+</ul>
+</li>
+<li><a href="#%E5%88%86%E6%94%AF">分支</a>
+<ul>
+<li><a href="#%E5%88%86%E6%94%AF-2">分支</a></li>
+<li><a href="#%E5%AF%B9%E6%AF%94-2">对比</a></li>
+<li><a href="#%E5%90%88%E5%B9%B6">合并</a></li>
+<li><a href="#%E9%87%8D%E5%91%BD%E5%90%8D%E4%B8%8E%E5%88%A0%E9%99%A4">重命名与删除</a></li>
+</ul>
+</li>
+<li><a href="#%E8%BF%9C%E7%A8%8B">远程</a>
+<ul>
+<li><a href="#%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B%E7%89%88%E6%9C%AC%E5%BA%93">添加远程版本库</a></li>
+<li><a href="#%E7%A7%BB%E9%99%A4%E8%BF%9C%E7%A8%8B%E7%89%88%E6%9C%AC%E5%BA%93">移除远程版本库</a></li>
+<li><a href="#%E6%9B%B4%E6%96%B0%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF%E5%88%97%E8%A1%A8">更新远程分支列表</a></li>
+<li><a href="#%E5%88%87%E6%8D%A2%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF">切换远程分支</a></li>
+<li><a href="#%E6%8B%89%E5%8F%96%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF">拉取远程分支</a></li>
+<li><a href="#%E6%8E%A8%E9%80%81%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF">推送远程分支</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B-%E5%88%A0%E9%99%A4%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF">查看、删除远程分支</a></li>
+<li><a href="#%E5%85%8B%E9%9A%86%E8%BF%9C%E7%A8%8B%E7%89%88%E6%9C%AC%E5%BA%93">克隆远程版本库</a></li>
+<li><a href="#%E6%8F%90%E5%8F%96-%E5%90%88%E5%B9%B6%E8%BF%9C%E7%A8%8B%E7%89%88%E6%9C%AC%E5%BA%93">提取、合并远程版本库</a></li>
+<li><a href="#%E5%AF%86%E7%A0%81%E4%BF%AE%E6%94%B9">密码修改</a><br>
+*
+<ul>
+<li><a href="#windows">windows</a></li>
+<li><a href="#mac-os">Mac OS</a></li>
+</ul>
+</li>
+<li><a href="#ssh-key">SSH key</a><br>
+*
+<ul>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E7%B3%BB%E7%BB%9F%E6%98%AF%E5%90%A6%E6%9C%89-ssh-key">查看当前系统是否有 SSH key</a></li>
+<li><a href="#%E7%94%9F%E6%88%90-ssh-key">生成 SSH key</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E6%A0%87%E7%AD%BE">标签</a>
+<ul>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E6%A0%87%E7%AD%BE">查看标签</a></li>
+<li><a href="#%E6%B7%BB%E5%8A%A0%E6%A0%87%E7%AD%BE">添加标签</a></li>
+<li><a href="#%E5%88%A0%E9%99%A4%E6%A0%87%E7%AD%BE">删除标签</a></li>
+<li><a href="#%E5%88%87%E6%8D%A2%E5%88%B0%E6%A0%87%E7%AD%BE">切换到标签</a></li>
+<li><a href="#%E6%8E%A8%E9%80%81%E5%88%B0%E8%BF%9C%E7%A8%8B">推送到远程</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B7%A5%E4%BD%9C%E6%B5%81">工作流</a>
+<ul>
+<li><a href="#%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%B7%A5%E4%BD%9C%E6%B5%81">集中式工作流</a></li>
+<li><a href="#%E5%8A%9F%E8%83%BD%E5%88%86%E6%94%AF%E5%B7%A5%E4%BD%9C%E6%B5%81">功能分支工作流</a></li>
+<li><a href="#gitflow-%E5%B7%A5%E4%BD%9C%E6%B5%81">Gitflow 工作流</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a class="margin-10-left-right" href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>|<a class="margin-10-left-right" href="http://www.beian.miit.gov.cn" target="_blank">粤ICP备15099124号-1</a>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?5d5eb0906105cf159da64f5d0625e7fa";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+  <a class="rss" href="https://www.xihrni.com/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
