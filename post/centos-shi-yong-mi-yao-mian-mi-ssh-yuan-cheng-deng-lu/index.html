@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CentOS 使用秘钥免密 SSH 远程登录 | 我的世界</title>
-<link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1591080603006">
+<link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1591081540385">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="CentOS 使用秘钥免密 SSH 远程登录 | 我的世界 - Atom Feed"
@@ -11,15 +11,16 @@
 <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700"> -->
 
 
-    <meta name="description" content="生成 SSH Key
+    <meta name="description" content="😳生成 SSH Key
 
 ~ 代表当前用户目录，比如 root 用户则为 /root
+
 
 检查当前是否已存在 ssh key
 &gt; cat ~/.ssh/id_rsa
 
 生成 ssh key （已存在则无需生成）
-&gt; ssh-keyg..." />
+&gt; ssh-k..." />
     <meta name="keywords" content="centos,ssh,秘钥" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -29,7 +30,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://www.xihrni.com">
-  <img class="avatar" src="https://www.xihrni.com/images/avatar.png?v=1591080603006" alt="">
+  <img class="avatar" src="https://www.xihrni.com/images/avatar.png?v=1591081540385" alt="">
   </a>
   <h1 class="site-title">
     我的世界
@@ -114,10 +115,11 @@
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <h3 id="生成-ssh-key">生成 SSH Key</h3>
+                <h3 id="生成-ssh-key">😳生成 SSH Key</h3>
 <blockquote>
 <p><code>~</code> 代表当前用户目录，比如 root 用户则为 <code>/root</code></p>
 </blockquote>
+<!-- more -->
 <p>检查当前是否已存在 <code>ssh key</code></p>
 <pre><code class="language-shell">&gt; cat ~/.ssh/id_rsa
 </code></pre>
@@ -162,6 +164,7 @@ PubkeyAuthentication yes // 允许使用基于密钥认证的方式登陆
 <h3 id="使用秘钥免密登录">使用秘钥免密登录</h3>
 <pre><code class="language-shell">&gt; ssh -i ~/.ssh/id_rsa root@***.***.***.***
 </code></pre>
+<p>😬</p>
 
               </div>
               <div class="toc-container">
@@ -170,7 +173,7 @@ PubkeyAuthentication yes // 允许使用基于密钥认证的方式登陆
 <ul>
 <li>
 <ul>
-<li><a href="#%E7%94%9F%E6%88%90-ssh-key">生成 SSH Key</a></li>
+<li><a href="#%E7%94%9F%E6%88%90-ssh-key">😳生成 SSH Key</a></li>
 <li><a href="#%E6%9C%AC%E5%9C%B0%E5%85%AC%E9%92%A5%E5%8A%A0%E5%85%A5%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%88%E6%9D%83%E6%96%87%E4%BB%B6%E4%B8%AD">本地公钥加入到远程服务器授权文件中</a></li>
 <li><a href="#%E9%85%8D%E7%BD%AE%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8ssh%E6%9C%8D%E5%8A%A1">配置远程服务器SSH服务</a></li>
 <li><a href="#%E4%BD%BF%E7%94%A8%E7%A7%98%E9%92%A5%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95">使用秘钥免密登录</a></li>
@@ -188,9 +191,9 @@ PubkeyAuthentication yes // 允许使用基于密钥认证的方式登陆
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://www.xihrni.com/post/git-ban-ben-kong-zhi-chang-yong-ming-ling/">
+            <a href="https://www.xihrni.com/post/centos-chong-xie-crontab-r-ming-ling-fang-zhi-wu-cao-zuo/">
               <h3 class="post-title">
-                Git 版本控制常用命令
+                Centos 重写 crontab -r 命令防止误操作
               </h3>
             </a>
           </div>

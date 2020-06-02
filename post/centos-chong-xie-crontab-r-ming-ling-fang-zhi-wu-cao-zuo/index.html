@@ -2,22 +2,25 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Git 从远程拉取数据时提示：&#39;You have not concluded your merge (MERGE_HEAD exists).&#39; 解决方法 | 我的世界</title>
+<title>Centos 重写 crontab -r 命令防止误操作 | 我的世界</title>
 <link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1591081540385">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="Git 从远程拉取数据时提示：&#39;You have not concluded your merge (MERGE_HEAD exists).&#39; 解决方法 | 我的世界 - Atom Feed"
+<link rel="alternate" type="application/atom+xml" title="Centos 重写 crontab -r 命令防止误操作 | 我的世界 - Atom Feed"
   href="https://www.xihrni.com/atom.xml">
 <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700"> -->
 
 
-    <meta name="description" content="😳当前状态
-有些代码未加到忽略文件然后系统运行中被修改之后如果未处理进行拉取，在操作的过程中可能出现了如下状态
+    <meta name="description" content="
+😳一次误操作将服务器上的所有定时任务清除导致项目故障
 
-&gt; git status
-# On branch develop
-# Your branch and 'origin/..." />
-    <meta name="keywords" content="merge,pull,git" />
+别名
+设置别名重写 crontab 命令
+&gt; vi /etc/bashrc
+
+输入 i 进入编辑模式，新增一行
+alias crontab='/usr/bin/crontab..." />
+    <meta name="keywords" content="crontab,定时任务,centos" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -83,79 +86,78 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              Git 从远程拉取数据时提示：&#39;You have not concluded your merge (MERGE_HEAD exists).&#39; 解决方法
+              Centos 重写 crontab -r 命令防止误操作
             </h2>
             <div class="post-info">
               <span>
-                2020-06-02
+                2019-07-24
               </span>
               <span>
                 2 min read
               </span>
               
-                <a href="https://www.xihrni.com/tag/merge/" class="post-tag">
-                  # merge
+                <a href="https://www.xihrni.com/tag/crontab/" class="post-tag">
+                  # crontab
                 </a>
               
-                <a href="https://www.xihrni.com/tag/pull/" class="post-tag">
-                  # pull
+                <a href="https://www.xihrni.com/tag/ding-shi-ren-wu/" class="post-tag">
+                  # 定时任务
                 </a>
               
-                <a href="https://www.xihrni.com/tag/9RuaOAU4j/" class="post-tag">
-                  # git
+                <a href="https://www.xihrni.com/tag/centos/" class="post-tag">
+                  # centos
                 </a>
               
             </div>
             
-              <img class="post-feature-image" src="https://www.xihrni.com/post-images/git-cong-yuan-cheng-la-qu-shu-ju-shi-ti-shi-you-have-not-concluded-your-merge-merge_head-exists.png" alt="">
+              <img class="post-feature-image" src="https://www.xihrni.com/post-images/centos-chong-xie-crontab-r-ming-ling-fang-zhi-wu-cao-zuo.png" alt="">
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <h3 id="当前状态">😳当前状态</h3>
-<p>有些代码未加到忽略文件然后系统运行中被修改之后如果未处理进行拉取，在操作的过程中可能出现了如下状态</p>
-<!-- more -->
-<pre><code class="language-shell">&gt; git status
-# On branch develop
-# Your branch and 'origin/develop' have diverged,
-# and have 9 and 7 different commits each, respectively.
-#   (use &quot;git pull&quot; to merge the remote branch into yours)
-#
-# All conflicts fixed but you are still merging.
-#   (use &quot;git commit&quot; to conclude merge)
-#
-# Changes not staged for commit:
-#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
-#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
-#
-#       modified:   config/site_config.php
-#       modified:   sitemap_article.xml
-#       modified:   sitemap_goods.xml
-#       modified:   sitemaps.xml
-#
-no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
-</code></pre>
-<p>这个时候可以先备份修改过的文件，然后重置到修改之前的状态再拉取试试</p>
-<pre><code class="language-shell">&gt; git checkout -- config/site_config.php
-&gt; git checkout -- sitemap_article.xml
-&gt; git checkout -- sitemap_goods.xml
-&gt; git checkout -- sitemap.xml
-&gt; git pull
-</code></pre>
-<p>如果提示以下信息则需要使用强制合并进行操作</p>
-<pre><code class="language-shell">&gt; git pull
-You have not concluded your merge (MERGE_HEAD exists).
-Please, commit your changes before you can merge.
-</code></pre>
-<h3 id="强制合并">强制合并</h3>
-<blockquote>
-<p>强制合并会覆盖本地版本，请先备份相关文件</p>
+                <blockquote>
+<p>😳一次误操作将服务器上的所有定时任务清除导致项目故障</p>
 </blockquote>
-<pre><code class="language-shell">&gt; git fetch --all
-&gt; git reset --hard origin/master
-&gt; git fetch
+<h3 id="别名">别名</h3>
+<p>设置别名重写 <code>crontab</code> 命令</p>
+<pre><code class="language-shell">&gt; vi /etc/bashrc
 </code></pre>
-<p>再进行拉取则没有问题了</p>
-<pre><code class="language-shell">&gt; git pull
+<p>输入 <code>i</code> 进入编辑模式，新增一行</p>
+<pre><code class="language-shell">alias crontab='/usr/bin/crontab.sh'
+</code></pre>
+<p>输入 <code>:wq</code> 保存并退出</p>
+<h3 id="命令文件">命令文件</h3>
+<p>编辑文件</p>
+<pre><code class="language-shell">&gt; vi crontab.sh
+</code></pre>
+<p>输入 <code>i</code> 进入编辑模式，输入以下代码</p>
+<pre><code class="language-shell">#!/bin/sh
+source /etc/profile;
+source ~/.bash_profile;
+
+etime=`date -d &quot;0 days ago&quot; +%Y%m%d_%H%M%S`
+
+if [ &quot;$1&quot; = &quot;-r&quot; ] ; then
+    echo &quot;My God! Dangerous...&quot;
+    echo &quot;Exit...&quot;
+    exit 2
+fi
+
+if [ &quot;$1&quot; = &quot;-l&quot; ] ; then
+    /usr/bin/crontab -l
+    exit 0
+fi
+
+# 编辑时进行备份
+if [ &quot;$1&quot; = &quot;-e&quot; ] ; then
+    mkdir -p  ~/cronbak
+    /usr/bin/crontab -l  &gt;  ~/cronbak/cron.bak.$etime.a
+    /usr/bin/crontab -e
+    /usr/bin/crontab -l  &gt;  ~/cronbak/cron.bak.$etime.b
+f
+</code></pre>
+<p>移动文件并添加权限</p>
+<pre><code class="language-shell">&gt; mv crontab.sh /usr/bin
+&gt; chmod 755 /usr/bin/crontab.sh
 </code></pre>
 <p>😬</p>
 
@@ -166,8 +168,8 @@ Please, commit your changes before you can merge.
 <ul>
 <li>
 <ul>
-<li><a href="#%E5%BD%93%E5%89%8D%E7%8A%B6%E6%80%81">😳当前状态</a></li>
-<li><a href="#%E5%BC%BA%E5%88%B6%E5%90%88%E5%B9%B6">强制合并</a></li>
+<li><a href="#%E5%88%AB%E5%90%8D">别名</a></li>
+<li><a href="#%E5%91%BD%E4%BB%A4%E6%96%87%E4%BB%B6">命令文件</a></li>
 </ul>
 </li>
 </ul>
@@ -182,9 +184,9 @@ Please, commit your changes before you can merge.
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://www.xihrni.com/post/borderlands-2-she-zhi-wei-fan-ti-zhong-wen-epic-games-ping-tai/">
+            <a href="https://www.xihrni.com/post/git-ban-ben-kong-zhi-chang-yong-ming-ling/">
               <h3 class="post-title">
-                Borderlands 2 设置为繁体中文（Epic Games 平台）
+                Git 版本控制常用命令
               </h3>
             </a>
           </div>
