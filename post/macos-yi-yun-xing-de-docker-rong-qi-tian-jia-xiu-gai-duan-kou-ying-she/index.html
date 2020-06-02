@@ -1,0 +1,312 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MacOS 已运行的 Docker 容器添加/修改端口映射 | 我的世界</title>
+<link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1591080175596">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="MacOS 已运行的 Docker 容器添加/修改端口映射 | 我的世界 - Atom Feed"
+  href="https://www.xihrni.com/atom.xml">
+<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700"> -->
+
+
+    <meta name="description" content="
+😳当前容器名称为 btPanel，需要添加 3306 端口
+
+
+确认已映射端口
+# name or container id
+&gt; docker port btPanel
+
+确认容器ID
+&gt; docker container ..." />
+    <meta name="keywords" content="宝塔面板,docker,端口,macos" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://www.xihrni.com">
+  <img class="avatar" src="https://www.xihrni.com/images/avatar.png?v=1591080175596" alt="">
+  </a>
+  <h1 class="site-title">
+    我的世界
+  </h1>
+  <p class="site-description">
+    只有自身强大
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/xihrni" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              MacOS 已运行的 Docker 容器添加/修改端口映射
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-01-01
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+                <a href="https://www.xihrni.com/tag/bao-ta-mian-ban/" class="post-tag">
+                  # 宝塔面板
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/docker/" class="post-tag">
+                  # docker
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/duan-kou/" class="post-tag">
+                  # 端口
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/macos/" class="post-tag">
+                  # macos
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://www.xihrni.com/post-images/macos-yi-yun-xing-de-docker-rong-qi-tian-jia-xiu-gai-duan-kou-ying-she.png" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <blockquote>
+<p>😳当前容器名称为 <code>btPanel</code>，需要添加 <code>3306</code> 端口</p>
+</blockquote>
+<!-- more -->
+<h3 id="确认已映射端口">确认已映射端口</h3>
+<pre><code class="language-shell"># name or container id
+&gt; docker port btPanel
+</code></pre>
+<h3 id="确认容器id">确认容器ID</h3>
+<pre><code class="language-shell">&gt; docker container inspect btPanel
+</code></pre>
+<h3 id="停止容器">停止容器</h3>
+<pre><code class="language-shell">&gt; docker stop btPanel
+</code></pre>
+<h3 id="登录到容器">登录到容器</h3>
+<pre><code class="language-shell">&gt; screen ~/Library/Containers/com.docker.docker/Data/vms/0/tty
+</code></pre>
+<h3 id="修改配置文件">修改配置文件</h3>
+<p>先进入容器ID的目录</p>
+<pre><code class="language-shell">&gt; cd /var/lib/docker/containers/&lt;containerId&gt;
+</code></pre>
+<p>修改 <code>config.v2.json</code> 文件</p>
+<blockquote>
+<p>被压缩的 json 格式，可复制出来用编辑器修改</p>
+</blockquote>
+<pre><code class="language-shell">&gt; vi config.v2.json
+</code></pre>
+<p>shell<br>
+按照原有格式修改或新增 <code>Config.ExposedPorts</code> 块</p>
+<pre><code class="language-json">{
+    &quot;80/tcp&quot;: {},
+    &quot;888/tcp&quot;: {},
+    &quot;3306/tcp&quot;: {}
+}
+</code></pre>
+<p>修改完后保存退出</p>
+<pre><code class="language-shell">:wq
+</code></pre>
+<p>修改 <code>hostconfig.json</code> 文件</p>
+<blockquote>
+<p>被压缩的 json 格式，可复制出来用编辑器修改</p>
+</blockquote>
+<pre><code class="language-shell">&gt; vi config.v2.json
+</code></pre>
+<p>按照原有格式修改或新增 <code>PortBindings</code> 块</p>
+<pre><code class="language-json">{
+    &quot;80/tcp&quot;: [
+        {
+            &quot;HostIp&quot;: &quot;&quot;,
+            &quot;HostPort&quot;: &quot;80&quot;
+        }
+    ],
+    &quot;888/tcp&quot;: [
+        {
+            &quot;HostIp&quot;: &quot;&quot;,
+            &quot;HostPort&quot;: &quot;888&quot;
+        }
+    ],
+    &quot;3306/tcp&quot;: [
+        {
+            &quot;HostIp&quot;: &quot;&quot;,
+            &quot;HostPort&quot;: &quot;3306&quot;
+        }
+    ]
+}
+</code></pre>
+<p>修改完后保存退出</p>
+<pre><code class="language-shell">:wq
+</code></pre>
+<blockquote>
+<p>vi 命令模式下，<code>dd</code> 是删除当前行，<code>dG</code> 是删除当前行后面的内容</p>
+</blockquote>
+<h3 id="退出容器">退出容器</h3>
+<p>按下 <code>Ctrl</code> + <code>A</code>，再快速按 <code>D</code>，退出 <code>screen</code></p>
+<h3 id="会话">会话</h3>
+<p>查看当前会话</p>
+<pre><code class="language-shell">&gt; screen -ls
+</code></pre>
+<p>杀死会话并退出</p>
+<pre><code class="language-shell">&gt; kill -9 12345
+&gt; screen -wipe
+</code></pre>
+<h3 id="重启-docker-desktop">重启 Docker Desktop</h3>
+<p>手动在状态栏上点击 <code>Restart</code> 进行重启<br>
+<img src="https://www.xihrni.com/post-images/1591079475440.png" alt="" loading="lazy"></p>
+<p>最后重启容器</p>
+<pre><code class="language-shell">&gt; docker start btPanel
+</code></pre>
+<p>😬</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E7%A1%AE%E8%AE%A4%E5%B7%B2%E6%98%A0%E5%B0%84%E7%AB%AF%E5%8F%A3">确认已映射端口</a></li>
+<li><a href="#%E7%A1%AE%E8%AE%A4%E5%AE%B9%E5%99%A8id">确认容器ID</a></li>
+<li><a href="#%E5%81%9C%E6%AD%A2%E5%AE%B9%E5%99%A8">停止容器</a></li>
+<li><a href="#%E7%99%BB%E5%BD%95%E5%88%B0%E5%AE%B9%E5%99%A8">登录到容器</a></li>
+<li><a href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">修改配置文件</a></li>
+<li><a href="#%E9%80%80%E5%87%BA%E5%AE%B9%E5%99%A8">退出容器</a></li>
+<li><a href="#%E4%BC%9A%E8%AF%9D">会话</a></li>
+<li><a href="#%E9%87%8D%E5%90%AF-docker-desktop">重启 Docker Desktop</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://www.xihrni.com/post/git-ban-ben-kong-zhi-chang-yong-ming-ling/">
+              <h3 class="post-title">
+                Git 版本控制常用命令
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a class="margin-10-left-right" href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>|<a class="margin-10-left-right" href="http://www.beian.miit.gov.cn" target="_blank">粤ICP备15099124号-1</a>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?5d5eb0906105cf159da64f5d0625e7fa";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+  <a class="rss" href="https://www.xihrni.com/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
