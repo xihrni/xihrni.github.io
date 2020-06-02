@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2020-06-02T03:40:52.861Z</updated>
+    <updated>2020-06-02T04:57:38.851Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
@@ -11,7 +11,7 @@
     <icon>https://www.xihrni.com/favicon.ico</icon>
     <rights>All rights reserved 2020, 我的世界</rights>
     <entry>
-        <title type="html"><![CDATA[Git从远程拉取数据时提示：'You have not concluded your merge (MERGE_HEAD exists).' 解决方法]]></title>
+        <title type="html"><![CDATA[Git 从远程拉取数据时提示：'You have not concluded your merge (MERGE_HEAD exists).' 解决方法]]></title>
         <id>https://www.xihrni.com/post/git-cong-yuan-cheng-la-qu-shu-ju-shi-ti-shi-you-have-not-concluded-your-merge-merge_head-exists/</id>
         <link href="https://www.xihrni.com/post/git-cong-yuan-cheng-la-qu-shu-ju-shi-ti-shi-you-have-not-concluded-your-merge-merge_head-exists/">
         </link>
@@ -89,7 +89,7 @@ Please, commit your changes before you can merge.
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[关于PHP连接本地localhost上的Redis特别慢的处理记录]]></title>
+        <title type="html"><![CDATA[关于 PHP 连接本地 localhost 上的 Redis 特别慢的处理记录]]></title>
         <id>https://www.xihrni.com/post/guan-yu-php-lian-jie-localhost-shang-de-redis-te-bie-man-de-chu-li-ji-lu/</id>
         <link href="https://www.xihrni.com/post/guan-yu-php-lian-jie-localhost-shang-de-redis-te-bie-man-de-chu-li-ji-lu/">
         </link>

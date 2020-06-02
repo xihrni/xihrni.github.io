@@ -996,16 +996,16 @@ td {
       }
     
       .post-container .post .post-title {
-        text-align: center;
+        text-align: left;
       }
       .post-container .post .post-info {
-        text-align: center;
+        text-align: left;
       }
       .post-detail .post .post-title {
-        text-align: center;
+        text-align: left;
       }
       .post-detail .post .post-info {
-        text-align: center;
+        text-align: left;
       }
     
       body {
