@@ -2,23 +2,22 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Borderlands 2 设置为繁体中文（Epic Games 平台） | 我的世界</title>
+<title>Git从远程拉取数据时提示：&#39;You have not concluded your merge (MERGE_HEAD exists).&#39; 解决方法 | 我的世界</title>
 <link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1591069250144">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="Borderlands 2 设置为繁体中文（Epic Games 平台） | 我的世界 - Atom Feed"
+<link rel="alternate" type="application/atom+xml" title="Git从远程拉取数据时提示：&#39;You have not concluded your merge (MERGE_HEAD exists).&#39; 解决方法 | 我的世界 - Atom Feed"
   href="https://www.xihrni.com/atom.xml">
 <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700"> -->
 
 
-    <meta name="description" content="😳打开 Epic Games 平台先安装好游戏后进入设置界面
+    <meta name="description" content="😳当前状态
+有些代码未加到忽略文件然后系统运行中被修改之后如果未处理进行拉取，在操作的过程中可能出现了如下状态
 
-
-滑动到最下方的管理游戏，展开 BORDERLANDS 2，勾选 额外命令行参数 后在输入框粘贴此字符： -epiclocale=zh-Hant
-
-返回到游戏库启动即可
-启动..." />
-    <meta name="keywords" content="borderlands2,游戏" />
+&gt; git status
+# On branch develop
+# Your branch and 'origin/..." />
+    <meta name="keywords" content="merge,pull,git" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -84,44 +83,95 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              Borderlands 2 设置为繁体中文（Epic Games 平台）
+              Git从远程拉取数据时提示：&#39;You have not concluded your merge (MERGE_HEAD exists).&#39; 解决方法
             </h2>
             <div class="post-info">
               <span>
                 2020-06-02
               </span>
               <span>
-                1 min read
+                2 min read
               </span>
               
-                <a href="https://www.xihrni.com/tag/borderlands2/" class="post-tag">
-                  # borderlands2
+                <a href="https://www.xihrni.com/tag/merge/" class="post-tag">
+                  # merge
                 </a>
               
-                <a href="https://www.xihrni.com/tag/you-xi/" class="post-tag">
-                  # 游戏
+                <a href="https://www.xihrni.com/tag/pull/" class="post-tag">
+                  # pull
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/9RuaOAU4j/" class="post-tag">
+                  # git
                 </a>
               
             </div>
             
-              <img class="post-feature-image" src="https://www.xihrni.com/post-images/borderlands-2-she-zhi-wei-fan-ti-zhong-wen-epic-games-ping-tai.jpg" alt="">
-            
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>😳打开 Epic Games 平台先安装好游戏后进入设置界面</p>
+                <h3 id="当前状态">😳当前状态</h3>
+<p>有些代码未加到忽略文件然后系统运行中被修改之后如果未处理进行拉取，在操作的过程中可能出现了如下状态</p>
 <!-- more -->
-<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1591057609359.png" alt="Epic Games 平台设置界面" loading="lazy"></figure>
-<p>滑动到最下方的管理游戏，展开 BORDERLANDS 2，勾选 <code>额外命令行参数</code> 后在输入框粘贴此字符： <code>-epiclocale=zh-Hant</code><br>
-<img src="https://www.xihrni.com/post-images/1591057832534.png" alt="Epic Games 平台设置界面" loading="lazy"></p>
-<p>返回到游戏库启动即可</p>
-<p>启动界面还是英文不用理他，点 <code>PLAY</code> 进入游戏后就是繁体中文了<br>
-<img src="https://www.xihrni.com/post-images/1591058065557.png" alt="游戏启动界面" loading="lazy"><br>
-<img src="https://www.xihrni.com/post-images/1591058184453.png" alt="游戏菜单界面" loading="lazy"><br>
-😬</p>
+<pre><code class="language-shell">&gt; git status
+# On branch develop
+# Your branch and 'origin/develop' have diverged,
+# and have 9 and 7 different commits each, respectively.
+#   (use &quot;git pull&quot; to merge the remote branch into yours)
+#
+# All conflicts fixed but you are still merging.
+#   (use &quot;git commit&quot; to conclude merge)
+#
+# Changes not staged for commit:
+#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+#
+#       modified:   config/site_config.php
+#       modified:   sitemap_article.xml
+#       modified:   sitemap_goods.xml
+#       modified:   sitemaps.xml
+#
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</code></pre>
+<p>这个时候可以先备份修改过的文件，然后重置到修改之前的状态再拉取试试</p>
+<pre><code class="language-shell">&gt; git checkout -- config/site_config.php
+&gt; git checkout -- sitemap_article.xml
+&gt; git checkout -- sitemap_goods.xml
+&gt; git checkout -- sitemap.xml
+&gt; git pull
+</code></pre>
+<p>如果提示以下信息则需要使用强制合并进行操作</p>
+<pre><code class="language-shell">&gt; git pull
+You have not concluded your merge (MERGE_HEAD exists).
+Please, commit your changes before you can merge.
+</code></pre>
+<h3 id="强制合并">强制合并</h3>
+<blockquote>
+<p>强制合并会覆盖本地版本，请先备份相关文件</p>
+</blockquote>
+<pre><code class="language-shell">&gt; git fetch --all
+&gt; git reset --hard origin/master
+&gt; git fetch
+</code></pre>
+<p>再进行拉取则没有问题了</p>
+<pre><code class="language-shell">&gt; git pull
+</code></pre>
+<p>😬</p>
 
               </div>
               <div class="toc-container">
-                
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E5%BD%93%E5%89%8D%E7%8A%B6%E6%80%81">😳当前状态</a></li>
+<li><a href="#%E5%BC%BA%E5%88%B6%E5%90%88%E5%B9%B6">强制合并</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
               </div>
             </div>
           </article>
@@ -130,9 +180,9 @@
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://www.xihrni.com/post/guan-yu-php-lian-jie-localhost-shang-de-redis-te-bie-man-de-chu-li-ji-lu/">
+            <a href="https://www.xihrni.com/post/borderlands-2-she-zhi-wei-fan-ti-zhong-wen-epic-games-ping-tai/">
               <h3 class="post-title">
-                关于PHP连接本地localhost上的Redis特别慢的处理记录
+                Borderlands 2 设置为繁体中文（Epic Games 平台）
               </h3>
             </a>
           </div>

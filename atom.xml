@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2020-06-02T01:48:59.309Z</updated>
+    <updated>2020-06-02T03:40:52.861Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
@@ -10,6 +10,64 @@
     <logo>https://www.xihrni.com/images/avatar.png</logo>
     <icon>https://www.xihrni.com/favicon.ico</icon>
     <rights>All rights reserved 2020, 我的世界</rights>
+    <entry>
+        <title type="html"><![CDATA[Git从远程拉取数据时提示：'You have not concluded your merge (MERGE_HEAD exists).' 解决方法]]></title>
+        <id>https://www.xihrni.com/post/git-cong-yuan-cheng-la-qu-shu-ju-shi-ti-shi-you-have-not-concluded-your-merge-merge_head-exists/</id>
+        <link href="https://www.xihrni.com/post/git-cong-yuan-cheng-la-qu-shu-ju-shi-ti-shi-you-have-not-concluded-your-merge-merge_head-exists/">
+        </link>
+        <updated>2020-06-02T03:07:51.000Z</updated>
+        <summary type="html"><![CDATA[<h3 id="当前状态">😳当前状态</h3>
+<p>有些代码未加到忽略文件然后系统运行中被修改之后如果未处理进行拉取，在操作的过程中可能出现了如下状态</p>
+]]></summary>
+        <content type="html"><![CDATA[<h3 id="当前状态">😳当前状态</h3>
+<p>有些代码未加到忽略文件然后系统运行中被修改之后如果未处理进行拉取，在操作的过程中可能出现了如下状态</p>
+<!-- more -->
+<pre><code class="language-shell">&gt; git status
+# On branch develop
+# Your branch and 'origin/develop' have diverged,
+# and have 9 and 7 different commits each, respectively.
+#   (use &quot;git pull&quot; to merge the remote branch into yours)
+#
+# All conflicts fixed but you are still merging.
+#   (use &quot;git commit&quot; to conclude merge)
+#
+# Changes not staged for commit:
+#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+#
+#       modified:   config/site_config.php
+#       modified:   sitemap_article.xml
+#       modified:   sitemap_goods.xml
+#       modified:   sitemaps.xml
+#
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</code></pre>
+<p>这个时候可以先备份修改过的文件，然后重置到修改之前的状态再拉取试试</p>
+<pre><code class="language-shell">&gt; git checkout -- config/site_config.php
+&gt; git checkout -- sitemap_article.xml
+&gt; git checkout -- sitemap_goods.xml
+&gt; git checkout -- sitemap.xml
+&gt; git pull
+</code></pre>
+<p>如果提示以下信息则需要使用强制合并进行操作</p>
+<pre><code class="language-shell">&gt; git pull
+You have not concluded your merge (MERGE_HEAD exists).
+Please, commit your changes before you can merge.
+</code></pre>
+<h3 id="强制合并">强制合并</h3>
+<blockquote>
+<p>强制合并会覆盖本地版本，请先备份相关文件</p>
+</blockquote>
+<pre><code class="language-shell">&gt; git fetch --all
+&gt; git reset --hard origin/master
+&gt; git fetch
+</code></pre>
+<p>再进行拉取则没有问题了</p>
+<pre><code class="language-shell">&gt; git pull
+</code></pre>
+<p>😬</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Borderlands 2 设置为繁体中文（Epic Games 平台）]]></title>
         <id>https://www.xihrni.com/post/borderlands-2-she-zhi-wei-fan-ti-zhong-wen-epic-games-ping-tai/</id>
