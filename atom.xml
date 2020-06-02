@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2020-06-02T00:43:12.964Z</updated>
+    <updated>2020-06-02T00:44:28.644Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
@@ -16,12 +16,11 @@
         <link href="https://www.xihrni.com/post/borderlands-2-she-zhi-wei-fan-ti-zhong-wen-epic-games-ping-tai/">
         </link>
         <updated>2020-06-02T00:24:01.000Z</updated>
-        <summary type="html"><![CDATA[<p>😳打开 Epic Games 平台先安装好游戏后进入设置界面<br>
-<img src="https://www.xihrni.com/post-images/1591057609359.png" alt="Epic Games 平台设置界面" loading="lazy"></p>
+        <summary type="html"><![CDATA[<p>😳打开 Epic Games 平台先安装好游戏后进入设置界面</p>
 ]]></summary>
-        <content type="html"><![CDATA[<p>😳打开 Epic Games 平台先安装好游戏后进入设置界面<br>
-<img src="https://www.xihrni.com/post-images/1591057609359.png" alt="Epic Games 平台设置界面" loading="lazy"></p>
+        <content type="html"><![CDATA[<p>😳打开 Epic Games 平台先安装好游戏后进入设置界面</p>
 <!-- more -->
+<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1591057609359.png" alt="Epic Games 平台设置界面" loading="lazy"></figure>
 <p>滑动到最下方的管理游戏，展开 BORDERLANDS 2，勾选 <code>额外命令行参数</code> 后在输入框粘贴此字符： <code>-epiclocale=zh-Hant</code><br>
 <img src="https://www.xihrni.com/post-images/1591057832534.png" alt="Epic Games 平台设置界面" loading="lazy"></p>
 <p>返回到游戏库启动即可</p>
