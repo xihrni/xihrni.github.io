@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2020-06-02T05:57:24.405Z</updated>
+    <updated>2020-06-02T06:37:38.672Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
@@ -228,6 +228,107 @@ Server is running: +PONG
 </code></pre>
 <p>到此，已经解决了连接 <code>localhost</code> 慢的问题，其他应用也可使用此方式解决，比如：MySQL、MemCacahe 等<br>
 😬</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[MacOS 已运行容器添加/修改端口映射]]></title>
+        <id>https://www.xihrni.com/post/macos-yi-yun-xing-rong-qi-tian-jia-xiu-gai-duan-kou-ying-she/</id>
+        <link href="https://www.xihrni.com/post/macos-yi-yun-xing-rong-qi-tian-jia-xiu-gai-duan-kou-ying-she/">
+        </link>
+        <updated>2020-01-01T06:24:35.000Z</updated>
+        <summary type="html"><![CDATA[<blockquote>
+<p>😳当前容器名称为 <code>btPanel</code>，需要添加 <code>3306</code> 端口</p>
+</blockquote>
+]]></summary>
+        <content type="html"><![CDATA[<blockquote>
+<p>😳当前容器名称为 <code>btPanel</code>，需要添加 <code>3306</code> 端口</p>
+</blockquote>
+<!-- more -->
+<h3 id="确认已映射端口">确认已映射端口</h3>
+<pre><code class="language-shell"># name or container id
+&gt; docker port btPanel
+</code></pre>
+<h3 id="确认容器id">确认容器ID</h3>
+<pre><code class="language-shell">&gt; docker container inspect btPanel
+</code></pre>
+<h3 id="停止容器">停止容器</h3>
+<pre><code class="language-shell">&gt; docker stop btPanel
+</code></pre>
+<h3 id="登录到容器">登录到容器</h3>
+<pre><code class="language-shell">&gt; screen ~/Library/Containers/com.docker.docker/Data/vms/0/tty
+</code></pre>
+<h3 id="修改配置文件">修改配置文件</h3>
+<p>先进入容器ID的目录</p>
+<pre><code class="language-shell">&gt; cd /var/lib/docker/containers/&lt;containerId&gt;
+</code></pre>
+<p>修改 <code>config.v2.json</code> 文件</p>
+<blockquote>
+<p>被压缩的 json 格式，可复制出来用编辑器修改</p>
+</blockquote>
+<pre><code class="language-shell">&gt; vi config.v2.json
+</code></pre>
+<p>shell<br>
+按照原有格式修改或新增 <code>Config.ExposedPorts</code> 块</p>
+<pre><code class="language-json">{
+    &quot;80/tcp&quot;: {},
+    &quot;888/tcp&quot;: {},
+    &quot;3306/tcp&quot;: {}
+}
+</code></pre>
+<p>修改完后保存退出</p>
+<pre><code class="language-shell">:wq
+</code></pre>
+<p>修改 <code>hostconfig.json</code> 文件</p>
+<blockquote>
+<p>被压缩的 json 格式，可复制出来用编辑器修改</p>
+</blockquote>
+<pre><code class="language-shell">&gt; vi config.v2.json
+</code></pre>
+<p>按照原有格式修改或新增 <code>PortBindings</code> 块</p>
+<pre><code class="language-json">{
+    &quot;80/tcp&quot;: [
+        {
+            &quot;HostIp&quot;: &quot;&quot;,
+            &quot;HostPort&quot;: &quot;80&quot;
+        }
+    ],
+    &quot;888/tcp&quot;: [
+        {
+            &quot;HostIp&quot;: &quot;&quot;,
+            &quot;HostPort&quot;: &quot;888&quot;
+        }
+    ],
+    &quot;3306/tcp&quot;: [
+        {
+            &quot;HostIp&quot;: &quot;&quot;,
+            &quot;HostPort&quot;: &quot;3306&quot;
+        }
+    ]
+}
+</code></pre>
+<p>修改完后保存退出</p>
+<pre><code class="language-shell">:wq
+</code></pre>
+<blockquote>
+<p>vi 命令模式下，<code>dd</code> 是删除当前行，<code>dG</code> 是删除当前行后面的内容</p>
+</blockquote>
+<h3 id="退出容器">退出容器</h3>
+<p>按下 <code>Ctrl</code> + <code>A</code>，再快速按 <code>D</code>，退出 <code>screen</code></p>
+<h3 id="会话">会话</h3>
+<p>查看当前会话</p>
+<pre><code class="language-shell">&gt; screen -ls
+</code></pre>
+<p>杀死会话并退出</p>
+<pre><code class="language-shell">&gt; kill -9 12345
+&gt; screen -wipe
+</code></pre>
+<h3 id="重启-docker-desktop">重启 Docker Desktop</h3>
+<p>手动在状态栏上点击 <code>Restart</code> 进行重启<br>
+<img src="https://www.xihrni.com/post-images/1591079475440.png" alt="" loading="lazy"></p>
+<p>最后重启容器</p>
+<pre><code class="language-shell">&gt; docker start btPanel
+</code></pre>
+<p>😬</p>
 ]]></content>
     </entry>
     <entry>
