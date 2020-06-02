@@ -436,7 +436,7 @@ td {
   color: #5E5E5E;
 }
 .post-container .post .post-info > span:not(:first-child):before {
-  content: "/ ";
+  content: '/ ';
   font-size: 10px;
   color: rgba(0, 0, 0, 0.1);
   margin: 0 4px;
@@ -464,6 +464,7 @@ td {
   padding: 24px 0;
   line-height: 1.5;
   font-size: 16px;
+  opacity: 0.75;
 }
 .post-container .post .post-abstract strong {
   font-weight: bolder;
