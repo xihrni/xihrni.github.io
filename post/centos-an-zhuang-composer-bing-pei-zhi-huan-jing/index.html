@@ -2,26 +2,24 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>CentOS 使用秘钥免密 SSH 远程登录 | 我的世界</title>
+<title>Centos 安装 Composer 并配置环境 | 我的世界</title>
 <link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1591082277809">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="CentOS 使用秘钥免密 SSH 远程登录 | 我的世界 - Atom Feed"
+<link rel="alternate" type="application/atom+xml" title="Centos 安装 Composer 并配置环境 | 我的世界 - Atom Feed"
   href="https://www.xihrni.com/atom.xml">
 <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700"> -->
 
 
-    <meta name="description" content="😳生成 SSH Key
+    <meta name="description" content="😳PHP CLI
+首先检测 PHP CLI 版本，输入命令
 
-~ 代表当前用户目录，比如 root 用户则为 /root
+&gt; php -v
+PHP 5.2.3 (cli) ...
 
-
-检查当前是否已存在 ssh key
-&gt; cat ~/.ssh/id_rsa
-
-生成 ssh key （已存在则无需生成）
-&gt; ssh-k..." />
-    <meta name="keywords" content="centos,ssh,秘钥" />
+需要更换 PHP CLI 版本，使用 BT 面板中 7.2 的版本，设置一个别名
+&gt; vi ~/.bas..." />
+    <meta name="keywords" content="composer,php包管理工具,centos" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -87,84 +85,95 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              CentOS 使用秘钥免密 SSH 远程登录
+              Centos 安装 Composer 并配置环境
             </h2>
             <div class="post-info">
               <span>
-                2019-11-26
+                2019-07-23
               </span>
               <span>
                 2 min read
               </span>
               
+                <a href="https://www.xihrni.com/tag/composer/" class="post-tag">
+                  # composer
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/php-bao-guan-li-gong-ju/" class="post-tag">
+                  # php包管理工具
+                </a>
+              
                 <a href="https://www.xihrni.com/tag/centos/" class="post-tag">
                   # centos
                 </a>
               
-                <a href="https://www.xihrni.com/tag/ssh/" class="post-tag">
-                  # ssh
-                </a>
-              
-                <a href="https://www.xihrni.com/tag/mi-yao/" class="post-tag">
-                  # 秘钥
-                </a>
-              
             </div>
             
-              <img class="post-feature-image" src="https://www.xihrni.com/post-images/centos-shi-yong-mi-yao-mian-mi-ssh-yuan-cheng-deng-lu.png" alt="">
+              <img class="post-feature-image" src="https://www.xihrni.com/post-images/centos-an-zhuang-composer-bing-pei-zhi-huan-jing.png" alt="">
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <h3 id="生成-ssh-key">😳生成 SSH Key</h3>
-<blockquote>
-<p><code>~</code> 代表当前用户目录，比如 root 用户则为 <code>/root</code></p>
-</blockquote>
+                <h3 id="php-cli">😳PHP CLI</h3>
+<p>首先检测 PHP CLI 版本，输入命令</p>
 <!-- more -->
-<p>检查当前是否已存在 <code>ssh key</code></p>
-<pre><code class="language-shell">&gt; cat ~/.ssh/id_rsa
+<pre><code class="language-shell">&gt; php -v
+PHP 5.2.3 (cli) ...
 </code></pre>
-<p>生成 <code>ssh key</code> （已存在则无需生成）</p>
-<pre><code class="language-shell">&gt; ssh-keygen -t rsa -C &quot;xieyucheng@dyg.cn&quot;
+<p>需要更换 PHP CLI 版本，使用 BT 面板中 <code>7.2</code> 的版本，设置一个别名</p>
+<pre><code class="language-shell">&gt; vi ~/.bashrc
 </code></pre>
-<p><code>id_rsa</code> 为秘钥文件，<code>id_rsa.pub</code> 为公钥文件</p>
-<p>查看公钥文件</p>
-<pre><code class="language-shell">&gt; cat ~/.ssh/id_rsa.pub
+<p>输入 <code>i</code> 进入编辑模式，新增一行</p>
+<pre><code class="language-shell">alias php='/www/server/php/72/bin/php'
 </code></pre>
+<p>输入 <code>:wq</code> 保存并退出</p>
+<p>再次执行 <code>php -v</code> 查看版本，输出</p>
+<pre><code class="language-shell">PHP 7.2.4 (cli) (built: Nov 12 2018 10:47:44) ( NTS )
+Copyright (c) 1997-2018 The PHP Group
+Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
+</code></pre>
+<p>看到已经是 <code>7.2.4</code> 的版本</p>
+<h3 id="composer">Composer</h3>
+<p>使用 PHP 下载安装文件</p>
+<pre><code class="language-shell">&gt; php -r &quot;copy('https://getcomposer.org/installer', 'composer-setup.php');&quot;
+</code></pre>
+<p>验证文件是否正确</p>
+<pre><code class="language-shell">&gt; php -r &quot;if (hash_file('sha384', 'composer-setup.php') === '48e3236262b34d30969dca3c37281b3b4bbe3221bda826ac6a9a62d6444cdb0dcd0615698a5cbe587c3f0fe57a54d8f5') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;&quot;
+</code></pre>
+<p>输出 <code>Installer verified</code> 则为正确，执行安装文件</p>
+<pre><code class="language-shell">&gt; php composer-setup.php
+</code></pre>
+<p>接着删除安装文件</p>
+<pre><code class="language-shell">&gt; php -r &quot;unlink('composer-setup.php');&quot;
+</code></pre>
+<p>移动到全局</p>
+<pre><code class="language-shell">&gt; mv composer.phar /usr/local/bin/composer
+</code></pre>
+<p>中国镜像</p>
+<pre><code class="language-shell">&gt; composer config -g repo.packagist composer https://packagist.phpcomposer.com
+# 或使用阿里云镜像
+&gt; composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
+</code></pre>
+<h3 id="composer-命令">Composer 命令</h3>
+<p>安装/更新项目依赖</p>
+<pre><code class="language-shell">&gt; cd '你的项目地址'
+&gt; composer install
+# 或
+&gt; composer update
+</code></pre>
+<p>如果报错</p>
+<pre><code class="language-shell">&gt; Unsupported declare 'strict_types' ...
+</code></pre>
+<p>PHP版本错误，原因是因为直接使用 composer 命令应该调用到了老版本的 PHP CLI，添加一个别名即可</p>
+<pre><code class="language-shell">&gt; vi ~/.bashrc
+</code></pre>
+<p>输入 <code>i</code> 进入编辑模式，新增一行</p>
+<pre><code class="language-shell">&gt; alias composer='php /usr/local/bin/composer'
+</code></pre>
+<p>输入 <code>:wq</code> 保存并退出</p>
 <blockquote>
-<p>注：本地与远程都需生成SSh Key</p>
+<p>重新登录 SSH 即可生效 <code>.bashrc</code> 文件<br>
+😬</p>
 </blockquote>
-<h3 id="本地公钥加入到远程服务器授权文件中">本地公钥加入到远程服务器授权文件中</h3>
-<p><strong>远程服务器</strong>检查当前是否已存在 <code>authorized_keys</code> 文件</p>
-<pre><code class="language-shell">&gt; cat ~/.ssh/authorized_keys
-</code></pre>
-<p>创建 <code>authorized_keys</code> 文件并修改权限（已存在则无需创建）</p>
-<pre><code class="language-shell">&gt; touch ~/.ssh/authorized_keys
-&gt; chmod 600 ~/.ssh/authorized_keys
-</code></pre>
-<p>拷贝<strong>本地</strong> <code>id_rsa.pub</code> 公钥文件中所有内容到<strong>远程服务器</strong></p>
-<pre><code class="language-shell">&gt; vi ~/.ssh/G-AA00468.pub # 创建一个以本地主机名称命名的临时文件
-</code></pre>
-<p>输入 <code>i</code> 进入编辑状态，粘贴，输入 <code>:wq</code> 保存文件并退出</p>
-<pre><code class="language-shell">&gt; cat ~/.ssh/G-AA00468.pub &gt;&gt; ~/.ssh/authorized_keys # 追加到 `authorized_keys` 文件
-</code></pre>
-<h3 id="配置远程服务器ssh服务">配置远程服务器SSH服务</h3>
-<p>编辑 <code>ssh</code> 配置</p>
-<pre><code class="language-shell">&gt; vi /etc/ssh/sshd_config
-</code></pre>
-<p>输入 <code>i</code> 进入编辑状态，将下面两个配置修改，输入 <code>:wq</code> 保存文件并退出</p>
-<pre><code class="language-shell">PasswordAuthentication no // 禁止使用基于口令认证的方式登陆
-PubkeyAuthentication yes // 允许使用基于密钥认证的方式登陆
-</code></pre>
-<p>重启 <code>ssh</code> 服务</p>
-<pre><code class="language-shell">&gt; /etc/init.d/sshd reload # CentOS7系统以下
-</code></pre>
-<p><strong>或</strong></p>
-<pre><code class="language-shell">&gt; systemctl restart sshd.service # CentOS7系统以上
-</code></pre>
-<h3 id="使用秘钥免密登录">使用秘钥免密登录</h3>
-<pre><code class="language-shell">&gt; ssh -i ~/.ssh/id_rsa root@***.***.***.***
-</code></pre>
-<p>😬</p>
 
               </div>
               <div class="toc-container">
@@ -173,10 +182,9 @@ PubkeyAuthentication yes // 允许使用基于密钥认证的方式登陆
 <ul>
 <li>
 <ul>
-<li><a href="#%E7%94%9F%E6%88%90-ssh-key">😳生成 SSH Key</a></li>
-<li><a href="#%E6%9C%AC%E5%9C%B0%E5%85%AC%E9%92%A5%E5%8A%A0%E5%85%A5%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%88%E6%9D%83%E6%96%87%E4%BB%B6%E4%B8%AD">本地公钥加入到远程服务器授权文件中</a></li>
-<li><a href="#%E9%85%8D%E7%BD%AE%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8ssh%E6%9C%8D%E5%8A%A1">配置远程服务器SSH服务</a></li>
-<li><a href="#%E4%BD%BF%E7%94%A8%E7%A7%98%E9%92%A5%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95">使用秘钥免密登录</a></li>
+<li><a href="#php-cli">😳PHP CLI</a></li>
+<li><a href="#composer">Composer</a></li>
+<li><a href="#composer-%E5%91%BD%E4%BB%A4">Composer 命令</a></li>
 </ul>
 </li>
 </ul>
@@ -191,9 +199,9 @@ PubkeyAuthentication yes // 允许使用基于密钥认证的方式登陆
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://www.xihrni.com/post/centos-chong-xie-crontab-r-ming-ling-fang-zhi-wu-cao-zuo/">
+            <a href="https://www.xihrni.com/post/yii2-jiang-csv-wen-jian-dao-ru-dao-shu-ju-ku/">
               <h3 class="post-title">
-                Centos 重写 crontab -r 命令防止误操作
+                Yii2 将 CSV 文件导入到数据库
               </h3>
             </a>
           </div>
