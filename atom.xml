@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2020-06-02T06:42:57.812Z</updated>
+    <updated>2020-06-02T06:50:05.853Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
@@ -329,6 +329,62 @@ Server is running: +PONG
 <pre><code class="language-shell">&gt; docker start btPanel
 </code></pre>
 <p>😬</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[CentOS 使用秘钥免密 SSH 远程登录]]></title>
+        <id>https://www.xihrni.com/post/centos-shi-yong-mi-yao-mian-mi-ssh-yuan-cheng-deng-lu/</id>
+        <link href="https://www.xihrni.com/post/centos-shi-yong-mi-yao-mian-mi-ssh-yuan-cheng-deng-lu/">
+        </link>
+        <updated>2019-11-26T06:45:02.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="生成-ssh-key">生成 SSH Key</h3>
+<blockquote>
+<p><code>~</code> 代表当前用户目录，比如 root 用户则为 <code>/root</code></p>
+</blockquote>
+<p>检查当前是否已存在 <code>ssh key</code></p>
+<pre><code class="language-shell">&gt; cat ~/.ssh/id_rsa
+</code></pre>
+<p>生成 <code>ssh key</code> （已存在则无需生成）</p>
+<pre><code class="language-shell">&gt; ssh-keygen -t rsa -C &quot;xieyucheng@dyg.cn&quot;
+</code></pre>
+<p><code>id_rsa</code> 为秘钥文件，<code>id_rsa.pub</code> 为公钥文件</p>
+<p>查看公钥文件</p>
+<pre><code class="language-shell">&gt; cat ~/.ssh/id_rsa.pub
+</code></pre>
+<blockquote>
+<p>注：本地与远程都需生成SSh Key</p>
+</blockquote>
+<h3 id="本地公钥加入到远程服务器授权文件中">本地公钥加入到远程服务器授权文件中</h3>
+<p><strong>远程服务器</strong>检查当前是否已存在 <code>authorized_keys</code> 文件</p>
+<pre><code class="language-shell">&gt; cat ~/.ssh/authorized_keys
+</code></pre>
+<p>创建 <code>authorized_keys</code> 文件并修改权限（已存在则无需创建）</p>
+<pre><code class="language-shell">&gt; touch ~/.ssh/authorized_keys
+&gt; chmod 600 ~/.ssh/authorized_keys
+</code></pre>
+<p>拷贝<strong>本地</strong> <code>id_rsa.pub</code> 公钥文件中所有内容到<strong>远程服务器</strong></p>
+<pre><code class="language-shell">&gt; vi ~/.ssh/G-AA00468.pub # 创建一个以本地主机名称命名的临时文件
+</code></pre>
+<p>输入 <code>i</code> 进入编辑状态，粘贴，输入 <code>:wq</code> 保存文件并退出</p>
+<pre><code class="language-shell">&gt; cat ~/.ssh/G-AA00468.pub &gt;&gt; ~/.ssh/authorized_keys # 追加到 `authorized_keys` 文件
+</code></pre>
+<h3 id="配置远程服务器ssh服务">配置远程服务器SSH服务</h3>
+<p>编辑 <code>ssh</code> 配置</p>
+<pre><code class="language-shell">&gt; vi /etc/ssh/sshd_config
+</code></pre>
+<p>输入 <code>i</code> 进入编辑状态，将下面两个配置修改，输入 <code>:wq</code> 保存文件并退出</p>
+<pre><code class="language-shell">PasswordAuthentication no // 禁止使用基于口令认证的方式登陆
+PubkeyAuthentication yes // 允许使用基于密钥认证的方式登陆
+</code></pre>
+<p>重启 <code>ssh</code> 服务</p>
+<pre><code class="language-shell">&gt; /etc/init.d/sshd reload # CentOS7系统以下
+</code></pre>
+<p><strong>或</strong></p>
+<pre><code class="language-shell">&gt; systemctl restart sshd.service # CentOS7系统以上
+</code></pre>
+<h3 id="使用秘钥免密登录">使用秘钥免密登录</h3>
+<pre><code class="language-shell">&gt; ssh -i ~/.ssh/id_rsa root@***.***.***.***
+</code></pre>
 ]]></content>
     </entry>
     <entry>
