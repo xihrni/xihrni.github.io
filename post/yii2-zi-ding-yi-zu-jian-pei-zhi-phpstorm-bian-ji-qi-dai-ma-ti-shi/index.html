@@ -1,0 +1,312 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Yii2 自定义组件配置 PhpStorm 编辑器代码提示 | 我的世界</title>
+<link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1591323929255">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Yii2 自定义组件配置 PhpStorm 编辑器代码提示 | 我的世界 - Atom Feed"
+  href="https://www.xihrni.com/atom.xml">
+<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700"> -->
+
+
+    <meta name="description" content="😳自定义组件配置
+在 web.php 的组件配置中添加了一个自定义用户组件
+
+&lt;?php
+
+$config = [
+    ...
+    'components' =&gt; [
+        ...
+        'admi..." />
+    <meta name="keywords" content="phpstorm,代码提示,yii2" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://www.xihrni.com">
+  <img class="avatar" src="https://www.xihrni.com/images/avatar.png?v=1591323929255" alt="">
+  </a>
+  <h1 class="site-title">
+    我的世界
+  </h1>
+  <p class="site-description">
+    只有自身强大
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/xihrni" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Yii2 自定义组件配置 PhpStorm 编辑器代码提示
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-06-05
+              </span>
+              <span>
+                3 min read
+              </span>
+              
+                <a href="https://www.xihrni.com/tag/phpstorm/" class="post-tag">
+                  # phpstorm
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/dai-ma-ti-shi/" class="post-tag">
+                  # 代码提示
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/yii2/" class="post-tag">
+                  # yii2
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://www.xihrni.com/post-images/yii2-zi-ding-yi-zu-jian-pei-zhi-phpstorm-bian-ji-qi-dai-ma-ti-shi.png" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h3 id="自定义组件配置">😳自定义组件配置</h3>
+<p>在 <code>web.php</code> 的组件配置中添加了一个自定义用户组件</p>
+<!-- more -->
+<pre><code class="language-php">&lt;?php
+
+$config = [
+    ...
+    'components' =&gt; [
+        ...
+        'admin' =&gt; [
+            'class' =&gt; 'yii\web\User',
+            'identityClass' =&gt; 'app\models\Admin',
+            'enableAutoLogin' =&gt; true,
+            'enableSession' =&gt; false,
+            'loginUrl' =&gt; null,
+        ],
+        ...
+    ],
+    ...
+]
+
+...
+
+return $config;
+</code></pre>
+<p>当在使用的时候 PhpStorm 编辑器则会提示“Property accessed via magic method”信息，并且无法关联类也无法进行自动提示代码补全</p>
+<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1591321895158.png" alt="提示“Property accessed via magic method”信息" loading="lazy"></figure>
+<h3 id="创建声明类文件">创建声明类文件</h3>
+<p>给 IDE 一些提示的最好方法是使用自己的 Yii 文件，运行代码时它实际上并不使用。这个文件可以命名为 <code>Yii.php</code> ，在项目根目录创建。其内容如下：</p>
+<pre><code class="language-php">&lt;?php
+
+use app\models\Admin;
+
+/**
+ * Yii bootstrap file.
+ * Used for enhanced IDE code autocompletion.
+ */
+class Yii extends \yii\BaseYii
+{
+    /**
+     * @var BaseApplication|WebApplication|ConsoleApplication the application instance
+     */
+    public static $app;
+}
+
+/**
+ * Class BaseApplication
+ * Used for properties that are identical for both WebApplication and ConsoleApplication
+ *
+// * @property \app\components\RbacManager $authManager The auth manager for this application. Null is returned if auth manager is not configured. This property is read-only. Extended component.
+// * @property \app\components\Mailer $mailer The mailer component. This property is read-only. Extended component.
+ */
+abstract class BaseApplication extends yii\base\Application
+{
+}
+
+/**
+ * Class WebApplication
+ * Include only Web application related components here
+ *
+ * @property Admin $admin The user component. This property is read-only. Extended component.
+// * @property \app\components\User $user The user component. This property is read-only. Extended component.
+// * @property \app\components\MyResponse $response The response component. This property is read-only. Extended component.
+// * @property \app\components\ErrorHandler $errorHandler The error handler application component. This property is read-only. Extended component.
+ */
+class WebApplication extends yii\web\Application
+{
+}
+
+/**
+ * Class ConsoleApplication
+ * Include only Console application related components here
+ *
+// * @property \app\components\ConsoleUser $user The user component. This property is read-only. Extended component.
+ */
+class ConsoleApplication extends yii\console\Application
+{
+}
+</code></pre>
+<blockquote>
+<p><code>BaseApplication</code> 表示包含所有环境下的 Yii 类<br>
+<code>WebApplication</code> 表示 Web 环境下的 Yii 类<br>
+<code>ConsoleApplication</code> 表示 Cli 环境下的 Yii 类</p>
+</blockquote>
+<p>由于已经有一个 Yii 的类了，所以 PhpStorm 编辑器会提示“Multiple Implementations”，我们需要将 <code>vendor/yiisoft/yii2/Yii.php</code> 文件标记为纯文本</p>
+<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1591322367077.png" alt="将  文件标记为纯文本" loading="lazy"></figure>
+<p>可以看到我们在给每个对应的类添加了 @property 文档注释，之后再去实际业务代码中会发现已经不会提示“Property accessed via magic method”信息了并且能像正常的类关联和自动提示代码补全</p>
+<figure data-type="image" tabindex="3"><img src="https://www.xihrni.com/post-images/1591322835443.png" alt="正常的类关联和自动提示代码补全" loading="lazy"></figure>
+<h3 id="忽略版本控制">忽略版本控制</h3>
+<p>可以将自定义的 <code>Yii.php</code> 加入到 <code>.gitignore</code> 忽略文件中提交到代码版本进行推送到线上协作，也可以加入到本地全局忽略文件不进行提交</p>
+<blockquote>
+<p>如果已有全局忽略文件则直接在文件中追加 <code>/Yii.php</code> 字符串即可</p>
+</blockquote>
+<pre><code class="language-shell">&gt; git config --global core.excludesfile ~/.gitignore_global
+# 如果没有 `.gitignore_global` 文件则进行创建
+&gt; echo '/Yii.php' &gt; .gitignore_global
+</code></pre>
+<p>😬</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6%E9%85%8D%E7%BD%AE">😳自定义组件配置</a></li>
+<li><a href="#%E5%88%9B%E5%BB%BA%E5%A3%B0%E6%98%8E%E7%B1%BB%E6%96%87%E4%BB%B6">创建声明类文件</a></li>
+<li><a href="#%E5%BF%BD%E7%95%A5%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6">忽略版本控制</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://www.xihrni.com/post/git-cong-yuan-cheng-la-qu-shu-ju-shi-ti-shi-you-have-not-concluded-your-merge-merge_head-exists/">
+              <h3 class="post-title">
+                Git 从远程拉取数据时提示：&#39;You have not concluded your merge (MERGE_HEAD exists).&#39; 解决方法
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a class="margin-10-left-right" href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>|<a class="margin-10-left-right" href="http://www.beian.miit.gov.cn" target="_blank">粤ICP备15099124号-1</a>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?5d5eb0906105cf159da64f5d0625e7fa";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+  <a class="rss" href="https://www.xihrni.com/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
