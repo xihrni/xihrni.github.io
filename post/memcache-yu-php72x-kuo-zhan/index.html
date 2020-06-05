@@ -1,0 +1,328 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PHP7.2.x 安装 Memcache 扩展 | 我的世界</title>
+<link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1591349059280">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="PHP7.2.x 安装 Memcache 扩展 | 我的世界 - Atom Feed"
+  href="https://www.xihrni.com/atom.xml">
+<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700"> -->
+
+
+    <meta name="description" content="😳Windows 下安装 Memcached
+
+
+推荐使用最新版本 1.4.5
+
+1.4.4 版本
+32位 下载
+64位 下载
+1.4.5 版本
+32位 下载
+64位 下载
+配置环境
+
+以下为 Windows 10 系统
+
+右键桌面的 此..." />
+    <meta name="keywords" content="memcache,php扩展,php" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://www.xihrni.com">
+  <img class="avatar" src="https://www.xihrni.com/images/avatar.png?v=1591349059280" alt="">
+  </a>
+  <h1 class="site-title">
+    我的世界
+  </h1>
+  <p class="site-description">
+    只有自身强大
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/xihrni" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              PHP7.2.x 安装 Memcache 扩展
+            </h2>
+            <div class="post-info">
+              <span>
+                2018-12-01
+              </span>
+              <span>
+                3 min read
+              </span>
+              
+                <a href="https://www.xihrni.com/tag/memcache/" class="post-tag">
+                  # memcache
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/php-kuo-zhan/" class="post-tag">
+                  # php扩展
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/zKKwXlxOi/" class="post-tag">
+                  # php
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://www.xihrni.com/post-images/memcache-yu-php72x-kuo-zhan.png" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h3 id="windows-下安装-memcached">😳Windows 下安装 Memcached</h3>
+<!-- more -->
+<blockquote>
+<p>推荐使用最新版本 <code>1.4.5</code></p>
+</blockquote>
+<h4 id="144-版本">1.4.4 版本</h4>
+<p>32位 <a href="http://static.runoob.com/download/memcached-win32-1.4.4-14.zip">下载</a><br>
+64位 <a href="http://static.runoob.com/download/memcached-win64-1.4.4-14.zip">下载</a></p>
+<h4 id="145-版本">1.4.5 版本</h4>
+<p>32位 <a href="http://static.runoob.com/download/memcached-1.4.5-x86.zip">下载</a><br>
+64位 <a href="http://static.runoob.com/download/memcached-1.4.5-amd64.zip">下载</a></p>
+<h3 id="配置环境">配置环境</h3>
+<blockquote>
+<p>以下为 Windows 10 系统</p>
+</blockquote>
+<p>右键桌面的 <code>此电脑</code> -&gt; <code>属性</code> -&gt; <code>高级系统设置</code> -&gt; <code>高级</code> -&gt; <code>环境变量</code> -&gt; <code>Path</code> -&gt; <code>编辑</code> -&gt; <code>新建</code>，输入解压的 memcached.exe 所在路径，例：<code>D:\Develop\Soft\memcached-amd64</code>，连续3次确定关闭对框配置环境完成</p>
+<h4 id="memcached-144-版本安装">memcached &lt;=1.4.4 版本安装</h4>
+<ol>
+<li>解压文件</li>
+<li>在 1.4.5 版本以前 <code>memcached</code> 可以作为一个服务安装，使用管理员权限运行以下命令：</li>
+</ol>
+<pre><code class="language-shell">&gt; memcached -d install
+</code></pre>
+<ol start="3">
+<li>使用以下命令来启动和关闭 <code>memcached</code> 服务</li>
+</ol>
+<pre><code class="language-shell">&gt; memcached -d start
+&gt; memcached -d stop
+&gt; memcached -d restart
+</code></pre>
+<ol start="4">
+<li>修改启动配置，运行 <code>regedit</code> 打开注册表，找到 <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\memcached</code> 进行修改：<br>
+<code>memcached -d runservice -m 64 -l 127.0.0.1 -p 11211</code></li>
+<li>卸载</li>
+</ol>
+<pre><code class="language-shell">&gt; memcached -d uninstall
+</code></pre>
+<h4 id="memcached-145-版本安装">memcached &gt; 1.4.5 版本安装</h4>
+<ol>
+<li>解压文件</li>
+<li>在 <code>memcached 1.4.5</code> 版本之后，<code>memcached</code> 不能作为服务来运行，需要使用任务计划中来开启一个普通的进程，在 <code>windows</code> 启动时设置 <code>memcached</code> 自动执行，使用管理员权限运行以下命令：</li>
+</ol>
+<pre><code class="language-shell">&gt; schtasks /create /sc onstart /tn memcached /tr &quot;D:\Develop\Soft\memcached-amd64\memcached.exe -m 64 -l 127.0.0.1 -p 11211 -d&quot;
+</code></pre>
+<ol start="3">
+<li>删除任务计划</li>
+</ol>
+<pre><code class="language-shell">&gt; schtasks /delete /tn memcached
+</code></pre>
+<h3 id="连接-memcached">连接 Memcached</h3>
+<blockquote>
+<p>安装 <code>Telnet</code><br>
+按下 <code>win</code> + <code>s</code> 输入 <code>控制面板</code> 打开 -&gt; 程序 -&gt; 启用或关闭 Windows 功能 -&gt; 勾选 <code>Telnet 客户端</code> -&gt; 确定</p>
+</blockquote>
+<p>连接</p>
+<pre><code class="language-shell">&gt; telnet 127.0.0.1 11211
+</code></pre>
+<p>退出</p>
+<pre><code class="language-shell"># 按下 `ctrl` + `]`
+&gt; quit
+</code></pre>
+<h3 id="php-72x-安装-memcache-扩展">PHP 7.2.x 安装 memcache 扩展</h3>
+<h4 id="下载-php7-memcache-dll">下载 php7-memcache-dll</h4>
+<p>下载 zip 压缩包 <a href="https://github.com/nono303/PHP7-memcache-dll">github地址</a></p>
+<h4 id="添加扩展">添加扩展</h4>
+<p>移动<code>PHP7-memcache-dll-master\vc15\x86\nts\avx\php-7.2.x_memcache.dll</code> 到 PHP 扩展目录 <code>php-7.2.1-nts\ext\php_memcache.dll</code></p>
+<p>修改 <code>php.ini</code> 配置</p>
+<pre><code class="language-ini">...
+;extension=php_soap.dll
+;extension=php_sockets.dll
+extension=php_sqlite3.dll
+;extension=php_tidy.dll
+;extension=php_xmlrpc.dll
+extension=php_xsl.dll
+
+# 在此段添加如下一行
+extension=php_memcache.dll
+</code></pre>
+<p>重启 nginx</p>
+<h4 id="查看扩展">查看扩展</h4>
+<pre><code class="language-shell">&gt; php -m
+</code></pre>
+<h4 id="php-操作">PHP 操作</h4>
+<pre><code class="language-php">$memcache = new Memcache;
+$memcache-&gt;addServer('127.0.0.1', '11211');
+
+$memcache-&gt;set('name', 'xiaoming', 0, 30);
+$name = $memcache-&gt;get('name');
+</code></pre>
+<p>😬<img src="https://www.xihrni.com/post-images/1591348926611.png" alt="" loading="lazy"></p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#windows-%E4%B8%8B%E5%AE%89%E8%A3%85-memcached">😳Windows 下安装 Memcached</a>
+<ul>
+<li><a href="#144-%E7%89%88%E6%9C%AC">1.4.4 版本</a></li>
+<li><a href="#145-%E7%89%88%E6%9C%AC">1.4.5 版本</a></li>
+</ul>
+</li>
+<li><a href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83">配置环境</a>
+<ul>
+<li><a href="#memcached-144-%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85">memcached &lt;=1.4.4 版本安装</a></li>
+<li><a href="#memcached-145-%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85">memcached &gt; 1.4.5 版本安装</a></li>
+</ul>
+</li>
+<li><a href="#%E8%BF%9E%E6%8E%A5-memcached">连接 Memcached</a></li>
+<li><a href="#php-72x-%E5%AE%89%E8%A3%85-memcache-%E6%89%A9%E5%B1%95">PHP 7.2.x 安装 memcache 扩展</a>
+<ul>
+<li><a href="#%E4%B8%8B%E8%BD%BD-php7-memcache-dll">下载 php7-memcache-dll</a></li>
+<li><a href="#%E6%B7%BB%E5%8A%A0%E6%89%A9%E5%B1%95">添加扩展</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E6%89%A9%E5%B1%95">查看扩展</a></li>
+<li><a href="#php-%E6%93%8D%E4%BD%9C">PHP 操作</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://www.xihrni.com/post/git-ban-ben-kong-zhi-chang-yong-ming-ling/">
+              <h3 class="post-title">
+                Git 版本控制常用命令
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a class="margin-10-left-right" href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>|<a class="margin-10-left-right" href="http://www.beian.miit.gov.cn" target="_blank">粤ICP备15099124号-1</a>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?5d5eb0906105cf159da64f5d0625e7fa";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+  <a class="rss" href="https://www.xihrni.com/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

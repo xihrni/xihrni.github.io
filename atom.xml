@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2020-06-05T03:42:12.094Z</updated>
+    <updated>2020-06-05T09:24:25.075Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
@@ -660,397 +660,103 @@ var_dump($result);exit;
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Git 版本控制常用命令]]></title>
-        <id>https://www.xihrni.com/post/git-ban-ben-kong-zhi-chang-yong-ming-ling/</id>
-        <link href="https://www.xihrni.com/post/git-ban-ben-kong-zhi-chang-yong-ming-ling/">
+        <title type="html"><![CDATA[PHP7.2.x 安装 Memcache 扩展]]></title>
+        <id>https://www.xihrni.com/post/memcache-yu-php72x-kuo-zhan/</id>
+        <link href="https://www.xihrni.com/post/memcache-yu-php72x-kuo-zhan/">
         </link>
-        <updated>2018-08-18T06:32:46.000Z</updated>
-        <summary type="html"><![CDATA[<h2 id="准备">😳准备</h2>
+        <updated>2018-12-01T09:03:04.000Z</updated>
+        <summary type="html"><![CDATA[<h3 id="windows-下安装-memcached">😳Windows 下安装 Memcached</h3>
 ]]></summary>
-        <content type="html"><![CDATA[<h2 id="准备">😳准备</h2>
+        <content type="html"><![CDATA[<h3 id="windows-下安装-memcached">😳Windows 下安装 Memcached</h3>
 <!-- more -->
-<h3 id="帮助">帮助</h3>
-<p>查看帮助</p>
-<pre><code class="language-shell">git help
-</code></pre>
-<p>查看所有命令</p>
-<pre><code class="language-shell">git help -a
-</code></pre>
-<p>查看使用手册</p>
-<pre><code class="language-shell">git help -g
-</code></pre>
-<p>查看单个命令</p>
 <blockquote>
-<p>使用 <code>F</code> 键向下翻页，使用 <code>B</code> 键向上翻页，使用 <code>Q</code> 键退出</p>
+<p>推荐使用最新版本 <code>1.4.5</code></p>
 </blockquote>
-<pre><code class="language-shell">git help add
-</code></pre>
-<h3 id="配置">配置</h3>
+<h4 id="144-版本">1.4.4 版本</h4>
+<p>32位 <a href="http://static.runoob.com/download/memcached-win32-1.4.4-14.zip">下载</a><br>
+64位 <a href="http://static.runoob.com/download/memcached-win64-1.4.4-14.zip">下载</a></p>
+<h4 id="145-版本">1.4.5 版本</h4>
+<p>32位 <a href="http://static.runoob.com/download/memcached-1.4.5-x86.zip">下载</a><br>
+64位 <a href="http://static.runoob.com/download/memcached-1.4.5-amd64.zip">下载</a></p>
+<h3 id="配置环境">配置环境</h3>
 <blockquote>
-<p>配置分为系统范围、用户范围、项目范围，<code>--global</code> 为用户范围</p>
+<p>以下为 Windows 10 系统</p>
 </blockquote>
-<p>查看配置</p>
-<pre><code class="language-shell">git config --list
+<p>右键桌面的 <code>此电脑</code> -&gt; <code>属性</code> -&gt; <code>高级系统设置</code> -&gt; <code>高级</code> -&gt; <code>环境变量</code> -&gt; <code>Path</code> -&gt; <code>编辑</code> -&gt; <code>新建</code>，输入解压的 memcached.exe 所在路径，例：<code>D:\Develop\Soft\memcached-amd64</code>，连续3次确定关闭对框配置环境完成</p>
+<h4 id="memcached-144-版本安装">memcached &lt;=1.4.4 版本安装</h4>
+<ol>
+<li>解压文件</li>
+<li>在 1.4.5 版本以前 <code>memcached</code> 可以作为一个服务安装，使用管理员权限运行以下命令：</li>
+</ol>
+<pre><code class="language-shell">&gt; memcached -d install
 </code></pre>
-<p>配置用户</p>
-<pre><code class="language-shell">git config --global user.email 'xihrni@126.com'
-git config --global user.name 'xihrni'
+<ol start="3">
+<li>使用以下命令来启动和关闭 <code>memcached</code> 服务</li>
+</ol>
+<pre><code class="language-shell">&gt; memcached -d start
+&gt; memcached -d stop
+&gt; memcached -d restart
 </code></pre>
-<p>配置颜色</p>
-<pre><code class="language-shell">git config --global color.ui true
+<ol start="4">
+<li>修改启动配置，运行 <code>regedit</code> 打开注册表，找到 <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\memcached</code> 进行修改：<br>
+<code>memcached -d runservice -m 64 -l 127.0.0.1 -p 11211</code></li>
+<li>卸载</li>
+</ol>
+<pre><code class="language-shell">&gt; memcached -d uninstall
 </code></pre>
-<p>配置忽略文件权限</p>
-<pre><code class="language-shell">git config core.filemode false
+<h4 id="memcached-145-版本安装">memcached &gt; 1.4.5 版本安装</h4>
+<ol>
+<li>解压文件</li>
+<li>在 <code>memcached 1.4.5</code> 版本之后，<code>memcached</code> 不能作为服务来运行，需要使用任务计划中来开启一个普通的进程，在 <code>windows</code> 启动时设置 <code>memcached</code> 自动执行，使用管理员权限运行以下命令：</li>
+</ol>
+<pre><code class="language-shell">&gt; schtasks /create /sc onstart /tn memcached /tr &quot;D:\Develop\Soft\memcached-amd64\memcached.exe -m 64 -l 127.0.0.1 -p 11211 -d&quot;
 </code></pre>
-<p>配置文件</p>
-<pre><code class="language-shell">cat ~/.gitconfig
+<ol start="3">
+<li>删除任务计划</li>
+</ol>
+<pre><code class="language-shell">&gt; schtasks /delete /tn memcached
 </code></pre>
-<h3 id="别名">别名</h3>
-<p>新增别名</p>
-<pre><code class="language-shell">git config --global alias.co checkout
+<h3 id="连接-memcached">连接 Memcached</h3>
+<blockquote>
+<p>安装 <code>Telnet</code><br>
+按下 <code>win</code> + <code>s</code> 输入 <code>控制面板</code> 打开 -&gt; 程序 -&gt; 启用或关闭 Windows 功能 -&gt; 勾选 <code>Telnet 客户端</code> -&gt; 确定</p>
+</blockquote>
+<p>连接</p>
+<pre><code class="language-shell">&gt; telnet 127.0.0.1 11211
 </code></pre>
-<p>Mac OS 设定别名</p>
-<pre><code class="language-shell">vim ~/.bash_profile
+<p>退出</p>
+<pre><code class="language-shell"># 按下 `ctrl` + `]`
+&gt; quit
+</code></pre>
+<h3 id="php-72x-安装-memcache-扩展">PHP 7.2.x 安装 memcache 扩展</h3>
+<h4 id="下载-php7-memcache-dll">下载 php7-memcache-dll</h4>
+<p>下载 zip 压缩包 <a href="https://github.com/nono303/PHP7-memcache-dll">github地址</a></p>
+<h4 id="添加扩展">添加扩展</h4>
+<p>移动<code>PHP7-memcache-dll-master\vc15\x86\nts\avx\php-7.2.x_memcache.dll</code> 到 PHP 扩展目录 <code>php-7.2.1-nts\ext\php_memcache.dll</code></p>
+<p>修改 <code>php.ini</code> 配置</p>
+<pre><code class="language-ini">...
+;extension=php_soap.dll
+;extension=php_sockets.dll
+extension=php_sqlite3.dll
+;extension=php_tidy.dll
+;extension=php_xmlrpc.dll
+extension=php_xsl.dll
 
-# 新增一行
-alias gco='git checkout'
+# 在此段添加如下一行
+extension=php_memcache.dll
+</code></pre>
+<p>重启 nginx</p>
+<h4 id="查看扩展">查看扩展</h4>
+<pre><code class="language-shell">&gt; php -m
+</code></pre>
+<h4 id="php-操作">PHP 操作</h4>
+<pre><code class="language-php">$memcache = new Memcache;
+$memcache-&gt;addServer('127.0.0.1', '11211');
 
-# 保存退出
-:wq
-
-# 立即生效
-source ~/.bash_profile
+$memcache-&gt;set('name', 'xiaoming', 0, 30);
+$name = $memcache-&gt;get('name');
 </code></pre>
-<h3 id="忽略跟踪文件">忽略跟踪文件</h3>
-<p>配置全局忽略文件</p>
-<pre><code class="language-shell">git config --global core.excludesfile ~/.gitignore_global
-</code></pre>
-<p>编辑配置文件</p>
-<pre><code class="language-shell">vim ~/.gitignore_global
-
-# 新增忽略文件
-.DS_Store
-
-# 保存退出
-:wq
-</code></pre>
-<p>配置项目忽略文件</p>
-<pre><code class="language-shell">vim .gitignore
-
-# 新增一行
-*.log
-
-# 保存退出
-:wq
-</code></pre>
-<p>将 <code>.gitignore</code> 文件提交到到版本库即可</p>
-<h3 id="忽略本地文件">忽略本地文件</h3>
-<p>忽略</p>
-<pre><code class="language-shell">git update-index --skip-worktree &lt;file&gt;
-</code></pre>
-<p>拉取时文件冲突需还原忽略</p>
-<pre><code class="language-shell">git update-index --no-skip-worktree &lt;file&gt;
-</code></pre>
-<h2 id="基础">基础</h2>
-<h3 id="初始化">初始化</h3>
-<p>创建目录并进入</p>
-<pre><code class="language-shell">mkdir git &amp;&amp; cd git
-</code></pre>
-<p>初始化 git</p>
-<pre><code class="language-shell">git init
-</code></pre>
-<h3 id="提交">提交</h3>
-<p>创建 <code>README</code> 文件</p>
-<pre><code class="language-shell">echo `# git demo` &gt;&gt; README.md
-</code></pre>
-<p>查看状态</p>
-<pre><code class="language-shell">git status
-</code></pre>
-<p>将修改文件添加到暂存（stage）区</p>
-<blockquote>
-<p>将保持文件追踪，git 不追踪文件夹</p>
-</blockquote>
-<pre><code class="language-shell">git add README.md
-</code></pre>
-<p>将暂存区提交到本地版本库</p>
-<pre><code class="language-shell">git commit -m 'git init'
-</code></pre>
-<p>或</p>
-<blockquote>
-<p>将修改文件添加到暂存（stage）区并提交到本地版本库</p>
-</blockquote>
-<pre><code class="language-shell">git commit -am 'git init'
-</code></pre>
-<h3 id="对比">对比</h3>
-<p>对比</p>
-<pre><code class="language-shell">git diff
-</code></pre>
-<p>对比文件</p>
-<pre><code class="language-shell">git diff index.html
-</code></pre>
-<p>对比暂存（stage）区</p>
-<pre><code class="language-shell">git diff --staged
-</code></pre>
-<h3 id="重命名">重命名</h3>
-<blockquote>
-<p>重命名已跟踪的文件</p>
-</blockquote>
-<p>git 命令之外更改文件名时</p>
-<pre><code class="language-shell"># 先删除原文件
-git rm style.css
-
-# 添加新文件
-git add themes.css
-</code></pre>
-<p>git 命令重命名</p>
-<pre><code class="language-shell">git mv theme.css xihrni-theme.css
-</code></pre>
-<p>移动文件</p>
-<pre><code class="language-shell">git mv xihrni-theme.css css/
-</code></pre>
-<p>移动目录</p>
-<pre><code class="language-shell">git mv css asset/
-</code></pre>
-<h3 id="删除文件">删除文件</h3>
-<blockquote>
-<p>删除文件之前，需要确定文件已被跟踪，并且没有将要被提交的修改，如果修改了要删除的文件，需要先添加修改并提交，之后才能删除</p>
-</blockquote>
-<pre><code class="language-shell">git rm asset/css/xihrni-theme.css
-</code></pre>
-<p>删除暂存区文件</p>
-<pre><code class="language-shell">git rm --cached index.html
-</code></pre>
-<h3 id="恢复删除文件">恢复删除文件</h3>
-<p>恢复到最近一次提交的状态</p>
-<blockquote>
-<p><code>--</code>表示当前分支</p>
-</blockquote>
-<pre><code class="language-shell">git checkout HEAD -- index.html
-</code></pre>
-<p>如果文件删除后进行提交了，可以恢复最近一次提交的上一次提交</p>
-<blockquote>
-<p><code>^</code> 表示上一次，<code>^^</code> 表示上两次</p>
-</blockquote>
-<pre><code class="language-shell">git checkout HEAD^ -- index.html
-</code></pre>
-<p>恢复已有的提交</p>
-<blockquote>
-<p>可使用 <code>git log --oneline</code> 获取 <code>commit id</code></p>
-</blockquote>
-<pre><code class="language-shell">git revert &lt;commit id&gt;
-</code></pre>
-<h3 id="重置提交控制头部指针">重置提交，控制头部指针</h3>
-<blockquote>
-<p>默认每次提交完成后头部指针都会指向最后的提交<br>
-<code>--mixed</code> 默认方式， 这个选项会把暂存区里的东西重置到指定提交的状态，并且会把指针指向这个提交<br>
-<code>--soft</code>  这个选项重置提交，不会影响到工作目录还有暂存区里的东西<br>
-<code>--hard</code>  这个选项会把工作目录还有暂存区，直接重置到指定的提交状态，也就是将全部状态还原<br>
-也就是说 <code>mixed</code> 重置暂存区不重置工作目录，<code>hard</code> 都重置，<code>soft</code> 都不重置</p>
-</blockquote>
-<pre><code class="language-shell">git reset --mixed &lt;commit id&gt;
-</code></pre>
-<h3 id="工作进度">工作进度</h3>
-<p>保存</p>
-<blockquote>
-<p>保存后将还恢复到当前版本提交时的修改</p>
-</blockquote>
-<pre><code class="language-shell">git stash save '修改了 index.html'
-</code></pre>
-<p>查看</p>
-<pre><code class="language-shell">git stash list
-</code></pre>
-<p>对比</p>
-<pre><code class="language-shell">git stash show -p &lt;stash@{0}&gt;
-</code></pre>
-<p>恢复</p>
-<pre><code class="language-shell">git stash apply &lt;stash@{0}&gt;
-</code></pre>
-<p>删除</p>
-<pre><code class="language-shell">git stash drop &lt;stash@{0}&gt;
-</code></pre>
-<p>恢复并删除</p>
-<pre><code class="language-shell">git stash pop &lt;stash@{0}&gt;
-</code></pre>
-<h3 id="日志">日志</h3>
-<blockquote>
-<p>--oneline 简单显示<br>
---oneline -5 简单显示最后5行<br>
---decorate 显示分支<br>
---decorate --all 显示所有分支<br>
---author='' 显示某一作者的提交<br>
---grep='' 搜索<br>
---before='' 之前的日期，可输入 <code>2018-01-01</code> 或 <code>1 day</code> 、<code>1 week</code> 等<br>
---after 之后的日志<br>
---graph 图形显示</p>
-</blockquote>
-<pre><code class="language-shell">git log --oneline
-</code></pre>
-<h2 id="分支">分支</h2>
-<h3 id="分支-2">分支</h3>
-<p>当前所在分支</p>
-<pre><code class="language-shell">git status
-</code></pre>
-<p>或</p>
-<pre><code class="language-shell">git branch
-</code></pre>
-<p>新建分支</p>
-<pre><code class="language-shell">git branch &lt;branch name&gt;
-</code></pre>
-<p>切换分支</p>
-<pre><code class="language-shell">git checkout &lt;branch name&gt;
-</code></pre>
-<p>切换远程分支并新建本地分支</p>
-<pre><code class="language-shell">git checkout -b develop origin/develop
-</code></pre>
-<h3 id="对比-2">对比</h3>
-<pre><code class="language-shell">git diff master..feature/mobile
-</code></pre>
-<p>对比某一文件</p>
-<pre><code class="language-shell">git diff master..feature/mobile index.html
-</code></pre>
-<h3 id="合并">合并</h3>
-<blockquote>
-<p><code>Fast forward</code> 合并，因为没有对当前分支做新的提交</p>
-</blockquote>
-<p>合并其他分支到当前分支</p>
-<pre><code class="language-shell">git merge feature/mobile
-</code></pre>
-<p>如果当前分支已做新的提交则会打开一个描述文件，修改后保存退出即可</p>
-<pre><code class="language-shell">:wq
-</code></pre>
-<p>出现冲突，解决</p>
-<pre><code class="language-shell">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-    ... 当前分支内容
-=======
-    ... 需要合并的分支内容
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; master
-</code></pre>
-<p>删除不需要的内容后（包含 <code>&lt;&lt;&lt;</code> <code>===</code> <code>&gt;&gt;&gt;</code> 这三行），添加到 git 并提交，提交时不需要 <code>m</code> 参数</p>
-<pre><code class="language-shell">git add .
-git commit
-:wq
-</code></pre>
-<p>出现冲突，放弃合并</p>
-<pre><code class="language-shell">git merge --abort
-</code></pre>
-<h3 id="重命名与删除">重命名与删除</h3>
-<p>重命名</p>
-<pre><code class="language-shell">git branch -m &lt;branch name&gt; &lt;new branch name&gt;
-</code></pre>
-<p>删除</p>
-<pre><code class="language-shell">git branch -d &lt;branch name&gt;
-</code></pre>
-<h2 id="远程">远程</h2>
-<h3 id="添加远程版本库">添加远程版本库</h3>
-<pre><code class="language-shell">git remote add &lt;name&gt; &lt;url&gt;
-git remote add origin git@github.com:xihrni/git_demo.git
-</code></pre>
-<p>查看远程</p>
-<blockquote>
-<p>一个是 fetch 远程，用来提取，一个是 push 远程，用来推送</p>
-</blockquote>
-<pre><code class="language-shell">git remote -v
-</code></pre>
-<h3 id="移除远程版本库">移除远程版本库</h3>
-<pre><code class="language-shell">git remote rm &lt;name&gt;
-git remote rm origin
-</code></pre>
-<h3 id="更新远程版本库地址">更新远程版本库地址</h3>
-<pre><code class="language-shell">git remote set-url &lt;name&gt; &lt;url&gt;
-git remote set-url origin git@github.com:xihrni/git_demo2.git
-</code></pre>
-<h3 id="更新远程分支列表">更新远程分支列表</h3>
-<pre><code class="language-shell">git remote update &lt;name&gt; -p
-git remote update origin -p
-</code></pre>
-<h3 id="切换远程分支">切换远程分支</h3>
-<pre><code class="language-shell">git checkout -t &lt;remote name&gt;/&lt;branch name&gt;
-git checkout -t origin/develop
-</code></pre>
-<h3 id="拉取远程分支">拉取远程分支</h3>
-<pre><code class="language-shell">git pull &lt;remote name&gt; &lt;branch name&gt;
-git pull origin master
-</code></pre>
-<p>如果提示 <code>fatal: refusing to merge unrelated histories</code></p>
-<pre><code class="language-shell">git pull origin master --allow-unrelated-histories
-</code></pre>
-<h3 id="推送远程分支">推送远程分支</h3>
-<p>将本地的 <code>master</code> 分支推送到 <code>origin</code> 主机，同时指定 <code>origin</code> 为默认主机</p>
-<pre><code class="language-shell">git push -u origin master
-</code></pre>
-<blockquote>
-<p>Branch master set up to track remote branch master form origin<br>
-意思就是，master 这个分支会跟踪 origin 上的 master 分支</p>
-</blockquote>
-<h3 id="查看-删除远程分支">查看、删除远程分支</h3>
-<p>查看分支</p>
-<pre><code class="language-shell">git branch -a
-git branch -r
-</code></pre>
-<p>删除分支</p>
-<pre><code class="language-shell">git push origin --delete &lt;branch name&gt;
-</code></pre>
-<h3 id="克隆远程版本库">克隆远程版本库</h3>
-<pre><code class="language-shell">git clone &lt;url&gt; &lt;dir&gt;
-git clone git@github.com:xihrni/git_demo.git git_demo
-</code></pre>
-<h3 id="提取-合并远程版本库">提取、合并远程版本库</h3>
-<p>提取</p>
-<pre><code class="language-shell">git fetch
-</code></pre>
-<p>合并</p>
-<pre><code class="language-shell">git merge origin/master
-</code></pre>
-<p>提取并合并远程版本库</p>
-<pre><code class="language-shell">git pull
-</code></pre>
-<h3 id="密码修改">密码修改</h3>
-<h5 id="windows">windows</h5>
-<p><code>控制面板</code> -&gt; <code>用户账户</code> -&gt; <code>管理 Windows 凭据</code>，找到相应的地址可进行编辑</p>
-<h5 id="mac-os">Mac OS</h5>
-<p>TODO</p>
-<h3 id="ssh-key">SSH key</h3>
-<h5 id="查看当前系统是否有-ssh-key">查看当前系统是否有 SSH key</h5>
-<pre><code class="language-shell"> ls -al ~/.ssh
-</code></pre>
-<p>如果没有出现 <code>id_rsa.pub</code> 文件则需要生成</p>
-<h4 id="生成-ssh-key">生成 SSH key</h4>
-<pre><code class="language-shell">ssh-keygen -t rsa -b 4096 -C &quot;xihrni@126.com&quot;
-</code></pre>
-<p>复制 <code>id_rsa.pub</code> 文件里的所有内容到 github 账户里的 <code>SSH keys</code> 里添加</p>
-<h2 id="标签">标签</h2>
-<h3 id="查看标签">查看标签</h3>
-<p>查看所有标签</p>
-<pre><code class="language-shell">git tag
-</code></pre>
-<p>查看某一标签，显示出某一标签最后提交的变化</p>
-<pre><code class="language-shell">git show &lt;tag name&gt;
-</code></pre>
-<h3 id="添加标签">添加标签</h3>
-<pre><code class="language-shell">git tag &lt;tag name&gt;
-git tag v0.1
-</code></pre>
-<p>添加注释的标签</p>
-<pre><code class="language-shell">git tag -a &lt;tag name&gt; [&lt;commit id&gt;] -m ''
-git tag -a v0.1 xxx -m 'init'
-</code></pre>
-<h3 id="删除标签">删除标签</h3>
-<pre><code class="language-shell">git tag -d &lt;tag name&gt;
-</code></pre>
-<h3 id="切换到标签">切换到标签</h3>
-<pre><code class="language-shell">git checkout &lt;tag name&gt;
-</code></pre>
-<h3 id="推送到远程">推送到远程</h3>
-<pre><code class="language-shell">git push --tags
-</code></pre>
-<h2 id="工作流">工作流</h2>
-<h3 id="集中式工作流">集中式工作流</h3>
-<p>一个中央远程仓库，一个主分支</p>
-<h3 id="功能分支工作流">功能分支工作流</h3>
-<p>一个中央远程仓库，一个主分支，多个功能分支</p>
-<h3 id="gitflow-工作流">Gitflow 工作流</h3>
-<p>一个中央远程仓库，一个主分支，一个开发分支，多个功能分支<br>
-😬</p>
+<p>😬<img src="https://www.xihrni.com/post-images/1591348926611.png" alt="" loading="lazy"></p>
 ]]></content>
     </entry>
 </feed>
