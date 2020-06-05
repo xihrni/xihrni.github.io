@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2020-06-05T02:25:37.058Z</updated>
+    <updated>2020-06-05T03:42:12.094Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
@@ -954,6 +954,10 @@ git remote add origin git@github.com:xihrni/git_demo.git
 <h3 id="移除远程版本库">移除远程版本库</h3>
 <pre><code class="language-shell">git remote rm &lt;name&gt;
 git remote rm origin
+</code></pre>
+<h3 id="更新远程版本库地址">更新远程版本库地址</h3>
+<pre><code class="language-shell">git remote set-url &lt;name&gt; &lt;url&gt;
+git remote set-url origin git@github.com:xihrni/git_demo2.git
 </code></pre>
 <h3 id="更新远程分支列表">更新远程分支列表</h3>
 <pre><code class="language-shell">git remote update &lt;name&gt; -p
