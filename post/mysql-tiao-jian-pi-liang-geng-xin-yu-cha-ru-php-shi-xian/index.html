@@ -1,0 +1,397 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MySQL 条件批量更新与插入（PHP实现） | 我的世界</title>
+<link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1592360824908">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="MySQL 条件批量更新与插入（PHP实现） | 我的世界 - Atom Feed"
+  href="https://www.xihrni.com/atom.xml">
+<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700"> -->
+
+
+    <meta name="description" content="
+😳有个接口需要同时修改关联数据，但是传过来的关联数据包含原本的数据（更新）和新的数据（插入），为了区分则让前端将原来的数据必须传ID，看看如何在一个接口中实现更新和插入操作
+
+
+接口需求
+请求地址
+POST {{domain}}/v1/..." />
+    <meta name="keywords" content="mysql,yii2,代码片段,php" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://www.xihrni.com">
+  <img class="avatar" src="https://www.xihrni.com/images/avatar.png?v=1592360824908" alt="">
+  </a>
+  <h1 class="site-title">
+    我的世界
+  </h1>
+  <p class="site-description">
+    君子和而不同。穷则独善其身，达则兼济天下。
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/xihrni" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              MySQL 条件批量更新与插入（PHP实现）
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-06-17
+              </span>
+              <span>
+                3 min read
+              </span>
+              
+                <a href="https://www.xihrni.com/tag/mysql/" class="post-tag">
+                  # mysql
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/yii2/" class="post-tag">
+                  # yii2
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/dai-ma-pian-duan/" class="post-tag">
+                  # 代码片段
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/zKKwXlxOi/" class="post-tag">
+                  # php
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://www.xihrni.com/post-images/mysql-tiao-jian-pi-liang-geng-xin-yu-cha-ru-php-shi-xian.png" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <blockquote>
+<p>😳有个接口需要同时修改关联数据，但是传过来的关联数据包含原本的数据（更新）和新的数据（插入），为了区分则让前端将原来的数据必须传ID，看看如何在一个接口中实现更新和插入操作</p>
+</blockquote>
+<!-- more -->
+<h3 id="接口需求">接口需求</h3>
+<p>请求地址</p>
+<pre><code class="language-text">POST {{domain}}/v1/user/api-envs/:id
+</code></pre>
+<p>请求数据</p>
+<pre><code class="language-json">{
+	&quot;title&quot;: &quot;环境变量组1&quot;,
+	&quot;variables&quot;: [
+		{
+			&quot;id&quot;: 1,
+			&quot;name&quot;: &quot;admin_token1&quot;,
+			&quot;value&quot;: &quot;123456&quot;
+		},
+		{
+			&quot;name&quot;: &quot;user_token&quot;,
+			&quot;value&quot;: &quot;456789&quot;
+		},
+		{
+			&quot;id&quot;: 2,
+			&quot;name&quot;: &quot;admin_token2&quot;,
+			&quot;value&quot;: &quot;1234567&quot;
+		},
+		{
+			&quot;id&quot;: 4,
+			&quot;name&quot;: &quot;admin_token4&quot;,
+			&quot;value&quot;: &quot;1234568&quot;
+		},
+		{
+			&quot;name&quot;: &quot;user_token2&quot;,
+			&quot;value&quot;: &quot;4567890&quot;
+		}
+	]
+}
+</code></pre>
+<p>数据库表结构<br>
+<code>api_env</code> 环境</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">名称</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:right">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">id</td>
+<td style="text-align:left">int(11) unsigned</td>
+<td style="text-align:right">ID</td>
+</tr>
+<tr>
+<td style="text-align:left">title</td>
+<td style="text-align:left">varchar(32)</td>
+<td style="text-align:right">标题</td>
+</tr>
+<tr>
+<td style="text-align:left">created_at</td>
+<td style="text-align:left">timestamp</td>
+<td style="text-align:right">创建时间</td>
+</tr>
+</tbody>
+</table>
+<p><code>api_env_variable</code> 环境变量</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">名称</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:right">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">id</td>
+<td style="text-align:left">int(11) unsigned</td>
+<td style="text-align:right">ID</td>
+</tr>
+<tr>
+<td style="text-align:left">env_id</td>
+<td style="text-align:left">int(11) unsigned</td>
+<td style="text-align:right">环境ID</td>
+</tr>
+<tr>
+<td style="text-align:left">name</td>
+<td style="text-align:left">varchar(32)</td>
+<td style="text-align:right">名称</td>
+</tr>
+<tr>
+<td style="text-align:left">value</td>
+<td style="text-align:left">varchar(255)</td>
+<td style="text-align:right">值</td>
+</tr>
+<tr>
+<td style="text-align:left">created_at</td>
+<td style="text-align:left">timestamp</td>
+<td style="text-align:right">创建时间</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mysql-条件批量更新语句">MySQL 条件批量更新语句</h3>
+<pre><code class="language-sql">UPDATE `api_env_variable`
+SET `name` = CASE `id`
+    WHEN 1 THEN 'admin_token1' 
+    WHEN 2 THEN 'admin_token2'
+    WHEN 4 THEN 'admin_token4'
+END
+WHERE `id` IN (1,2,4)
+</code></pre>
+<p>后面的条件 <code>id</code> 用于提升效率，还可加 <code>AND</code> 条件筛选</p>
+<h3 id="php-实现">PHP 实现</h3>
+<p>使用 Yii2 框架进行示例：</p>
+<pre><code class="language-php">$data = Yii::$app-&gt;request-&gt;post();
+
+// 更新环境数据
+// ... 
+
+// 更新和插入环境变量数据
+if ($data['variables']) {
+    $updateData = []; // 需要更新的数据
+    $insertData = []; // 需要插入的数据
+    foreach ($data['variables'] as $v) {
+        // 过滤数据
+        if ($v['name'] &amp;&amp; $v['value']) {
+            // 判断是插入还是更新
+            $v['id'] ? $updateData[] = $v : $insertData[] = $v;
+        }
+    }
+
+    // 开启事务
+    $result = Yii::$app-&gt;db-&gt;transaction(function ($e) use ($id, $updateData, $insertData) {
+        $table = ApiEnvVariable::tableName();
+
+        // 更新
+        if ($updateData) {
+            $ids = $name = $value = '';
+            foreach ($updateData as $v) {
+                $ids   .= $v['id'] . ',';
+                $name  .= &quot; WHEN ${v['id']} THEN '${v['name']}'&quot;;
+                $value .= &quot; WHEN ${v['id']} THEN '${v['value']}'&quot;;
+            }
+
+            $ids = rtrim($ids, ',');
+            $sql = &quot;UPDATE ${table} SET name = CASE id ${name} END, value = CASE id ${value} END WHERE id IN (${ids}) AND is_trash = 0&quot;;
+
+            try {
+                $result = Yii::$app-&gt;db-&gt;createCommand($sql)-&gt;execute();
+                // var_dump($result);
+            } catch (Exception $e) {
+                // var_dump($e-&gt;getMessage());
+                throw new ServerErrorHttpException(Yii::t('app/error', 'Update failed.'));
+                $e-&gt;transaction-&gt;rollBack();
+            }
+        }
+
+        // 插入
+        if ($insertData) {
+            $insertData = array_map(function ($v) use ($id) {
+                return [
+                    'env_id' =&gt; $id,
+                    'name'   =&gt; $v['name'],
+                    'value'  =&gt; $v['value'],
+                ];
+            }, $insertData);
+
+            return Yii::$app-&gt;db-&gt;createCommand()
+                -&gt;batchInsert($table, ['env_id', 'name', 'value'], $insertData)
+                -&gt;execute();
+        }
+
+        // $e-&gt;transaction-&gt;commit(); // 无错误或异常执行完自动提交事务
+        return true;
+    });
+
+    // 验证返回
+    // ...
+}
+</code></pre>
+<p>😬</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E6%8E%A5%E5%8F%A3%E9%9C%80%E6%B1%82">接口需求</a></li>
+<li><a href="#mysql-%E6%9D%A1%E4%BB%B6%E6%89%B9%E9%87%8F%E6%9B%B4%E6%96%B0%E8%AF%AD%E5%8F%A5">MySQL 条件批量更新语句</a></li>
+<li><a href="#php-%E5%AE%9E%E7%8E%B0">PHP 实现</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://www.xihrni.com/post/yii2-zi-ding-yi-zu-jian-pei-zhi-phpstorm-bian-ji-qi-dai-ma-ti-shi/">
+              <h3 class="post-title">
+                Yii2 自定义组件配置 PhpStorm 编辑器代码提示
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a class="margin-10-left-right" href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>|<a class="margin-10-left-right" href="http://www.beian.miit.gov.cn" target="_blank">粤ICP备15099124号-1</a>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?5d5eb0906105cf159da64f5d0625e7fa";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+  <a class="rss" href="https://www.xihrni.com/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

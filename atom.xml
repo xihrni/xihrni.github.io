@@ -2,14 +2,208 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2020-06-05T09:28:58.378Z</updated>
+    <updated>2020-06-17T02:29:16.329Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
-    <subtitle>只有自身强大</subtitle>
+    <subtitle>君子和而不同。穷则独善其身，达则兼济天下。</subtitle>
     <logo>https://www.xihrni.com/images/avatar.png</logo>
     <icon>https://www.xihrni.com/favicon.ico</icon>
     <rights>All rights reserved 2020, 我的世界</rights>
+    <entry>
+        <title type="html"><![CDATA[MySQL 条件批量更新与插入（PHP实现）]]></title>
+        <id>https://www.xihrni.com/post/mysql-tiao-jian-pi-liang-geng-xin-yu-cha-ru-php-shi-xian/</id>
+        <link href="https://www.xihrni.com/post/mysql-tiao-jian-pi-liang-geng-xin-yu-cha-ru-php-shi-xian/">
+        </link>
+        <updated>2020-06-17T01:54:38.000Z</updated>
+        <summary type="html"><![CDATA[<blockquote>
+<p>😳有个接口需要同时修改关联数据，但是传过来的关联数据包含原本的数据（更新）和新的数据（插入），为了区分则让前端将原来的数据必须传ID，看看如何在一个接口中实现更新和插入操作</p>
+</blockquote>
+]]></summary>
+        <content type="html"><![CDATA[<blockquote>
+<p>😳有个接口需要同时修改关联数据，但是传过来的关联数据包含原本的数据（更新）和新的数据（插入），为了区分则让前端将原来的数据必须传ID，看看如何在一个接口中实现更新和插入操作</p>
+</blockquote>
+<!-- more -->
+<h3 id="接口需求">接口需求</h3>
+<p>请求地址</p>
+<pre><code class="language-text">POST {{domain}}/v1/user/api-envs/:id
+</code></pre>
+<p>请求数据</p>
+<pre><code class="language-json">{
+	&quot;title&quot;: &quot;环境变量组1&quot;,
+	&quot;variables&quot;: [
+		{
+			&quot;id&quot;: 1,
+			&quot;name&quot;: &quot;admin_token1&quot;,
+			&quot;value&quot;: &quot;123456&quot;
+		},
+		{
+			&quot;name&quot;: &quot;user_token&quot;,
+			&quot;value&quot;: &quot;456789&quot;
+		},
+		{
+			&quot;id&quot;: 2,
+			&quot;name&quot;: &quot;admin_token2&quot;,
+			&quot;value&quot;: &quot;1234567&quot;
+		},
+		{
+			&quot;id&quot;: 4,
+			&quot;name&quot;: &quot;admin_token4&quot;,
+			&quot;value&quot;: &quot;1234568&quot;
+		},
+		{
+			&quot;name&quot;: &quot;user_token2&quot;,
+			&quot;value&quot;: &quot;4567890&quot;
+		}
+	]
+}
+</code></pre>
+<p>数据库表结构<br>
+<code>api_env</code> 环境</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">名称</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:right">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">id</td>
+<td style="text-align:left">int(11) unsigned</td>
+<td style="text-align:right">ID</td>
+</tr>
+<tr>
+<td style="text-align:left">title</td>
+<td style="text-align:left">varchar(32)</td>
+<td style="text-align:right">标题</td>
+</tr>
+<tr>
+<td style="text-align:left">created_at</td>
+<td style="text-align:left">timestamp</td>
+<td style="text-align:right">创建时间</td>
+</tr>
+</tbody>
+</table>
+<p><code>api_env_variable</code> 环境变量</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">名称</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:right">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">id</td>
+<td style="text-align:left">int(11) unsigned</td>
+<td style="text-align:right">ID</td>
+</tr>
+<tr>
+<td style="text-align:left">env_id</td>
+<td style="text-align:left">int(11) unsigned</td>
+<td style="text-align:right">环境ID</td>
+</tr>
+<tr>
+<td style="text-align:left">name</td>
+<td style="text-align:left">varchar(32)</td>
+<td style="text-align:right">名称</td>
+</tr>
+<tr>
+<td style="text-align:left">value</td>
+<td style="text-align:left">varchar(255)</td>
+<td style="text-align:right">值</td>
+</tr>
+<tr>
+<td style="text-align:left">created_at</td>
+<td style="text-align:left">timestamp</td>
+<td style="text-align:right">创建时间</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mysql-条件批量更新语句">MySQL 条件批量更新语句</h3>
+<pre><code class="language-sql">UPDATE `api_env_variable`
+SET `name` = CASE `id`
+    WHEN 1 THEN 'admin_token1' 
+    WHEN 2 THEN 'admin_token2'
+    WHEN 4 THEN 'admin_token4'
+END
+WHERE `id` IN (1,2,4)
+</code></pre>
+<p>后面的条件 <code>id</code> 用于提升效率，还可加 <code>AND</code> 条件筛选</p>
+<h3 id="php-实现">PHP 实现</h3>
+<p>使用 Yii2 框架进行示例：</p>
+<pre><code class="language-php">$data = Yii::$app-&gt;request-&gt;post();
+
+// 更新环境数据
+// ... 
+
+// 更新和插入环境变量数据
+if ($data['variables']) {
+    $updateData = []; // 需要更新的数据
+    $insertData = []; // 需要插入的数据
+    foreach ($data['variables'] as $v) {
+        // 过滤数据
+        if ($v['name'] &amp;&amp; $v['value']) {
+            // 判断是插入还是更新
+            $v['id'] ? $updateData[] = $v : $insertData[] = $v;
+        }
+    }
+
+    // 开启事务
+    $result = Yii::$app-&gt;db-&gt;transaction(function ($e) use ($id, $updateData, $insertData) {
+        $table = ApiEnvVariable::tableName();
+
+        // 更新
+        if ($updateData) {
+            $ids = $name = $value = '';
+            foreach ($updateData as $v) {
+                $ids   .= $v['id'] . ',';
+                $name  .= &quot; WHEN ${v['id']} THEN '${v['name']}'&quot;;
+                $value .= &quot; WHEN ${v['id']} THEN '${v['value']}'&quot;;
+            }
+
+            $ids = rtrim($ids, ',');
+            $sql = &quot;UPDATE ${table} SET name = CASE id ${name} END, value = CASE id ${value} END WHERE id IN (${ids}) AND is_trash = 0&quot;;
+
+            try {
+                $result = Yii::$app-&gt;db-&gt;createCommand($sql)-&gt;execute();
+                // var_dump($result);
+            } catch (Exception $e) {
+                // var_dump($e-&gt;getMessage());
+                throw new ServerErrorHttpException(Yii::t('app/error', 'Update failed.'));
+                $e-&gt;transaction-&gt;rollBack();
+            }
+        }
+
+        // 插入
+        if ($insertData) {
+            $insertData = array_map(function ($v) use ($id) {
+                return [
+                    'env_id' =&gt; $id,
+                    'name'   =&gt; $v['name'],
+                    'value'  =&gt; $v['value'],
+                ];
+            }, $insertData);
+
+            return Yii::$app-&gt;db-&gt;createCommand()
+                -&gt;batchInsert($table, ['env_id', 'name', 'value'], $insertData)
+                -&gt;execute();
+        }
+
+        // $e-&gt;transaction-&gt;commit(); // 无错误或异常执行完自动提交事务
+        return true;
+    });
+
+    // 验证返回
+    // ...
+}
+</code></pre>
+<p>😬</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Yii2 自定义组件配置 PhpStorm 编辑器代码提示]]></title>
         <id>https://www.xihrni.com/post/yii2-zi-ding-yi-zu-jian-pei-zhi-phpstorm-bian-ji-qi-dai-ma-ti-shi/</id>
@@ -655,106 +849,6 @@ $result = Yii::$app-&gt;db-&gt;createCommand()
     -&gt;execute();
 
 var_dump($result);exit;
-</code></pre>
-<p>😬</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[PHP7.2.x 安装 Memcache 扩展]]></title>
-        <id>https://www.xihrni.com/post/memcache-yu-php72x-kuo-zhan/</id>
-        <link href="https://www.xihrni.com/post/memcache-yu-php72x-kuo-zhan/">
-        </link>
-        <updated>2018-12-01T09:03:04.000Z</updated>
-        <summary type="html"><![CDATA[<h3 id="windows-下安装-memcached">😳Windows 下安装 Memcached</h3>
-]]></summary>
-        <content type="html"><![CDATA[<h3 id="windows-下安装-memcached">😳Windows 下安装 Memcached</h3>
-<!-- more -->
-<blockquote>
-<p>推荐使用最新版本 <code>1.4.5</code></p>
-</blockquote>
-<h4 id="144-版本">1.4.4 版本</h4>
-<p>32位 <a href="http://static.runoob.com/download/memcached-win32-1.4.4-14.zip">下载</a><br>
-64位 <a href="http://static.runoob.com/download/memcached-win64-1.4.4-14.zip">下载</a></p>
-<h4 id="145-版本">1.4.5 版本</h4>
-<p>32位 <a href="http://static.runoob.com/download/memcached-1.4.5-x86.zip">下载</a><br>
-64位 <a href="http://static.runoob.com/download/memcached-1.4.5-amd64.zip">下载</a></p>
-<h3 id="配置环境">配置环境</h3>
-<blockquote>
-<p>以下为 Windows 10 系统</p>
-</blockquote>
-<p>右键桌面的 <code>此电脑</code> -&gt; <code>属性</code> -&gt; <code>高级系统设置</code> -&gt; <code>高级</code> -&gt; <code>环境变量</code> -&gt; <code>Path</code> -&gt; <code>编辑</code> -&gt; <code>新建</code>，输入解压的 memcached.exe 所在路径，例：<code>D:\Develop\Soft\memcached-amd64</code>，连续3次确定关闭对框配置环境完成</p>
-<h4 id="memcached-144-版本安装">memcached &lt;=1.4.4 版本安装</h4>
-<ol>
-<li>解压文件</li>
-<li>在 1.4.5 版本以前 <code>memcached</code> 可以作为一个服务安装，使用管理员权限运行以下命令：</li>
-</ol>
-<pre><code class="language-shell">&gt; memcached -d install
-</code></pre>
-<ol start="3">
-<li>使用以下命令来启动和关闭 <code>memcached</code> 服务</li>
-</ol>
-<pre><code class="language-shell">&gt; memcached -d start
-&gt; memcached -d stop
-&gt; memcached -d restart
-</code></pre>
-<ol start="4">
-<li>修改启动配置，运行 <code>regedit</code> 打开注册表，找到 <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\memcached</code> 进行修改：<br>
-<code>memcached -d runservice -m 64 -l 127.0.0.1 -p 11211</code></li>
-<li>卸载</li>
-</ol>
-<pre><code class="language-shell">&gt; memcached -d uninstall
-</code></pre>
-<h4 id="memcached-145-版本安装">memcached &gt; 1.4.5 版本安装</h4>
-<ol>
-<li>解压文件</li>
-<li>在 <code>memcached 1.4.5</code> 版本之后，<code>memcached</code> 不能作为服务来运行，需要使用任务计划中来开启一个普通的进程，在 <code>windows</code> 启动时设置 <code>memcached</code> 自动执行，使用管理员权限运行以下命令：</li>
-</ol>
-<pre><code class="language-shell">&gt; schtasks /create /sc onstart /tn memcached /tr &quot;D:\Develop\Soft\memcached-amd64\memcached.exe -m 64 -l 127.0.0.1 -p 11211 -d&quot;
-</code></pre>
-<ol start="3">
-<li>删除任务计划</li>
-</ol>
-<pre><code class="language-shell">&gt; schtasks /delete /tn memcached
-</code></pre>
-<h3 id="连接-memcached">连接 Memcached</h3>
-<blockquote>
-<p>安装 <code>Telnet</code><br>
-按下 <code>win</code> + <code>s</code> 输入 <code>控制面板</code> 打开 -&gt; 程序 -&gt; 启用或关闭 Windows 功能 -&gt; 勾选 <code>Telnet 客户端</code> -&gt; 确定</p>
-</blockquote>
-<p>连接</p>
-<pre><code class="language-shell">&gt; telnet 127.0.0.1 11211
-</code></pre>
-<p>退出</p>
-<pre><code class="language-shell"># 按下 `ctrl` + `]`
-&gt; quit
-</code></pre>
-<h3 id="php-72x-安装-memcache-扩展">PHP 7.2.x 安装 memcache 扩展</h3>
-<h4 id="下载-php7-memcache-dll">下载 php7-memcache-dll</h4>
-<p>下载 zip 压缩包 <a href="https://github.com/nono303/PHP7-memcache-dll">github地址</a></p>
-<h4 id="添加扩展">添加扩展</h4>
-<p>移动<code>PHP7-memcache-dll-master\vc15\x86\nts\avx\php-7.2.x_memcache.dll</code> 到 PHP 扩展目录 <code>php-7.2.1-nts\ext\php_memcache.dll</code></p>
-<p>修改 <code>php.ini</code> 配置</p>
-<pre><code class="language-ini">...
-;extension=php_soap.dll
-;extension=php_sockets.dll
-extension=php_sqlite3.dll
-;extension=php_tidy.dll
-;extension=php_xmlrpc.dll
-extension=php_xsl.dll
-
-# 在此段添加如下一行
-extension=php_memcache.dll
-</code></pre>
-<p>重启 nginx</p>
-<h4 id="查看扩展">查看扩展</h4>
-<pre><code class="language-shell">&gt; php -m
-</code></pre>
-<h4 id="php-操作">PHP 操作</h4>
-<pre><code class="language-php">$memcache = new Memcache;
-$memcache-&gt;addServer('127.0.0.1', '11211');
-
-$memcache-&gt;set('name', 'xiaoming', 0, 30);
-$name = $memcache-&gt;get('name');
 </code></pre>
 <p>😬</p>
 ]]></content>
