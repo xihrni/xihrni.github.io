@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2020-06-17T02:29:16.329Z</updated>
+    <updated>2020-12-28T03:53:02.690Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
@@ -654,7 +654,7 @@ Server is running: +PONG
 <pre><code class="language-shell">&gt; cat ~/.ssh/id_rsa
 </code></pre>
 <p>生成 <code>ssh key</code> （已存在则无需生成）</p>
-<pre><code class="language-shell">&gt; ssh-keygen -t rsa -C &quot;xieyucheng@dyg.cn&quot;
+<pre><code class="language-shell">&gt; ssh-keygen -t rsa -C &quot;xxx@xxx.com&quot;
 </code></pre>
 <p><code>id_rsa</code> 为秘钥文件，<code>id_rsa.pub</code> 为公钥文件</p>
 <p>查看公钥文件</p>
