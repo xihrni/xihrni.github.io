@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2020-12-28T03:53:02.690Z</updated>
+    <updated>2020-12-30T02:48:19.132Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
@@ -10,6 +10,64 @@
     <logo>https://www.xihrni.com/images/avatar.png</logo>
     <icon>https://www.xihrni.com/favicon.ico</icon>
     <rights>All rights reserved 2020, 我的世界</rights>
+    <entry>
+        <title type="html"><![CDATA[CentOS 挂载新磁盘（阿里云ECS）]]></title>
+        <id>https://www.xihrni.com/post/a-li-yun-ecs-centos7-gua-zai-xin-ci-pan/</id>
+        <link href="https://www.xihrni.com/post/a-li-yun-ecs-centos7-gua-zai-xin-ci-pan/">
+        </link>
+        <updated>2020-12-30T01:57:51.000Z</updated>
+        <summary type="html"><![CDATA[<blockquote>
+<p>😳 服务器磁盘已满，新购了一块云盘，包年包月的磁盘会自动挂载，不用重启，但是需要手动进入系统格式化磁盘、分区、挂载路径<br>
+本文只适用小于2T容量的磁盘</p>
+</blockquote>
+]]></summary>
+        <content type="html"><![CDATA[<blockquote>
+<p>😳 服务器磁盘已满，新购了一块云盘，包年包月的磁盘会自动挂载，不用重启，但是需要手动进入系统格式化磁盘、分区、挂载路径<br>
+本文只适用小于2T容量的磁盘</p>
+</blockquote>
+<!-- more -->
+<p>先查看当前磁盘信息</p>
+<pre><code class="language-shell">&gt; fdisk -l
+</code></pre>
+<p><img src="https://www.xihrni.com/post-images/1609294893165.png" alt="fdisk -l" loading="lazy"><br>
+<code>/dev/vdc</code> 就是新添加的磁盘</p>
+<h3 id="创建分区">创建分区</h3>
+<p>进入分区模式</p>
+<pre><code class="language-shell">&gt; fdisk -u /dev/vdc
+</code></pre>
+<ol>
+<li>输入 <code>n</code> 创建一个新分区</li>
+<li>输入 <code>p</code> 选择分区类型为主分区</li>
+<li>输入分区编号，直接按回车键选择默认值下一步</li>
+<li>输入第一个可用的扇区编号，直接按回车键选择默认值下一步</li>
+<li>输入最后一个扇区编号，直接按回车键选择默认值下一步</li>
+<li>输入 <code>p</code> 查看分区情况</li>
+<li>输入 <code>w</code> 开始分区，并且分区完成后会自动退出分区模式</li>
+</ol>
+<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1609295585447.png" alt="fdisk -u" loading="lazy"></figure>
+<p>查看新分区信息</p>
+<pre><code class="language-shell">&gt; fdisk -lu /dev/vdc
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1609296021975.png" alt="fdisk -lu" loading="lazy"></figure>
+<h3 id="创建文件系统">创建文件系统</h3>
+<p>创建一个ext4文件系统</p>
+<pre><code class="language-shell">&gt; mkfs -t ext4 /dev/vdc1
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="https://www.xihrni.com/post-images/1609296123347.png" alt="mkfs -t" loading="lazy"></figure>
+<h3 id="挂载分区">挂载分区</h3>
+<p>写入新分区信息，启动开机自动挂载分区</p>
+<blockquote>
+<p>如果要把数据盘单独挂载到某个文件夹，例如单独用来存放网页，则将命令中/mnt替换成所需的挂载点路径。</p>
+</blockquote>
+<pre><code class="language-shell">&gt; cp /etc/fstab /etc/fstab.bak # 备份原本的文件
+&gt; echo `blkid /dev/vdc1 | awk '{print $2}' | sed 's/\&quot;//g'` /mnt ext4 defaults 0 0 &gt;&gt; /etc/fstab
+</code></pre>
+<p>挂载分区</p>
+<pre><code class="language-shell">&gt; mount /dev/vdc1 /mnt
+</code></pre>
+<p>😬</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[MySQL 条件批量更新与插入（PHP实现）]]></title>
         <id>https://www.xihrni.com/post/mysql-tiao-jian-pi-liang-geng-xin-yu-cha-ru-php-shi-xian/</id>
@@ -698,7 +756,7 @@ PubkeyAuthentication yes // 允许使用基于密钥认证的方式登陆
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Centos 重写 crontab -r 命令防止误操作]]></title>
+        <title type="html"><![CDATA[CentOS 重写 crontab -r 命令防止误操作]]></title>
         <id>https://www.xihrni.com/post/centos-chong-xie-crontab-r-ming-ling-fang-zhi-wu-cao-zuo/</id>
         <link href="https://www.xihrni.com/post/centos-chong-xie-crontab-r-ming-ling-fang-zhi-wu-cao-zuo/">
         </link>
@@ -752,7 +810,7 @@ f
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Centos 安装 Composer 并配置环境]]></title>
+        <title type="html"><![CDATA[CentOS 安装 Composer 并配置环境]]></title>
         <id>https://www.xihrni.com/post/centos-an-zhuang-composer-bing-pei-zhi-huan-jing/</id>
         <link href="https://www.xihrni.com/post/centos-an-zhuang-composer-bing-pei-zhi-huan-jing/">
         </link>
@@ -821,36 +879,6 @@ Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
 <p>重新登录 SSH 即可生效 <code>.bashrc</code> 文件<br>
 😬</p>
 </blockquote>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Yii2 将 CSV 文件导入到数据库]]></title>
-        <id>https://www.xihrni.com/post/yii2-jiang-csv-wen-jian-dao-ru-dao-shu-ju-ku/</id>
-        <link href="https://www.xihrni.com/post/yii2-jiang-csv-wen-jian-dao-ru-dao-shu-ju-ku/">
-        </link>
-        <updated>2019-06-20T07:14:51.000Z</updated>
-        <summary type="html"><![CDATA[<h3 id="代码">😳代码</h3>
-]]></summary>
-        <content type="html"><![CDATA[<h3 id="代码">😳代码</h3>
-<!-- more -->
-<pre><code class="language-php">$file = fopen(Yii::getAlias('@webroot') . '/region-code.csv', 'r');
-
-while ($data = fgetcsv($file)) {
-    $rows[] = [
-        'name' =&gt; trim($data[1]),
-        'code' =&gt; trim($data[0]),
-    ];
-}
-
-fclose($file);
-
-$result = Yii::$app-&gt;db-&gt;createCommand()
-    -&gt;batchInsert(\app\models\RegionCode::tableName(), ['name', 'code'], $rows)
-    -&gt;execute();
-
-var_dump($result);exit;
-</code></pre>
-<p>😬</p>
 ]]></content>
     </entry>
 </feed>

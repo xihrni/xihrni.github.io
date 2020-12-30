@@ -2,25 +2,26 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>CentOS 重写 crontab -r 命令防止误操作 | 我的世界</title>
+<title>CentOS 挂载新磁盘（阿里云ECS） | 我的世界</title>
 <link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1609296494416">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="CentOS 重写 crontab -r 命令防止误操作 | 我的世界 - Atom Feed"
+<link rel="alternate" type="application/atom+xml" title="CentOS 挂载新磁盘（阿里云ECS） | 我的世界 - Atom Feed"
   href="https://www.xihrni.com/atom.xml">
 <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700"> -->
 
 
     <meta name="description" content="
-😳一次误操作将服务器上的所有定时任务清除导致项目故障
+😳 服务器磁盘已满，新购了一块云盘，包年包月的磁盘会自动挂载，不用重启，但是需要手动进入系统格式化磁盘、分区、挂载路径
+本文只适用小于2T容量的磁盘
 
-别名
-设置别名重写 crontab 命令
-&gt; vi /etc/bashrc
 
-输入 i 进入编辑模式，新增一行
-alias crontab='/usr/bin/crontab..." />
-    <meta name="keywords" content="crontab,定时任务,centos" />
+先查看当前磁盘信息
+&gt; fdisk -l
+
+
+/dev/vdc 就是新添加的..." />
+    <meta name="keywords" content="挂载磁盘,阿里云,centos" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -86,22 +87,22 @@ alias crontab='/usr/bin/crontab..." />
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              CentOS 重写 crontab -r 命令防止误操作
+              CentOS 挂载新磁盘（阿里云ECS）
             </h2>
             <div class="post-info">
               <span>
-                2019-07-24
+                2020-12-30
               </span>
               <span>
                 2 min read
               </span>
               
-                <a href="https://www.xihrni.com/tag/crontab/" class="post-tag">
-                  # crontab
+                <a href="https://www.xihrni.com/tag/gua-zai-ci-pan/" class="post-tag">
+                  # 挂载磁盘
                 </a>
               
-                <a href="https://www.xihrni.com/tag/ding-shi-ren-wu/" class="post-tag">
-                  # 定时任务
+                <a href="https://www.xihrni.com/tag/a-li-yun/" class="post-tag">
+                  # 阿里云
                 </a>
               
                 <a href="https://www.xihrni.com/tag/centos/" class="post-tag">
@@ -110,54 +111,53 @@ alias crontab='/usr/bin/crontab..." />
               
             </div>
             
-              <img class="post-feature-image" src="https://www.xihrni.com/post-images/centos-chong-xie-crontab-r-ming-ling-fang-zhi-wu-cao-zuo.png" alt="">
+              <img class="post-feature-image" src="https://www.xihrni.com/post-images/a-li-yun-ecs-centos7-gua-zai-xin-ci-pan.png" alt="">
             
             <div class="post-content-wrapper">
               <div class="post-content">
                 <blockquote>
-<p>😳一次误操作将服务器上的所有定时任务清除导致项目故障</p>
+<p>😳 服务器磁盘已满，新购了一块云盘，包年包月的磁盘会自动挂载，不用重启，但是需要手动进入系统格式化磁盘、分区、挂载路径<br>
+本文只适用小于2T容量的磁盘</p>
 </blockquote>
-<h3 id="别名">别名</h3>
-<p>设置别名重写 <code>crontab</code> 命令</p>
-<pre><code class="language-shell">&gt; vi /etc/bashrc
+<!-- more -->
+<p>先查看当前磁盘信息</p>
+<pre><code class="language-shell">&gt; fdisk -l
 </code></pre>
-<p>输入 <code>i</code> 进入编辑模式，新增一行</p>
-<pre><code class="language-shell">alias crontab='/usr/bin/crontab.sh'
+<p><img src="https://www.xihrni.com/post-images/1609294893165.png" alt="fdisk -l" loading="lazy"><br>
+<code>/dev/vdc</code> 就是新添加的磁盘</p>
+<h3 id="创建分区">创建分区</h3>
+<p>进入分区模式</p>
+<pre><code class="language-shell">&gt; fdisk -u /dev/vdc
 </code></pre>
-<p>输入 <code>:wq</code> 保存并退出</p>
-<h3 id="命令文件">命令文件</h3>
-<p>编辑文件</p>
-<pre><code class="language-shell">&gt; vi crontab.sh
+<ol>
+<li>输入 <code>n</code> 创建一个新分区</li>
+<li>输入 <code>p</code> 选择分区类型为主分区</li>
+<li>输入分区编号，直接按回车键选择默认值下一步</li>
+<li>输入第一个可用的扇区编号，直接按回车键选择默认值下一步</li>
+<li>输入最后一个扇区编号，直接按回车键选择默认值下一步</li>
+<li>输入 <code>p</code> 查看分区情况</li>
+<li>输入 <code>w</code> 开始分区，并且分区完成后会自动退出分区模式</li>
+</ol>
+<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1609295585447.png" alt="fdisk -u" loading="lazy"></figure>
+<p>查看新分区信息</p>
+<pre><code class="language-shell">&gt; fdisk -lu /dev/vdc
 </code></pre>
-<p>输入 <code>i</code> 进入编辑模式，输入以下代码</p>
-<pre><code class="language-shell">#!/bin/sh
-source /etc/profile;
-source ~/.bash_profile;
-
-etime=`date -d &quot;0 days ago&quot; +%Y%m%d_%H%M%S`
-
-if [ &quot;$1&quot; = &quot;-r&quot; ] ; then
-    echo &quot;My God! Dangerous...&quot;
-    echo &quot;Exit...&quot;
-    exit 2
-fi
-
-if [ &quot;$1&quot; = &quot;-l&quot; ] ; then
-    /usr/bin/crontab -l
-    exit 0
-fi
-
-# 编辑时进行备份
-if [ &quot;$1&quot; = &quot;-e&quot; ] ; then
-    mkdir -p  ~/cronbak
-    /usr/bin/crontab -l  &gt;  ~/cronbak/cron.bak.$etime.a
-    /usr/bin/crontab -e
-    /usr/bin/crontab -l  &gt;  ~/cronbak/cron.bak.$etime.b
-f
+<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1609296021975.png" alt="fdisk -lu" loading="lazy"></figure>
+<h3 id="创建文件系统">创建文件系统</h3>
+<p>创建一个ext4文件系统</p>
+<pre><code class="language-shell">&gt; mkfs -t ext4 /dev/vdc1
 </code></pre>
-<p>移动文件并添加权限</p>
-<pre><code class="language-shell">&gt; mv crontab.sh /usr/bin
-&gt; chmod 755 /usr/bin/crontab.sh
+<figure data-type="image" tabindex="3"><img src="https://www.xihrni.com/post-images/1609296123347.png" alt="mkfs -t" loading="lazy"></figure>
+<h3 id="挂载分区">挂载分区</h3>
+<p>写入新分区信息，启动开机自动挂载分区</p>
+<blockquote>
+<p>如果要把数据盘单独挂载到某个文件夹，例如单独用来存放网页，则将命令中/mnt替换成所需的挂载点路径。</p>
+</blockquote>
+<pre><code class="language-shell">&gt; cp /etc/fstab /etc/fstab.bak # 备份原本的文件
+&gt; echo `blkid /dev/vdc1 | awk '{print $2}' | sed 's/\&quot;//g'` /mnt ext4 defaults 0 0 &gt;&gt; /etc/fstab
+</code></pre>
+<p>挂载分区</p>
+<pre><code class="language-shell">&gt; mount /dev/vdc1 /mnt
 </code></pre>
 <p>😬</p>
 
@@ -168,8 +168,9 @@ f
 <ul>
 <li>
 <ul>
-<li><a href="#%E5%88%AB%E5%90%8D">别名</a></li>
-<li><a href="#%E5%91%BD%E4%BB%A4%E6%96%87%E4%BB%B6">命令文件</a></li>
+<li><a href="#%E5%88%9B%E5%BB%BA%E5%88%86%E5%8C%BA">创建分区</a></li>
+<li><a href="#%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F">创建文件系统</a></li>
+<li><a href="#%E6%8C%82%E8%BD%BD%E5%88%86%E5%8C%BA">挂载分区</a></li>
 </ul>
 </li>
 </ul>
@@ -184,9 +185,9 @@ f
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://www.xihrni.com/post/centos-an-zhuang-composer-bing-pei-zhi-huan-jing/">
+            <a href="https://www.xihrni.com/post/mysql-tiao-jian-pi-liang-geng-xin-yu-cha-ru-php-shi-xian/">
               <h3 class="post-title">
-                CentOS 安装 Composer 并配置环境
+                MySQL 条件批量更新与插入（PHP实现）
               </h3>
             </a>
           </div>
