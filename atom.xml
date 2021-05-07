@@ -2,14 +2,14 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2020-12-30T02:48:19.132Z</updated>
+    <updated>2021-05-07T04:51:18.779Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
     <subtitle>君子和而不同。穷则独善其身，达则兼济天下。</subtitle>
     <logo>https://www.xihrni.com/images/avatar.png</logo>
     <icon>https://www.xihrni.com/favicon.ico</icon>
-    <rights>All rights reserved 2020, 我的世界</rights>
+    <rights>All rights reserved 2021, 我的世界</rights>
     <entry>
         <title type="html"><![CDATA[CentOS 挂载新磁盘（阿里云ECS）]]></title>
         <id>https://www.xihrni.com/post/a-li-yun-ecs-centos7-gua-zai-xin-ci-pan/</id>
