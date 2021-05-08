@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2021-05-07T04:51:18.779Z</updated>
+    <updated>2021-05-08T00:02:33.684Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
@@ -643,7 +643,7 @@ Server is running: +PONG
 <blockquote>
 <p>被压缩的 json 格式，可复制出来用编辑器修改</p>
 </blockquote>
-<pre><code class="language-shell">&gt; vi config.v2.json
+<pre><code class="language-shell">&gt; vi hostconfig.json
 </code></pre>
 <p>按照原有格式修改或新增 <code>PortBindings</code> 块</p>
 <pre><code class="language-json">{
