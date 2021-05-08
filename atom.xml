@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2021-05-08T00:02:33.684Z</updated>
+    <updated>2021-05-08T01:19:58.218Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
@@ -628,8 +628,7 @@ Server is running: +PONG
 </blockquote>
 <pre><code class="language-shell">&gt; vi config.v2.json
 </code></pre>
-<p>shell<br>
-按照原有格式修改或新增 <code>Config.ExposedPorts</code> 块</p>
+<p>按照原有格式修改或新增 <code>Config.ExposedPorts</code> 块</p>
 <pre><code class="language-json">{
     &quot;80/tcp&quot;: {},
     &quot;888/tcp&quot;: {},
@@ -683,11 +682,23 @@ Server is running: +PONG
 <pre><code class="language-shell">&gt; kill -9 12345
 &gt; screen -wipe
 </code></pre>
+<h3 id="如果出现没有-tty-文件无法登陆到容器">如果出现没有 tty 文件无法登陆到容器</h3>
+<p>最近系统升级到 Big Sur 11.3 版本发现安装完 Docker 后想登陆上去，提示 <code>screen is terminating</code>，经检查后原来是没有 <code>tty</code> 这个文件，最后爬了全网2天终于找到方法：使用其他镜像登录进行修改</p>
+<pre><code class="language-shell"># 找不到这个文件
+&gt; ls ~/Library/Containers/com.docker.docker/Data/vms/0/tty
+</code></pre>
+<p>使用 <code>justincormack/nsenter1</code> 镜像登录</p>
+<pre><code class="language-shell">&gt; docker run it --privileged --pid=host justincormack/nsenter1
+</code></pre>
+<p>查看容器文件</p>
+<pre><code class="language-shell">&gt; cd /var/lib/docker/containers &amp;&amp; ls -al
+</code></pre>
+<p>接着和上文一样修改好配置文件直接退出容器（一定要记得先停止需要修改的容器），重启 Docker 即可</p>
 <h3 id="重启-docker-desktop">重启 Docker Desktop</h3>
 <p>手动在状态栏上点击 <code>Restart</code> 进行重启<br>
 <img src="https://www.xihrni.com/post-images/1591079475440.png" alt="" loading="lazy"></p>
 <p>最后重启容器</p>
-<pre><code class="language-shell">&gt; docker start btPanel
+<pre><code class="language-shell">&gt; docker restart btPanel
 </code></pre>
 <p>😬</p>
 ]]></content>

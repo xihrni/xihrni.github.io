@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MacOS 已运行的 Docker 容器添加/修改端口映射 | 我的世界</title>
-<link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1620432142523">
+<link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1620436794894">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="MacOS 已运行的 Docker 容器添加/修改端口映射 | 我的世界 - Atom Feed"
@@ -30,7 +30,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://www.xihrni.com">
-  <img class="avatar" src="https://www.xihrni.com/images/avatar.png?v=1620432142523" alt="">
+  <img class="avatar" src="https://www.xihrni.com/images/avatar.png?v=1620436794894" alt="">
   </a>
   <h1 class="site-title">
     我的世界
@@ -94,7 +94,7 @@
                 2020-01-01
               </span>
               <span>
-                2 min read
+                3 min read
               </span>
               
                 <a href="https://www.xihrni.com/tag/bao-ta-mian-ban/" class="post-tag">
@@ -146,8 +146,7 @@
 </blockquote>
 <pre><code class="language-shell">&gt; vi config.v2.json
 </code></pre>
-<p>shell<br>
-按照原有格式修改或新增 <code>Config.ExposedPorts</code> 块</p>
+<p>按照原有格式修改或新增 <code>Config.ExposedPorts</code> 块</p>
 <pre><code class="language-json">{
     &quot;80/tcp&quot;: {},
     &quot;888/tcp&quot;: {},
@@ -201,11 +200,23 @@
 <pre><code class="language-shell">&gt; kill -9 12345
 &gt; screen -wipe
 </code></pre>
+<h3 id="如果出现没有-tty-文件无法登陆到容器">如果出现没有 tty 文件无法登陆到容器</h3>
+<p>最近系统升级到 Big Sur 11.3 版本发现安装完 Docker 后想登陆上去，提示 <code>screen is terminating</code>，经检查后原来是没有 <code>tty</code> 这个文件，最后爬了全网2天终于找到方法：使用其他镜像登录进行修改</p>
+<pre><code class="language-shell"># 找不到这个文件
+&gt; ls ~/Library/Containers/com.docker.docker/Data/vms/0/tty
+</code></pre>
+<p>使用 <code>justincormack/nsenter1</code> 镜像登录</p>
+<pre><code class="language-shell">&gt; docker run it --privileged --pid=host justincormack/nsenter1
+</code></pre>
+<p>查看容器文件</p>
+<pre><code class="language-shell">&gt; cd /var/lib/docker/containers &amp;&amp; ls -al
+</code></pre>
+<p>接着和上文一样修改好配置文件直接退出容器（一定要记得先停止需要修改的容器），重启 Docker 即可</p>
 <h3 id="重启-docker-desktop">重启 Docker Desktop</h3>
 <p>手动在状态栏上点击 <code>Restart</code> 进行重启<br>
 <img src="https://www.xihrni.com/post-images/1591079475440.png" alt="" loading="lazy"></p>
 <p>最后重启容器</p>
-<pre><code class="language-shell">&gt; docker start btPanel
+<pre><code class="language-shell">&gt; docker restart btPanel
 </code></pre>
 <p>😬</p>
 
@@ -223,6 +234,7 @@
 <li><a href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">修改配置文件</a></li>
 <li><a href="#%E9%80%80%E5%87%BA%E5%AE%B9%E5%99%A8">退出容器</a></li>
 <li><a href="#%E4%BC%9A%E8%AF%9D">会话</a></li>
+<li><a href="#%E5%A6%82%E6%9E%9C%E5%87%BA%E7%8E%B0%E6%B2%A1%E6%9C%89-tty-%E6%96%87%E4%BB%B6%E6%97%A0%E6%B3%95%E7%99%BB%E9%99%86%E5%88%B0%E5%AE%B9%E5%99%A8">如果出现没有 tty 文件无法登陆到容器</a></li>
 <li><a href="#%E9%87%8D%E5%90%AF-docker-desktop">重启 Docker Desktop</a></li>
 </ul>
 </li>
