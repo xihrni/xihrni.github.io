@@ -2,26 +2,25 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>CentOS 使用秘钥免密 SSH 远程登录 | 我的世界</title>
+<title>Linux 后台执行命令 | 我的世界</title>
 <link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1621395672054">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="CentOS 使用秘钥免密 SSH 远程登录 | 我的世界 - Atom Feed"
+<link rel="alternate" type="application/atom+xml" title="Linux 后台执行命令 | 我的世界 - Atom Feed"
   href="https://www.xihrni.com/atom.xml">
 <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700"> -->
 
 
-    <meta name="description" content="😳生成 SSH Key
+    <meta name="description" content="
+😳在命令前添加 nohup（no hang up）使命令在后台执行
 
-~ 代表当前用户目录，比如 root 用户则为 /root
 
+将命令放在后台执行
+&gt; nohup your-command &amp;
 
-检查当前是否已存在 ssh key
-&gt; cat ~/.ssh/id_rsa
-
-生成 ssh key （已存在则无需生成）
-&gt; ssh-k..." />
-    <meta name="keywords" content="centos,ssh,秘钥" />
+输出重定向到文件
+&gt; your-command &gt; out.file ..." />
+    <meta name="keywords" content="linux" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -87,84 +86,41 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              CentOS 使用秘钥免密 SSH 远程登录
+              Linux 后台执行命令
             </h2>
             <div class="post-info">
               <span>
-                2019-11-26
+                2019-05-19
               </span>
               <span>
-                2 min read
+                1 min read
               </span>
               
-                <a href="https://www.xihrni.com/tag/centos/" class="post-tag">
-                  # centos
-                </a>
-              
-                <a href="https://www.xihrni.com/tag/ssh/" class="post-tag">
-                  # ssh
-                </a>
-              
-                <a href="https://www.xihrni.com/tag/mi-yao/" class="post-tag">
-                  # 秘钥
+                <a href="https://www.xihrni.com/tag/linux/" class="post-tag">
+                  # linux
                 </a>
               
             </div>
             
-              <img class="post-feature-image" src="https://www.xihrni.com/post-images/centos-shi-yong-mi-yao-mian-mi-ssh-yuan-cheng-deng-lu.png" alt="">
-            
             <div class="post-content-wrapper">
               <div class="post-content">
-                <h3 id="生成-ssh-key">😳生成 SSH Key</h3>
-<blockquote>
-<p><code>~</code> 代表当前用户目录，比如 root 用户则为 <code>/root</code></p>
+                <blockquote>
+<p>😳在命令前添加 nohup（no hang up）使命令在后台执行</p>
 </blockquote>
 <!-- more -->
-<p>检查当前是否已存在 <code>ssh key</code></p>
-<pre><code class="language-shell">&gt; cat ~/.ssh/id_rsa
+<h3 id="将命令放在后台执行">将命令放在后台执行</h3>
+<pre><code class="language-shell">&gt; nohup your-command &amp;
 </code></pre>
-<p>生成 <code>ssh key</code> （已存在则无需生成）</p>
-<pre><code class="language-shell">&gt; ssh-keygen -t rsa -C &quot;xxx@xxx.com&quot;
+<h3 id="输出重定向到文件">输出重定向到文件</h3>
+<pre><code class="language-shell">&gt; your-command &gt; out.file 2&gt;&amp;1 &amp;
 </code></pre>
-<p><code>id_rsa</code> 为秘钥文件，<code>id_rsa.pub</code> 为公钥文件</p>
-<p>查看公钥文件</p>
-<pre><code class="language-shell">&gt; cat ~/.ssh/id_rsa.pub
+<h3 id="案例">案例</h3>
+<p>执行 <code>frpc</code> 并将输出保存到 <code>frpc.log</code> 文件中：</p>
+<pre><code class="language-shell">nohup ~/frp/frpc -c ~/frp/frpc.ini &gt; ~/frp/frpc.log 2&gt;&amp;1 &amp;
 </code></pre>
 <blockquote>
-<p>注：本地与远程都需生成SSh Key</p>
+<p>可通过 <code>ps</code> 命令查看进程号，使用 <code>kill -9</code> 结束进程</p>
 </blockquote>
-<h3 id="本地公钥加入到远程服务器授权文件中">本地公钥加入到远程服务器授权文件中</h3>
-<p><strong>远程服务器</strong>检查当前是否已存在 <code>authorized_keys</code> 文件</p>
-<pre><code class="language-shell">&gt; cat ~/.ssh/authorized_keys
-</code></pre>
-<p>创建 <code>authorized_keys</code> 文件并修改权限（已存在则无需创建）</p>
-<pre><code class="language-shell">&gt; touch ~/.ssh/authorized_keys
-&gt; chmod 600 ~/.ssh/authorized_keys
-</code></pre>
-<p>拷贝<strong>本地</strong> <code>id_rsa.pub</code> 公钥文件中所有内容到<strong>远程服务器</strong></p>
-<pre><code class="language-shell">&gt; vi ~/.ssh/G-AA00468.pub # 创建一个以本地主机名称命名的临时文件
-</code></pre>
-<p>输入 <code>i</code> 进入编辑状态，粘贴，输入 <code>:wq</code> 保存文件并退出</p>
-<pre><code class="language-shell">&gt; cat ~/.ssh/G-AA00468.pub &gt;&gt; ~/.ssh/authorized_keys # 追加到 `authorized_keys` 文件
-</code></pre>
-<h3 id="配置远程服务器ssh服务">配置远程服务器SSH服务</h3>
-<p>编辑 <code>ssh</code> 配置</p>
-<pre><code class="language-shell">&gt; vi /etc/ssh/sshd_config
-</code></pre>
-<p>输入 <code>i</code> 进入编辑状态，将下面两个配置修改，输入 <code>:wq</code> 保存文件并退出</p>
-<pre><code class="language-shell">PasswordAuthentication no // 禁止使用基于口令认证的方式登陆
-PubkeyAuthentication yes // 允许使用基于密钥认证的方式登陆
-</code></pre>
-<p>重启 <code>ssh</code> 服务</p>
-<pre><code class="language-shell">&gt; /etc/init.d/sshd reload # CentOS7系统以下
-</code></pre>
-<p><strong>或</strong></p>
-<pre><code class="language-shell">&gt; systemctl restart sshd.service # CentOS7系统以上
-</code></pre>
-<h3 id="使用秘钥免密登录">使用秘钥免密登录</h3>
-<pre><code class="language-shell">&gt; ssh -i ~/.ssh/id_rsa root@***.***.***.***
-</code></pre>
-<p>😬</p>
 
               </div>
               <div class="toc-container">
@@ -173,10 +129,9 @@ PubkeyAuthentication yes // 允许使用基于密钥认证的方式登陆
 <ul>
 <li>
 <ul>
-<li><a href="#%E7%94%9F%E6%88%90-ssh-key">😳生成 SSH Key</a></li>
-<li><a href="#%E6%9C%AC%E5%9C%B0%E5%85%AC%E9%92%A5%E5%8A%A0%E5%85%A5%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%88%E6%9D%83%E6%96%87%E4%BB%B6%E4%B8%AD">本地公钥加入到远程服务器授权文件中</a></li>
-<li><a href="#%E9%85%8D%E7%BD%AE%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8ssh%E6%9C%8D%E5%8A%A1">配置远程服务器SSH服务</a></li>
-<li><a href="#%E4%BD%BF%E7%94%A8%E7%A7%98%E9%92%A5%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95">使用秘钥免密登录</a></li>
+<li><a href="#%E5%B0%86%E5%91%BD%E4%BB%A4%E6%94%BE%E5%9C%A8%E5%90%8E%E5%8F%B0%E6%89%A7%E8%A1%8C">将命令放在后台执行</a></li>
+<li><a href="#%E8%BE%93%E5%87%BA%E9%87%8D%E5%AE%9A%E5%90%91%E5%88%B0%E6%96%87%E4%BB%B6">输出重定向到文件</a></li>
+<li><a href="#%E6%A1%88%E4%BE%8B">案例</a></li>
 </ul>
 </li>
 </ul>
@@ -191,9 +146,9 @@ PubkeyAuthentication yes // 允许使用基于密钥认证的方式登陆
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://www.xihrni.com/post/centos-chong-xie-crontab-r-ming-ling-fang-zhi-wu-cao-zuo/">
+            <a href="https://www.xihrni.com/post/macos/">
               <h3 class="post-title">
-                CentOS 重写 crontab -r 命令防止误操作
+                MacOS 添加开机启动命令
               </h3>
             </a>
           </div>
