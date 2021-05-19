@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2021-05-08T01:19:58.218Z</updated>
+    <updated>2021-05-19T02:40:13.148Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
@@ -10,6 +10,44 @@
     <logo>https://www.xihrni.com/images/avatar.png</logo>
     <icon>https://www.xihrni.com/favicon.ico</icon>
     <rights>All rights reserved 2021, 我的世界</rights>
+    <entry>
+        <title type="html"><![CDATA[MacOS 添加开机启动命令]]></title>
+        <id>https://www.xihrni.com/post/macos/</id>
+        <link href="https://www.xihrni.com/post/macos/">
+        </link>
+        <updated>2021-05-19T02:16:57.000Z</updated>
+        <summary type="html"><![CDATA[<blockquote>
+<p>😳 准备好要执行的命令</p>
+</blockquote>
+]]></summary>
+        <content type="html"><![CDATA[<blockquote>
+<p>😳 准备好要执行的命令</p>
+</blockquote>
+<!-- more -->
+<h3 id="创建可执行脚本文件">创建可执行脚本文件</h3>
+<pre><code class="language-shell">&gt; vi ~/frp/frpc.sh
+</code></pre>
+<p>按格式输入命令</p>
+<pre><code class="language-shell">#!/bin/bash
+
+# 启动客户端放入后台执行
+~/frp/frpc -c ~/frp/frpc.ini &amp;
+exit
+</code></pre>
+<p>修改完后保存退出</p>
+<pre><code class="language-shell">:wq
+</code></pre>
+<h3 id="添加可执行权限">添加可执行权限</h3>
+<pre><code class="language-shell">&gt; chmod 755 ~/frp/frpc.sh
+</code></pre>
+<h3 id="添加开机启动">添加开机启动</h3>
+<p>打开 <code>系统偏好设置</code> 应用，进入 <code>用户与群组</code> -&gt; <code>登录项</code>，点击 <code>+</code> 加号，选择刚刚创建的文件</p>
+<blockquote>
+<p>开机后如果显示 “进程已结束” 的终端，可进入 <code>终端</code> 的 <code>偏好设置</code> -&gt; <code>描述文件</code> -&gt; <code>默认描述</code> -&gt; <code>Shell</code> 将 <code>当shell退出时：</code> 选为 <code>关闭窗口</code></p>
+</blockquote>
+<p>😬</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[CentOS 挂载新磁盘（阿里云ECS）]]></title>
         <id>https://www.xihrni.com/post/a-li-yun-ecs-centos7-gua-zai-xin-ci-pan/</id>
@@ -818,78 +856,6 @@ f
 &gt; chmod 755 /usr/bin/crontab.sh
 </code></pre>
 <p>😬</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[CentOS 安装 Composer 并配置环境]]></title>
-        <id>https://www.xihrni.com/post/centos-an-zhuang-composer-bing-pei-zhi-huan-jing/</id>
-        <link href="https://www.xihrni.com/post/centos-an-zhuang-composer-bing-pei-zhi-huan-jing/">
-        </link>
-        <updated>2019-07-23T07:07:27.000Z</updated>
-        <summary type="html"><![CDATA[<h3 id="php-cli">😳PHP CLI</h3>
-<p>首先检测 PHP CLI 版本，输入命令</p>
-]]></summary>
-        <content type="html"><![CDATA[<h3 id="php-cli">😳PHP CLI</h3>
-<p>首先检测 PHP CLI 版本，输入命令</p>
-<!-- more -->
-<pre><code class="language-shell">&gt; php -v
-PHP 5.2.3 (cli) ...
-</code></pre>
-<p>需要更换 PHP CLI 版本，使用 BT 面板中 <code>7.2</code> 的版本，设置一个别名</p>
-<pre><code class="language-shell">&gt; vi ~/.bashrc
-</code></pre>
-<p>输入 <code>i</code> 进入编辑模式，新增一行</p>
-<pre><code class="language-shell">alias php='/www/server/php/72/bin/php'
-</code></pre>
-<p>输入 <code>:wq</code> 保存并退出</p>
-<p>再次执行 <code>php -v</code> 查看版本，输出</p>
-<pre><code class="language-shell">PHP 7.2.4 (cli) (built: Nov 12 2018 10:47:44) ( NTS )
-Copyright (c) 1997-2018 The PHP Group
-Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
-</code></pre>
-<p>看到已经是 <code>7.2.4</code> 的版本</p>
-<h3 id="composer">Composer</h3>
-<p>使用 PHP 下载安装文件</p>
-<pre><code class="language-shell">&gt; php -r &quot;copy('https://getcomposer.org/installer', 'composer-setup.php');&quot;
-</code></pre>
-<p>验证文件是否正确</p>
-<pre><code class="language-shell">&gt; php -r &quot;if (hash_file('sha384', 'composer-setup.php') === '48e3236262b34d30969dca3c37281b3b4bbe3221bda826ac6a9a62d6444cdb0dcd0615698a5cbe587c3f0fe57a54d8f5') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;&quot;
-</code></pre>
-<p>输出 <code>Installer verified</code> 则为正确，执行安装文件</p>
-<pre><code class="language-shell">&gt; php composer-setup.php
-</code></pre>
-<p>接着删除安装文件</p>
-<pre><code class="language-shell">&gt; php -r &quot;unlink('composer-setup.php');&quot;
-</code></pre>
-<p>移动到全局</p>
-<pre><code class="language-shell">&gt; mv composer.phar /usr/local/bin/composer
-</code></pre>
-<p>中国镜像</p>
-<pre><code class="language-shell">&gt; composer config -g repo.packagist composer https://packagist.phpcomposer.com
-# 或使用阿里云镜像
-&gt; composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
-</code></pre>
-<h3 id="composer-命令">Composer 命令</h3>
-<p>安装/更新项目依赖</p>
-<pre><code class="language-shell">&gt; cd '你的项目地址'
-&gt; composer install
-# 或
-&gt; composer update
-</code></pre>
-<p>如果报错</p>
-<pre><code class="language-shell">&gt; Unsupported declare 'strict_types' ...
-</code></pre>
-<p>PHP版本错误，原因是因为直接使用 composer 命令应该调用到了老版本的 PHP CLI，添加一个别名即可</p>
-<pre><code class="language-shell">&gt; vi ~/.bashrc
-</code></pre>
-<p>输入 <code>i</code> 进入编辑模式，新增一行</p>
-<pre><code class="language-shell">&gt; alias composer='php /usr/local/bin/composer'
-</code></pre>
-<p>输入 <code>:wq</code> 保存并退出</p>
-<blockquote>
-<p>重新登录 SSH 即可生效 <code>.bashrc</code> 文件<br>
-😬</p>
-</blockquote>
 ]]></content>
     </entry>
 </feed>

@@ -2,24 +2,29 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>CentOS 安装 Composer 并配置环境 | 我的世界</title>
+<title>MacOS 添加开机启动命令 | 我的世界</title>
 <link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1621392007039">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="CentOS 安装 Composer 并配置环境 | 我的世界 - Atom Feed"
+<link rel="alternate" type="application/atom+xml" title="MacOS 添加开机启动命令 | 我的世界 - Atom Feed"
   href="https://www.xihrni.com/atom.xml">
 <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700"> -->
 
 
-    <meta name="description" content="😳PHP CLI
-首先检测 PHP CLI 版本，输入命令
+    <meta name="description" content="
+😳 准备好要执行的命令
 
-&gt; php -v
-PHP 5.2.3 (cli) ...
 
-需要更换 PHP CLI 版本，使用 BT 面板中 7.2 的版本，设置一个别名
-&gt; vi ~/.bas..." />
-    <meta name="keywords" content="composer,php包管理工具,centos" />
+创建可执行脚本文件
+&gt; vi ~/frp/frpc.sh
+
+按格式输入命令
+#!/bin/bash
+
+# 启动客户端放入后台执行
+~/frp/frpc -c ~/frp/frpc.ini &amp;
+e..." />
+    <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -85,95 +90,46 @@ PHP 5.2.3 (cli) ...
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              CentOS 安装 Composer 并配置环境
+              MacOS 添加开机启动命令
             </h2>
             <div class="post-info">
               <span>
-                2019-07-23
+                2021-05-19
               </span>
               <span>
-                2 min read
+                1 min read
               </span>
-              
-                <a href="https://www.xihrni.com/tag/composer/" class="post-tag">
-                  # composer
-                </a>
-              
-                <a href="https://www.xihrni.com/tag/php-bao-guan-li-gong-ju/" class="post-tag">
-                  # php包管理工具
-                </a>
-              
-                <a href="https://www.xihrni.com/tag/centos/" class="post-tag">
-                  # centos
-                </a>
               
             </div>
             
-              <img class="post-feature-image" src="https://www.xihrni.com/post-images/centos-an-zhuang-composer-bing-pei-zhi-huan-jing.png" alt="">
-            
             <div class="post-content-wrapper">
               <div class="post-content">
-                <h3 id="php-cli">😳PHP CLI</h3>
-<p>首先检测 PHP CLI 版本，输入命令</p>
-<!-- more -->
-<pre><code class="language-shell">&gt; php -v
-PHP 5.2.3 (cli) ...
-</code></pre>
-<p>需要更换 PHP CLI 版本，使用 BT 面板中 <code>7.2</code> 的版本，设置一个别名</p>
-<pre><code class="language-shell">&gt; vi ~/.bashrc
-</code></pre>
-<p>输入 <code>i</code> 进入编辑模式，新增一行</p>
-<pre><code class="language-shell">alias php='/www/server/php/72/bin/php'
-</code></pre>
-<p>输入 <code>:wq</code> 保存并退出</p>
-<p>再次执行 <code>php -v</code> 查看版本，输出</p>
-<pre><code class="language-shell">PHP 7.2.4 (cli) (built: Nov 12 2018 10:47:44) ( NTS )
-Copyright (c) 1997-2018 The PHP Group
-Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
-</code></pre>
-<p>看到已经是 <code>7.2.4</code> 的版本</p>
-<h3 id="composer">Composer</h3>
-<p>使用 PHP 下载安装文件</p>
-<pre><code class="language-shell">&gt; php -r &quot;copy('https://getcomposer.org/installer', 'composer-setup.php');&quot;
-</code></pre>
-<p>验证文件是否正确</p>
-<pre><code class="language-shell">&gt; php -r &quot;if (hash_file('sha384', 'composer-setup.php') === '48e3236262b34d30969dca3c37281b3b4bbe3221bda826ac6a9a62d6444cdb0dcd0615698a5cbe587c3f0fe57a54d8f5') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;&quot;
-</code></pre>
-<p>输出 <code>Installer verified</code> 则为正确，执行安装文件</p>
-<pre><code class="language-shell">&gt; php composer-setup.php
-</code></pre>
-<p>接着删除安装文件</p>
-<pre><code class="language-shell">&gt; php -r &quot;unlink('composer-setup.php');&quot;
-</code></pre>
-<p>移动到全局</p>
-<pre><code class="language-shell">&gt; mv composer.phar /usr/local/bin/composer
-</code></pre>
-<p>中国镜像</p>
-<pre><code class="language-shell">&gt; composer config -g repo.packagist composer https://packagist.phpcomposer.com
-# 或使用阿里云镜像
-&gt; composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
-</code></pre>
-<h3 id="composer-命令">Composer 命令</h3>
-<p>安装/更新项目依赖</p>
-<pre><code class="language-shell">&gt; cd '你的项目地址'
-&gt; composer install
-# 或
-&gt; composer update
-</code></pre>
-<p>如果报错</p>
-<pre><code class="language-shell">&gt; Unsupported declare 'strict_types' ...
-</code></pre>
-<p>PHP版本错误，原因是因为直接使用 composer 命令应该调用到了老版本的 PHP CLI，添加一个别名即可</p>
-<pre><code class="language-shell">&gt; vi ~/.bashrc
-</code></pre>
-<p>输入 <code>i</code> 进入编辑模式，新增一行</p>
-<pre><code class="language-shell">&gt; alias composer='php /usr/local/bin/composer'
-</code></pre>
-<p>输入 <code>:wq</code> 保存并退出</p>
-<blockquote>
-<p>重新登录 SSH 即可生效 <code>.bashrc</code> 文件<br>
-😬</p>
+                <blockquote>
+<p>😳 准备好要执行的命令</p>
 </blockquote>
+<!-- more -->
+<h3 id="创建可执行脚本文件">创建可执行脚本文件</h3>
+<pre><code class="language-shell">&gt; vi ~/frp/frpc.sh
+</code></pre>
+<p>按格式输入命令</p>
+<pre><code class="language-shell">#!/bin/bash
+
+# 启动客户端放入后台执行
+~/frp/frpc -c ~/frp/frpc.ini &amp;
+exit
+</code></pre>
+<p>修改完后保存退出</p>
+<pre><code class="language-shell">:wq
+</code></pre>
+<h3 id="添加可执行权限">添加可执行权限</h3>
+<pre><code class="language-shell">&gt; chmod 755 ~/frp/frpc.sh
+</code></pre>
+<h3 id="添加开机启动">添加开机启动</h3>
+<p>打开 <code>系统偏好设置</code> 应用，进入 <code>用户与群组</code> -&gt; <code>登录项</code>，点击 <code>+</code> 加号，选择刚刚创建的文件</p>
+<blockquote>
+<p>开机后如果显示 “进程已结束” 的终端，可进入 <code>终端</code> 的 <code>偏好设置</code> -&gt; <code>描述文件</code> -&gt; <code>默认描述</code> -&gt; <code>Shell</code> 将 <code>当shell退出时：</code> 选为 <code>关闭窗口</code></p>
+</blockquote>
+<p>😬</p>
 
               </div>
               <div class="toc-container">
@@ -182,9 +138,9 @@ Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
 <ul>
 <li>
 <ul>
-<li><a href="#php-cli">😳PHP CLI</a></li>
-<li><a href="#composer">Composer</a></li>
-<li><a href="#composer-%E5%91%BD%E4%BB%A4">Composer 命令</a></li>
+<li><a href="#%E5%88%9B%E5%BB%BA%E5%8F%AF%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E6%96%87%E4%BB%B6">创建可执行脚本文件</a></li>
+<li><a href="#%E6%B7%BB%E5%8A%A0%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%9D%83%E9%99%90">添加可执行权限</a></li>
+<li><a href="#%E6%B7%BB%E5%8A%A0%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8">添加开机启动</a></li>
 </ul>
 </li>
 </ul>
@@ -199,9 +155,9 @@ Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://www.xihrni.com/post/yii2-jiang-csv-wen-jian-dao-ru-dao-shu-ju-ku/">
+            <a href="https://www.xihrni.com/post/a-li-yun-ecs-centos7-gua-zai-xin-ci-pan/">
               <h3 class="post-title">
-                Yii2 将 CSV 文件导入到数据库
+                CentOS 挂载新磁盘（阿里云ECS）
               </h3>
             </a>
           </div>
