@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2021-08-31T12:23:35.309Z</updated>
+    <updated>2021-08-31T12:27:03.757Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
@@ -18,12 +18,12 @@
         <updated>2021-08-23T10:58:33.000Z</updated>
         <summary type="html"><![CDATA[<blockquote>
 <p>😳准备把存放在Coding平台上的代码发布到某一台服务器上时，执行 <code>git clone xxx</code> 突然提示 <code>Permission denied (publickey).</code><br>
-![Permission denied (https://www.xihrni.com/post-images/1630398641542.png)</p>
+<img src="https://www.xihrni.com/post-images/1630398641542.png" alt="Permission denied" loading="lazy"></p>
 </blockquote>
 ]]></summary>
         <content type="html"><![CDATA[<blockquote>
 <p>😳准备把存放在Coding平台上的代码发布到某一台服务器上时，执行 <code>git clone xxx</code> 突然提示 <code>Permission denied (publickey).</code><br>
-![Permission denied (https://www.xihrni.com/post-images/1630398641542.png)</p>
+<img src="https://www.xihrni.com/post-images/1630398641542.png" alt="Permission denied" loading="lazy"></p>
 </blockquote>
 <!-- more -->
 <h3 id="部署公钥">部署公钥</h3>
