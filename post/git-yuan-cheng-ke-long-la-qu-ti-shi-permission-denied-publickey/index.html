@@ -1,0 +1,240 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Git 远程克隆/拉取提示：&#39;Permission denied (publickey).&#39;，解决记录 | 我的世界</title>
+<link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1630412495148">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Git 远程克隆/拉取提示：&#39;Permission denied (publickey).&#39;，解决记录 | 我的世界 - Atom Feed"
+  href="https://www.xihrni.com/atom.xml">
+<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700"> -->
+
+
+    <meta name="description" content="
+😳准备把存放在Coding平台上的代码发布到某一台服务器上时，执行 git clone xxx 突然提示 Permission denied (publickey).
+![Permission denied (https://www.x..." />
+    <meta name="keywords" content="阿里云,秘钥,Coding,git" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://www.xihrni.com">
+  <img class="avatar" src="https://www.xihrni.com/images/avatar.png?v=1630412495148" alt="">
+  </a>
+  <h1 class="site-title">
+    我的世界
+  </h1>
+  <p class="site-description">
+    君子和而不同。穷则独善其身，达则兼济天下。
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/xihrni" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Git 远程克隆/拉取提示：&#39;Permission denied (publickey).&#39;，解决记录
+            </h2>
+            <div class="post-info">
+              <span>
+                2021-08-23
+              </span>
+              <span>
+                3 min read
+              </span>
+              
+                <a href="https://www.xihrni.com/tag/a-li-yun/" class="post-tag">
+                  # 阿里云
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/mi-yao/" class="post-tag">
+                  # 秘钥
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/coding/" class="post-tag">
+                  # Coding
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/9RuaOAU4j/" class="post-tag">
+                  # git
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://www.xihrni.com/post-images/git-yuan-cheng-ke-long-la-qu-ti-shi-permission-denied-publickey.png" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <blockquote>
+<p>😳准备把存放在Coding平台上的代码发布到某一台服务器上时，执行 <code>git clone xxx</code> 突然提示 <code>Permission denied (publickey).</code><br>
+![Permission denied (https://www.xihrni.com/post-images/1630398641542.png)</p>
+</blockquote>
+<!-- more -->
+<h3 id="部署公钥">部署公钥</h3>
+<p>最开始以为是公钥复制错了，所以把仓库里面的公钥删除，重新将服务器上的公钥进行部署（最后一条）</p>
+<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1630399322338.png" alt="部署公钥" loading="lazy"></figure>
+<p>但是依然提示 <code>Permission denied (publickey).</code></p>
+<h3 id="known_hosts">known_hosts</h3>
+<p>后来上网查找问题时发现有人说可能是因为第一次 <code>git clone</code> 的时候提示：'Are you sure you want to continue connecting (yes/no)?' 没有输入 <code>yes</code> 就直接回车了导致的</p>
+<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1630400353463.png" alt="需要输入yes" loading="lazy"></figure>
+<p>但是我却发现我重新输入 <code>git clone</code> 怎么也不会重新提示，让我输入 <code>yes</code> 的步骤。就开始在网上查询如何让我的 <code>git clone</code> 命令重新提示这步，但是怎么查询貌似都没有结果，直到我想起 <code>known_hosts</code> 文件</p>
+<blockquote>
+<p>ssh 会把你每个你访问过计算机的公钥（public key）都记录在 <code>~/.ssh/known_hosts</code>。当下次访问相同计算机时，OpenSSH会核对公钥。如果公钥不同，OpenSSH会发出警告，避免你受到 DNS Hijack 之类的攻击</p>
+</blockquote>
+<p>然后我打算查看一下我的 <code>known_hosts</code> 文件，却发现了一点蹊跷之处。我的 <code>~/.ssh</code> 目录下面没有这个文件，这就很奇怪了</p>
+<figure data-type="image" tabindex="3"><img src="https://www.xihrni.com/post-images/1630400888669.png" alt="ssh目录" loading="lazy"></figure>
+<p>只有最开始生成的秘钥对和一些其他机器的公钥文件，并且我还上网查了是不是 ssh 配置相关，没有生成<code>known_hosts</code> 文件，发现并不是。找了好一会突然想起，难道这个文件在 <code>www</code> 用户（此时我登录用户为 <code>root</code>）？立马去 <code>/home/www/.ssh</code> 目录下发现，果然在这里</p>
+<figure data-type="image" tabindex="4"><img src="https://www.xihrni.com/post-images/1630401299855.png" alt="www用户目录" loading="lazy"></figure>
+<p>我删除了里面这唯一一条记录，重新进行 <code>git clone</code>，果然进行了提示</p>
+<figure data-type="image" tabindex="5"><img src="https://www.xihrni.com/post-images/1630401520775.png" alt="重新提示" loading="lazy"></figure>
+<p>但是！我输入完 <code>yes</code> 后，依然还是相同的提示... <code>Permission denied (publickey).</code></p>
+<h3 id="www用户">WWW用户</h3>
+<p>接着又试了很多方法，比如有人说要重新生成秘钥对，也试过了依然还是同样的错误，还有人说用 <code>git -T</code> 绑定一下，也试过提示正确的公钥指纹</p>
+<p>最后想起为什么 <code>known_hosts</code> 文件会在 <code>www</code> 用户目录呢，哦原来是用 <code>www</code> 用户执行的 <code>git</code> 命令，所以才在 www 用户目录生成了 <code>known_hosts</code> 文件</p>
+<p>接着把秘钥对复制到 <code>www</code> 用户目录下（或者用 <code>www</code> 用户重新生成），然后重新执行 <code>git clone</code> 命令，成功~</p>
+<figure data-type="image" tabindex="6"><img src="https://www.xihrni.com/post-images/1630412169314.png" alt="clone成功" loading="lazy"></figure>
+<p>😁</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E9%83%A8%E7%BD%B2%E5%85%AC%E9%92%A5">部署公钥</a></li>
+<li><a href="#known_hosts">known_hosts</a></li>
+<li><a href="#www%E7%94%A8%E6%88%B7">WWW用户</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://www.xihrni.com/post/a-li-yun-ecs-centos7-gua-zai-xin-ci-pan/">
+              <h3 class="post-title">
+                CentOS 挂载新磁盘（阿里云ECS）
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a class="margin-10-left-right" href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>|<a class="margin-10-left-right" href="https://beian.miit.gov.cn" target="_blank">粤ICP备2021115781号</a>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?5d5eb0906105cf159da64f5d0625e7fa";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+  <a class="rss" href="https://www.xihrni.com/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

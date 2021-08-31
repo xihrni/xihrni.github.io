@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2021-08-19T15:01:09.634Z</updated>
+    <updated>2021-08-31T12:21:49.491Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
@@ -10,6 +10,48 @@
     <logo>https://www.xihrni.com/images/avatar.png</logo>
     <icon>https://www.xihrni.com/favicon.ico</icon>
     <rights>All rights reserved 2021, 我的世界</rights>
+    <entry>
+        <title type="html"><![CDATA[Git 远程克隆/拉取提示：'Permission denied (publickey).'，解决记录]]></title>
+        <id>https://www.xihrni.com/post/git-yuan-cheng-ke-long-la-qu-ti-shi-permission-denied-publickey/</id>
+        <link href="https://www.xihrni.com/post/git-yuan-cheng-ke-long-la-qu-ti-shi-permission-denied-publickey/">
+        </link>
+        <updated>2021-08-23T10:58:33.000Z</updated>
+        <summary type="html"><![CDATA[<blockquote>
+<p>😳准备把存放在Coding平台上的代码发布到某一台服务器上时，执行 <code>git clone xxx</code> 突然提示 <code>Permission denied (publickey).</code><br>
+![Permission denied (https://www.xihrni.com/post-images/1630398641542.png)</p>
+</blockquote>
+]]></summary>
+        <content type="html"><![CDATA[<blockquote>
+<p>😳准备把存放在Coding平台上的代码发布到某一台服务器上时，执行 <code>git clone xxx</code> 突然提示 <code>Permission denied (publickey).</code><br>
+![Permission denied (https://www.xihrni.com/post-images/1630398641542.png)</p>
+</blockquote>
+<!-- more -->
+<h3 id="部署公钥">部署公钥</h3>
+<p>最开始以为是公钥复制错了，所以把仓库里面的公钥删除，重新将服务器上的公钥进行部署（最后一条）</p>
+<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1630399322338.png" alt="部署公钥" loading="lazy"></figure>
+<p>但是依然提示 <code>Permission denied (publickey).</code></p>
+<h3 id="known_hosts">known_hosts</h3>
+<p>后来上网查找问题时发现有人说可能是因为第一次 <code>git clone</code> 的时候提示：'Are you sure you want to continue connecting (yes/no)?' 没有输入 <code>yes</code> 就直接回车了导致的</p>
+<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1630400353463.png" alt="需要输入yes" loading="lazy"></figure>
+<p>但是我却发现我重新输入 <code>git clone</code> 怎么也不会重新提示，让我输入 <code>yes</code> 的步骤。就开始在网上查询如何让我的 <code>git clone</code> 命令重新提示这步，但是怎么查询貌似都没有结果，直到我想起 <code>known_hosts</code> 文件</p>
+<blockquote>
+<p>ssh 会把你每个你访问过计算机的公钥（public key）都记录在 <code>~/.ssh/known_hosts</code>。当下次访问相同计算机时，OpenSSH会核对公钥。如果公钥不同，OpenSSH会发出警告，避免你受到 DNS Hijack 之类的攻击</p>
+</blockquote>
+<p>然后我打算查看一下我的 <code>known_hosts</code> 文件，却发现了一点蹊跷之处。我的 <code>~/.ssh</code> 目录下面没有这个文件，这就很奇怪了</p>
+<figure data-type="image" tabindex="3"><img src="https://www.xihrni.com/post-images/1630400888669.png" alt="ssh目录" loading="lazy"></figure>
+<p>只有最开始生成的秘钥对和一些其他机器的公钥文件，并且我还上网查了是不是 ssh 配置相关，没有生成<code>known_hosts</code> 文件，发现并不是。找了好一会突然想起，难道这个文件在 <code>www</code> 用户（此时我登录用户为 <code>root</code>）？立马去 <code>/home/www/.ssh</code> 目录下发现，果然在这里</p>
+<figure data-type="image" tabindex="4"><img src="https://www.xihrni.com/post-images/1630401299855.png" alt="www用户目录" loading="lazy"></figure>
+<p>我删除了里面这唯一一条记录，重新进行 <code>git clone</code>，果然进行了提示</p>
+<figure data-type="image" tabindex="5"><img src="https://www.xihrni.com/post-images/1630401520775.png" alt="重新提示" loading="lazy"></figure>
+<p>但是！我输入完 <code>yes</code> 后，依然还是相同的提示... <code>Permission denied (publickey).</code></p>
+<h3 id="www用户">WWW用户</h3>
+<p>接着又试了很多方法，比如有人说要重新生成秘钥对，也试过了依然还是同样的错误，还有人说用 <code>git -T</code> 绑定一下，也试过提示正确的公钥指纹</p>
+<p>最后想起为什么 <code>known_hosts</code> 文件会在 <code>www</code> 用户目录呢，哦原来是用 <code>www</code> 用户执行的 <code>git</code> 命令，所以才在 www 用户目录生成了 <code>known_hosts</code> 文件</p>
+<p>接着把秘钥对复制到 <code>www</code> 用户目录下（或者用 <code>www</code> 用户重新生成），然后重新执行 <code>git clone</code> 命令，成功~</p>
+<figure data-type="image" tabindex="6"><img src="https://www.xihrni.com/post-images/1630412169314.png" alt="clone成功" loading="lazy"></figure>
+<p>😁</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[CentOS 挂载新磁盘（阿里云ECS）]]></title>
         <id>https://www.xihrni.com/post/a-li-yun-ecs-centos7-gua-zai-xin-ci-pan/</id>
@@ -779,60 +821,6 @@ PubkeyAuthentication yes // 允许使用基于密钥认证的方式登陆
 </code></pre>
 <h3 id="使用秘钥免密登录">使用秘钥免密登录</h3>
 <pre><code class="language-shell">&gt; ssh -i ~/.ssh/id_rsa root@***.***.***.***
-</code></pre>
-<p>😬</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[CentOS 重写 crontab -r 命令防止误操作]]></title>
-        <id>https://www.xihrni.com/post/centos-chong-xie-crontab-r-ming-ling-fang-zhi-wu-cao-zuo/</id>
-        <link href="https://www.xihrni.com/post/centos-chong-xie-crontab-r-ming-ling-fang-zhi-wu-cao-zuo/">
-        </link>
-        <updated>2019-07-24T07:01:58.000Z</updated>
-        <content type="html"><![CDATA[<blockquote>
-<p>😳一次误操作将服务器上的所有定时任务清除导致项目故障</p>
-</blockquote>
-<h3 id="别名">别名</h3>
-<p>设置别名重写 <code>crontab</code> 命令</p>
-<pre><code class="language-shell">&gt; vi /etc/bashrc
-</code></pre>
-<p>输入 <code>i</code> 进入编辑模式，新增一行</p>
-<pre><code class="language-shell">alias crontab='/usr/bin/crontab.sh'
-</code></pre>
-<p>输入 <code>:wq</code> 保存并退出</p>
-<h3 id="命令文件">命令文件</h3>
-<p>编辑文件</p>
-<pre><code class="language-shell">&gt; vi crontab.sh
-</code></pre>
-<p>输入 <code>i</code> 进入编辑模式，输入以下代码</p>
-<pre><code class="language-shell">#!/bin/sh
-source /etc/profile;
-source ~/.bash_profile;
-
-etime=`date -d &quot;0 days ago&quot; +%Y%m%d_%H%M%S`
-
-if [ &quot;$1&quot; = &quot;-r&quot; ] ; then
-    echo &quot;My God! Dangerous...&quot;
-    echo &quot;Exit...&quot;
-    exit 2
-fi
-
-if [ &quot;$1&quot; = &quot;-l&quot; ] ; then
-    /usr/bin/crontab -l
-    exit 0
-fi
-
-# 编辑时进行备份
-if [ &quot;$1&quot; = &quot;-e&quot; ] ; then
-    mkdir -p  ~/cronbak
-    /usr/bin/crontab -l  &gt;  ~/cronbak/cron.bak.$etime.a
-    /usr/bin/crontab -e
-    /usr/bin/crontab -l  &gt;  ~/cronbak/cron.bak.$etime.b
-f
-</code></pre>
-<p>移动文件并添加权限</p>
-<pre><code class="language-shell">&gt; mv crontab.sh /usr/bin
-&gt; chmod 755 /usr/bin/crontab.sh
 </code></pre>
 <p>😬</p>
 ]]></content>
