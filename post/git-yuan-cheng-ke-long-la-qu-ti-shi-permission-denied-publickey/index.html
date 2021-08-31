@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Git 远程克隆/拉取提示：&#39;Permission denied (publickey).&#39; 解决记录 | 我的世界</title>
-<link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1630413800555">
+<link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1630413846994">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="Git 远程克隆/拉取提示：&#39;Permission denied (publickey).&#39; 解决记录 | 我的世界 - Atom Feed"
@@ -27,7 +27,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://www.xihrni.com">
-  <img class="avatar" src="https://www.xihrni.com/images/avatar.png?v=1630413800555" alt="">
+  <img class="avatar" src="https://www.xihrni.com/images/avatar.png?v=1630413846994" alt="">
   </a>
   <h1 class="site-title">
     我的世界
@@ -117,10 +117,10 @@
             <div class="post-content-wrapper">
               <div class="post-content">
                 <blockquote>
-<p>😳准备把存放在Coding平台上的代码发布到某一台服务器上时，执行 <code>git clone xxx</code> 突然提示 <code>Permission denied (publickey).</code><br>
-<img src="https://www.xihrni.com/post-images/1630398641542.png" alt="Permission denied" loading="lazy"></p>
+<p>😳准备把存放在Coding平台上的代码发布到某一台服务器上时，执行 <code>git clone xxx</code> 突然提示 <code>Permission denied (publickey).</code></p>
 </blockquote>
 <!-- more -->
+<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1630398641542.png" alt="Permission denied" loading="lazy"></figure>
 <h3 id="部署公钥">部署公钥</h3>
 <p>最开始以为是公钥复制错了，所以把仓库里面的公钥删除，重新将服务器上的公钥进行部署（最后一条）</p>
 <p><img src="https://www.xihrni.com/post-images/1630412914894.png" alt="部署公钥" loading="lazy"><br>
@@ -135,17 +135,17 @@
 <p>ssh 会把你每个你访问过计算机的公钥（public key）都记录在 <code>~/.ssh/known_hosts</code>。当下次访问相同计算机时，OpenSSH会核对公钥。如果公钥不同，OpenSSH会发出警告，避免你受到 DNS Hijack 之类的攻击</p>
 </blockquote>
 <p>然后我打算查看一下我的 <code>known_hosts</code> 文件，却发现了一点蹊跷之处。我的 <code>~/.ssh</code> 目录下面没有这个文件，这就很奇怪了</p>
-<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1630400888669.png" alt="ssh目录" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1630400888669.png" alt="ssh目录" loading="lazy"></figure>
 <p>只有最开始生成的秘钥对和一些其他机器的公钥文件，并且我还上网查了是不是 ssh 配置相关，没有生成<code>known_hosts</code> 文件，发现并不是。找了好一会突然想起，难道这个文件在 <code>www</code> 用户（此时我登录用户为 <code>root</code>）？立马去 <code>/home/www/.ssh</code> 目录下发现，果然在这里</p>
-<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1630401299855.png" alt="www用户目录" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="https://www.xihrni.com/post-images/1630401299855.png" alt="www用户目录" loading="lazy"></figure>
 <p>我删除了里面这唯一一条记录，重新进行 <code>git clone</code>，果然进行了提示</p>
-<figure data-type="image" tabindex="3"><img src="https://www.xihrni.com/post-images/1630401520775.png" alt="重新提示" loading="lazy"></figure>
+<figure data-type="image" tabindex="4"><img src="https://www.xihrni.com/post-images/1630401520775.png" alt="重新提示" loading="lazy"></figure>
 <p>但是！我输入完 <code>yes</code> 后，依然还是相同的提示... <code>Permission denied (publickey).</code></p>
 <h3 id="www用户">WWW用户</h3>
 <p>接着又试了很多方法，比如有人说要重新生成秘钥对，也试过了依然还是同样的错误，还有人说用 <code>git -T</code> 绑定一下，也试过提示正确的公钥指纹</p>
 <p>最后想起为什么 <code>known_hosts</code> 文件会在 <code>www</code> 用户目录呢，哦原来是用 <code>www</code> 用户执行的 <code>git</code> 命令，所以才在 www 用户目录生成了 <code>known_hosts</code> 文件</p>
 <p>接着把秘钥对复制到 <code>www</code> 用户目录下（或者用 <code>www</code> 用户重新生成），然后重新执行 <code>git clone</code> 命令，成功~</p>
-<figure data-type="image" tabindex="4"><img src="https://www.xihrni.com/post-images/1630412169314.png" alt="clone成功" loading="lazy"></figure>
+<figure data-type="image" tabindex="5"><img src="https://www.xihrni.com/post-images/1630412169314.png" alt="clone成功" loading="lazy"></figure>
 <p>😬</p>
 
               </div>
