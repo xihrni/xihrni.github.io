@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2021-08-31T12:21:49.491Z</updated>
+    <updated>2021-08-31T12:23:35.309Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
@@ -11,7 +11,7 @@
     <icon>https://www.xihrni.com/favicon.ico</icon>
     <rights>All rights reserved 2021, 我的世界</rights>
     <entry>
-        <title type="html"><![CDATA[Git 远程克隆/拉取提示：'Permission denied (publickey).'，解决记录]]></title>
+        <title type="html"><![CDATA[Git 远程克隆/拉取提示：'Permission denied (publickey).' 解决记录]]></title>
         <id>https://www.xihrni.com/post/git-yuan-cheng-ke-long-la-qu-ti-shi-permission-denied-publickey/</id>
         <link href="https://www.xihrni.com/post/git-yuan-cheng-ke-long-la-qu-ti-shi-permission-denied-publickey/">
         </link>
