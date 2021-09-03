@@ -2,27 +2,25 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>CentOS 使用秘钥免密 SSH 远程登录 | 我的世界</title>
+<title>PHP、Nginx、云存储跨域配置 | 我的世界</title>
 <link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1630654864871">
 <!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet"> -->
 <link href="https://www.xihrni.com/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="CentOS 使用秘钥免密 SSH 远程登录 | 我的世界 - Atom Feed"
+<link rel="alternate" type="application/atom+xml" title="PHP、Nginx、云存储跨域配置 | 我的世界 - Atom Feed"
   href="https://www.xihrni.com/atom.xml">
 <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700"> -->
 
 
-    <meta name="description" content="😳生成 SSH Key
+    <meta name="description" content="
+😳前端调用接口或者JS静态文件浏览器都会出现跨域问题，禁止访问。所以需要在后端提供请求的时候带上允许跨域的提示
 
-~ 代表当前用户目录，比如 root 用户则为 /root
 
 
-检查当前是否已存在 ssh key
-&gt; cat ~/.ssh/id_rsa
-
-生成 ssh key （已存在则无需生成）
-&gt; ssh-k..." />
-    <meta name="keywords" content="centos,ssh,秘钥" />
+PHP
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+if (in_array($..." />
+    <meta name="keywords" content="跨域,腾讯云,阿里云,php" />
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css"> -->
     <link rel="stylesheet" href="https://www.xihrni.com/katex.min.css">
     <!-- <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script> -->
@@ -90,83 +88,80 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              CentOS 使用秘钥免密 SSH 远程登录
+              PHP、Nginx、云存储跨域配置
             </h2>
             <div class="post-info">
               <span>
-                2019-11-26
+                2018-09-02
               </span>
               <span>
-                2 min read
+                1 min read
               </span>
               
-                <a href="https://www.xihrni.com/tag/centos/" class="post-tag">
-                  # centos
+                <a href="https://www.xihrni.com/tag/kua-yu/" class="post-tag">
+                  # 跨域
                 </a>
               
-                <a href="https://www.xihrni.com/tag/ssh/" class="post-tag">
-                  # ssh
+                <a href="https://www.xihrni.com/tag/teng-xun-yun/" class="post-tag">
+                  # 腾讯云
                 </a>
               
-                <a href="https://www.xihrni.com/tag/mi-yao/" class="post-tag">
-                  # 秘钥
+                <a href="https://www.xihrni.com/tag/a-li-yun/" class="post-tag">
+                  # 阿里云
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/zKKwXlxOi/" class="post-tag">
+                  # php
                 </a>
               
             </div>
             
-              <img class="post-feature-image" src="https://www.xihrni.com/post-images/centos-shi-yong-mi-yao-mian-mi-ssh-yuan-cheng-deng-lu.png" alt="">
+              <img class="post-feature-image" src="https://www.xihrni.com/post-images/php-qian-duan-nginx-kua-yu-pei-zhi.png" alt="">
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <h3 id="生成-ssh-key">😳生成 SSH Key</h3>
-<blockquote>
-<p><code>~</code> 代表当前用户目录，比如 root 用户则为 <code>/root</code></p>
+                <blockquote>
+<p>😳前端调用接口或者JS静态文件浏览器都会出现跨域问题，禁止访问。所以需要在后端提供请求的时候带上允许跨域的提示</p>
 </blockquote>
 <!-- more -->
-<p>检查当前是否已存在 <code>ssh key</code></p>
-<pre><code class="language-shell">&gt; cat ~/.ssh/id_rsa
+<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1630573311514.png" alt="浏览器响应" loading="lazy"></figure>
+<h3 id="php">PHP</h3>
+<pre><code class="language-php">$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+if (in_array($origin, ['https://www.xihrni.com'])) {
+    // 允许来源（可使用*代替所有）
+    header('Access-Control-Allow-Origin: ' . $origin);
+    // 允许请求方式（可使用*代替所有）
+    header('Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS');
+    // 允许携带Cookie
+    header('Access-Control-Allow-Credentials: true');
+    // 允许请求头（不能使用*）
+    header('Access-Control-Allow-Headers: X-Requested-With, Content-Type, X-CSRF-Token, Token, Accept');
+}
 </code></pre>
-<p>生成 <code>ssh key</code> （已存在则无需生成）</p>
-<pre><code class="language-shell">&gt; ssh-keygen -t rsa -C &quot;xxx@xxx.com&quot;
+<h3 id="nginx">Nginx</h3>
+<pre><code class="language-conf"># vhost/*.conf
+
+server
+{
+    # 上文
+    ...
+
+    # 允许跨域请求
+    add_header 'Access-Control-Allow-Origin' *;
+    add_header 'Access-Control-Allow-Methods' *;
+    add_header 'Access-Control-Allow-Credentials' true;
+    add_header 'Access-Control-Allow-Headers' *;
+
+    # 下文
+    ...
+}
 </code></pre>
-<p><code>id_rsa</code> 为秘钥文件，<code>id_rsa.pub</code> 为公钥文件</p>
-<p>查看公钥文件</p>
-<pre><code class="language-shell">&gt; cat ~/.ssh/id_rsa.pub
-</code></pre>
-<blockquote>
-<p>注：本地与远程都需生成SSh Key</p>
-</blockquote>
-<h3 id="本地公钥加入到远程服务器授权文件中">本地公钥加入到远程服务器授权文件中</h3>
-<p><strong>远程服务器</strong>检查当前是否已存在 <code>authorized_keys</code> 文件</p>
-<pre><code class="language-shell">&gt; cat ~/.ssh/authorized_keys
-</code></pre>
-<p>创建 <code>authorized_keys</code> 文件并修改权限（已存在则无需创建）</p>
-<pre><code class="language-shell">&gt; touch ~/.ssh/authorized_keys
-&gt; chmod 600 ~/.ssh/authorized_keys
-</code></pre>
-<p>拷贝<strong>本地</strong> <code>id_rsa.pub</code> 公钥文件中所有内容到<strong>远程服务器</strong></p>
-<pre><code class="language-shell">&gt; vi ~/.ssh/G-AA00468.pub # 创建一个以本地主机名称命名的临时文件
-</code></pre>
-<p>输入 <code>i</code> 进入编辑状态，粘贴，输入 <code>:wq</code> 保存文件并退出</p>
-<pre><code class="language-shell">&gt; cat ~/.ssh/G-AA00468.pub &gt;&gt; ~/.ssh/authorized_keys # 追加到 `authorized_keys` 文件
-</code></pre>
-<h3 id="配置远程服务器ssh服务">配置远程服务器SSH服务</h3>
-<p>编辑 <code>ssh</code> 配置</p>
-<pre><code class="language-shell">&gt; vi /etc/ssh/sshd_config
-</code></pre>
-<p>输入 <code>i</code> 进入编辑状态，将下面两个配置修改，输入 <code>:wq</code> 保存文件并退出</p>
-<pre><code class="language-shell">PasswordAuthentication no // 禁止使用基于口令认证的方式登陆
-PubkeyAuthentication yes // 允许使用基于密钥认证的方式登陆
-</code></pre>
-<p>重启 <code>ssh</code> 服务</p>
-<pre><code class="language-shell">&gt; /etc/init.d/sshd reload # CentOS7系统以下
-</code></pre>
-<p><strong>或</strong></p>
-<pre><code class="language-shell">&gt; systemctl restart sshd.service # CentOS7系统以上
-</code></pre>
-<h3 id="使用秘钥免密登录">使用秘钥免密登录</h3>
-<pre><code class="language-shell">&gt; ssh -i ~/.ssh/id_rsa root@***.***.***.***
-</code></pre>
+<h3 id="腾讯云cos">腾讯云COS</h3>
+<p><img src="https://www.xihrni.com/post-images/1630654539279.png" alt="腾讯云COS" loading="lazy"><br>
+<img src="https://www.xihrni.com/post-images/1630654544865.png" alt="腾讯云COS" loading="lazy"></p>
+<h3 id="阿里云oss">阿里云OSS</h3>
+<p><img src="https://www.xihrni.com/post-images/1630654687527.png" alt="阿里云OSS" loading="lazy"><br>
+<img src="https://www.xihrni.com/post-images/1630654691767.png" alt="阿里云OSS" loading="lazy"></p>
 <p>😬</p>
 
               </div>
@@ -176,10 +171,10 @@ PubkeyAuthentication yes // 允许使用基于密钥认证的方式登陆
 <ul>
 <li>
 <ul>
-<li><a href="#%E7%94%9F%E6%88%90-ssh-key">😳生成 SSH Key</a></li>
-<li><a href="#%E6%9C%AC%E5%9C%B0%E5%85%AC%E9%92%A5%E5%8A%A0%E5%85%A5%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%88%E6%9D%83%E6%96%87%E4%BB%B6%E4%B8%AD">本地公钥加入到远程服务器授权文件中</a></li>
-<li><a href="#%E9%85%8D%E7%BD%AE%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8ssh%E6%9C%8D%E5%8A%A1">配置远程服务器SSH服务</a></li>
-<li><a href="#%E4%BD%BF%E7%94%A8%E7%A7%98%E9%92%A5%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95">使用秘钥免密登录</a></li>
+<li><a href="#php">PHP</a></li>
+<li><a href="#nginx">Nginx</a></li>
+<li><a href="#%E8%85%BE%E8%AE%AF%E4%BA%91cos">腾讯云COS</a></li>
+<li><a href="#%E9%98%BF%E9%87%8C%E4%BA%91oss">阿里云OSS</a></li>
 </ul>
 </li>
 </ul>
@@ -194,9 +189,9 @@ PubkeyAuthentication yes // 允许使用基于密钥认证的方式登陆
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://www.xihrni.com/post/centos-chong-xie-crontab-r-ming-ling-fang-zhi-wu-cao-zuo/">
+            <a href="https://www.xihrni.com/post/git-ban-ben-kong-zhi-chang-yong-ming-ling/">
               <h3 class="post-title">
-                CentOS 重写 crontab -r 命令防止误操作
+                Git 版本控制常用命令
               </h3>
             </a>
           </div>
