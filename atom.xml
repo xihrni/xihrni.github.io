@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2021-09-03T07:41:37.733Z</updated>
+    <updated>2021-09-03T07:46:13.446Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
@@ -109,23 +109,6 @@
 <pre><code class="language-shell">&gt; mount /dev/vdc1 /mnt
 </code></pre>
 <p>😬</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Nuxt.js 使用宝塔 PM2管理器 进行部署]]></title>
-        <id>https://www.xihrni.com/post/nuxtjs-shi-yong-bao-ta-pm2-guan-li-qi-jin-xing-bu-shu/</id>
-        <link href="https://www.xihrni.com/post/nuxtjs-shi-yong-bao-ta-pm2-guan-li-qi-jin-xing-bu-shu/">
-        </link>
-        <updated>2020-12-29T08:17:59.000Z</updated>
-        <summary type="html"><![CDATA[<blockquote>
-<p>😳 更新中</p>
-</blockquote>
-]]></summary>
-        <content type="html"><![CDATA[<blockquote>
-<p>😳 更新中</p>
-</blockquote>
-<!-- more -->
-<p>更新中...</p>
 ]]></content>
     </entry>
     <entry>
@@ -822,6 +805,60 @@ PubkeyAuthentication yes // 允许使用基于密钥认证的方式登陆
 </code></pre>
 <h3 id="使用秘钥免密登录">使用秘钥免密登录</h3>
 <pre><code class="language-shell">&gt; ssh -i ~/.ssh/id_rsa root@***.***.***.***
+</code></pre>
+<p>😬</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[CentOS 重写 crontab -r 命令防止误操作]]></title>
+        <id>https://www.xihrni.com/post/centos-chong-xie-crontab-r-ming-ling-fang-zhi-wu-cao-zuo/</id>
+        <link href="https://www.xihrni.com/post/centos-chong-xie-crontab-r-ming-ling-fang-zhi-wu-cao-zuo/">
+        </link>
+        <updated>2019-07-24T07:01:58.000Z</updated>
+        <content type="html"><![CDATA[<blockquote>
+<p>😳一次误操作将服务器上的所有定时任务清除导致项目故障</p>
+</blockquote>
+<h3 id="别名">别名</h3>
+<p>设置别名重写 <code>crontab</code> 命令</p>
+<pre><code class="language-shell">&gt; vi /etc/bashrc
+</code></pre>
+<p>输入 <code>i</code> 进入编辑模式，新增一行</p>
+<pre><code class="language-shell">alias crontab='/usr/bin/crontab.sh'
+</code></pre>
+<p>输入 <code>:wq</code> 保存并退出</p>
+<h3 id="命令文件">命令文件</h3>
+<p>编辑文件</p>
+<pre><code class="language-shell">&gt; vi crontab.sh
+</code></pre>
+<p>输入 <code>i</code> 进入编辑模式，输入以下代码</p>
+<pre><code class="language-shell">#!/bin/sh
+source /etc/profile;
+source ~/.bash_profile;
+
+etime=`date -d &quot;0 days ago&quot; +%Y%m%d_%H%M%S`
+
+if [ &quot;$1&quot; = &quot;-r&quot; ] ; then
+    echo &quot;My God! Dangerous...&quot;
+    echo &quot;Exit...&quot;
+    exit 2
+fi
+
+if [ &quot;$1&quot; = &quot;-l&quot; ] ; then
+    /usr/bin/crontab -l
+    exit 0
+fi
+
+# 编辑时进行备份
+if [ &quot;$1&quot; = &quot;-e&quot; ] ; then
+    mkdir -p  ~/cronbak
+    /usr/bin/crontab -l  &gt;  ~/cronbak/cron.bak.$etime.a
+    /usr/bin/crontab -e
+    /usr/bin/crontab -l  &gt;  ~/cronbak/cron.bak.$etime.b
+f
+</code></pre>
+<p>移动文件并添加权限</p>
+<pre><code class="language-shell">&gt; mv crontab.sh /usr/bin
+&gt; chmod 755 /usr/bin/crontab.sh
 </code></pre>
 <p>😬</p>
 ]]></content>
