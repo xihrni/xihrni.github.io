@@ -1,0 +1,244 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>新电脑被植入 Lockbit 勒索病毒记录 | 我的世界</title>
+<link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1631105640523">
+<!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet"> -->
+<link href="https://www.xihrni.com/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="新电脑被植入 Lockbit 勒索病毒记录 | 我的世界 - Atom Feed"
+  href="https://www.xihrni.com/atom.xml">
+<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700"> -->
+
+
+    <meta name="description" content="
+😳帮客户推荐了一台品牌主机：HP 战99 Pro（i5 16G 512G固态那款），客户自己去找供应商买的。买回来后我帮忙重新安装了win10专业版系统，由于家庭版系统不能远程桌面，主要安装了一些常用软件、开发环境（宝塔面板）、编辑器之..." />
+    <meta name="keywords" content="勒索病毒,lockbit" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css"> -->
+    <link rel="stylesheet" href="https://www.xihrni.com/katex.min.css">
+    <!-- <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script> -->
+    <script src="https://www.xihrni.com/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://www.xihrni.com">
+  <img class="avatar" src="https://www.xihrni.com/images/avatar.png?v=1631105640523" alt="">
+  </a>
+  <h1 class="site-title">
+    我的世界
+  </h1>
+  <p class="site-description">
+    君子和而不同。穷则独善其身，达则兼济天下。
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/xihrni" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              新电脑被植入 Lockbit 勒索病毒记录
+            </h2>
+            <div class="post-info">
+              <span>
+                2021-09-04
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+                <a href="https://www.xihrni.com/tag/le-suo-bing-du/" class="post-tag">
+                  # 勒索病毒
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/lockbit/" class="post-tag">
+                  # lockbit
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://www.xihrni.com/post-images/xin-dian-nao-bei-zhi-ru-lockbit-le-suo-bing-du-ji-lu.png" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <blockquote>
+<p>😳帮客户推荐了一台品牌主机：HP 战99 Pro（i5 16G 512G固态那款），客户自己去找供应商买的。买回来后我帮忙重新安装了win10专业版系统，由于家庭版系统不能远程桌面，主要安装了一些常用软件、开发环境（宝塔面板）、编辑器之类的，还配置了 <code>frp</code> 代理远程桌面端口，由于不太放心所以安装了腾讯安全管家</p>
+</blockquote>
+<!-- more -->
+<p><img src="https://www.xihrni.com/post-images/1631070601756.png" alt="win10专业版" loading="lazy"><br>
+<img src="https://www.xihrni.com/post-images/1631070818619.png" alt="frp客户端配置" loading="lazy"></p>
+<h3 id="远程连接异常">远程连接异常</h3>
+<blockquote>
+<p>这台主机目的是为了部署一个网站放到本地网络访问使用，所以为了能远程更新操作配置了 <code>frp</code> 将端口开放到外网请求，可以使用Windows自带的远程桌面，另外还装了向日葵防止 <code>frp</code> 连接不上时可以检查问题（向日葵远程太卡）</p>
+</blockquote>
+<p>在第4天突然访问电脑的时候出现一直连接中，进度条来来回回滚动也不提示连接失败，最开始以为是我这边网络问题，找了其他人帮忙访问也是一样的结果，首先怀疑是 <code>frp</code> 是否连接正常，访问管理面板发现主机在线中</p>
+<p><img src="https://www.xihrni.com/post-images/1631076081071.png" alt="远程桌面连接中" loading="lazy"><br>
+<img src="https://www.xihrni.com/post-images/1631076327702.png" alt="frp管理面板" loading="lazy"></p>
+<p>然后用向日葵连接想检查一下 <code>frp</code> 问题，居然也一直连接连中。这时想着估计就是客户那边本地网络的问题，打电话过去了解却说网络没有任何变化一切正常</p>
+<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1631076766667.png" alt="向日葵远控" loading="lazy"></figure>
+<p>前一天的上午还有连接过并没有问题。这个时候开始判断那台电脑可能网络问题或者是系统升级什么之类的开始不断尝试连接，再过了大概15分钟左右，远程桌面突然连上了（因为一直没有点取消）</p>
+<h3 id="lockbit-勒索病毒">Lockbit 勒索病毒</h3>
+<p>连上之后发现系统通知有提示发现威胁，并且病毒防护程序被关闭，心里一惊估计不妙</p>
+<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1631078814006.png" alt="Windows系统通知" loading="lazy"></figure>
+<p>提示在前一天的下午出现了病毒程序，除系统目录外的所有目录大部分常用文件都被加密了，同时还放了一个说明文档（说明此电脑已被加密，如果要解密则需要支付XX价格之类的），加密文件为源文件名称+ <code>.lockbit</code> 后缀</p>
+<p><img src="https://www.xihrni.com/post-images/1631078998026.png" alt="压缩文件" loading="lazy"><br>
+<img src="https://www.xihrni.com/post-images/1631079280321.png" alt="代码文件" loading="lazy"><br>
+<img src="https://www.xihrni.com/post-images/1631079353610.png" alt="说明文档" loading="lazy"><br>
+<img src="https://www.xihrni.com/post-images/1631079532589.png" alt="说明文档翻译" loading="lazy"></p>
+<p>并且操作时非常卡，打开一个目录要1分多钟，检查任务管理器发现一个奇怪的进程，右键打开目录后发现还有个远程软件，可疑的文件应该是目录植入程序，并且放在用户目录音乐文件夹下</p>
+<figure data-type="image" tabindex="3"><img src="https://www.xihrni.com/post-images/1631079694239.png" alt="木马程序" loading="lazy"></figure>
+<h3 id="解密防护">解密&amp;防护</h3>
+<p>直接先将进程结束后删除这两个文件，然后上网搜寻解密方法发现暂时无解。安装了一些国产软件想对文件进行解密，干脆直接没检测到被加密文件。访问说明文档里面的两个解密网址也无法打开，不知道是网页已经失效还是需要科学上网已经不清楚了</p>
+<p>后来在论坛发现到目前为止还是很多人遇到这个病毒，基本上也没什么办法，只能重新安装系统。而需要的文件则一般靠文件恢复的方式找回，解密目前还是困难重重</p>
+<blockquote>
+<p>参考网址：https://bbs.360.cn/thread-15836302-1-1.html</p>
+</blockquote>
+<p>平时还是要多加防护，可以参考以下网址。这么多年个人电脑使用真没装过什么杀毒软件防火墙之类的，还是运气使然，否者一旦遇到真没什么办法（远程桌面端口开放在其他电脑也开了，系统盘也是官网下的，账户密码也不是简单密码）。真是破坏性灾难~~</p>
+<blockquote>
+<p>参考网址：<br>
+https://bbs.360.cn/thread-15858154-1-1.html<br>
+https://www.kaspersky.com.cn/resource-center/threats/lockbit-ransomware</p>
+</blockquote>
+<p>😬</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E5%BC%82%E5%B8%B8">远程连接异常</a></li>
+<li><a href="#lockbit-%E5%8B%92%E7%B4%A2%E7%97%85%E6%AF%92">Lockbit 勒索病毒</a></li>
+<li><a href="#%E8%A7%A3%E5%AF%86%E9%98%B2%E6%8A%A4">解密&amp;防护</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://www.xihrni.com/post/git-yuan-cheng-ke-long-la-qu-ti-shi-permission-denied-publickey/">
+              <h3 class="post-title">
+                Git 远程克隆/拉取提示：&#39;Permission denied (publickey).&#39; 解决记录
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a class="margin-10-left-right" href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>|<a class="margin-10-left-right" href="https://beian.miit.gov.cn" target="_blank">粤ICP备2021115781号</a>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?5d5eb0906105cf159da64f5d0625e7fa";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+  <a class="rss" href="https://www.xihrni.com/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
