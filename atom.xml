@@ -2,14 +2,14 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2021-09-08T12:56:19.844Z</updated>
+    <updated>2022-02-13T06:48:26.922Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
     <subtitle>君子和而不同。穷则独善其身，达则兼济天下。</subtitle>
     <logo>https://www.xihrni.com/images/avatar.png</logo>
     <icon>https://www.xihrni.com/favicon.ico</icon>
-    <rights>All rights reserved 2021, 我的世界</rights>
+    <rights>All rights reserved 2022, 我的世界</rights>
     <entry>
         <title type="html"><![CDATA[新电脑被植入 Lockbit 勒索病毒记录]]></title>
         <id>https://www.xihrni.com/post/xin-dian-nao-bei-zhi-ru-lockbit-le-suo-bing-du-ji-lu/</id>
