@@ -2,23 +2,19 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Git 从远程拉取数据时提示：&#39;You have not concluded your merge (MERGE_HEAD exists).&#39; 解决方法 | 我的世界</title>
+<title>Git 远程克隆/拉取提示：&#39;Permission denied (publickey).&#39; 解决记录 for Windows版本 | 我的世界</title>
 <link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1652693537309">
 <!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet"> -->
 <link href="https://www.xihrni.com/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="Git 从远程拉取数据时提示：&#39;You have not concluded your merge (MERGE_HEAD exists).&#39; 解决方法 | 我的世界 - Atom Feed"
+<link rel="alternate" type="application/atom+xml" title="Git 远程克隆/拉取提示：&#39;Permission denied (publickey).&#39; 解决记录 for Windows版本 | 我的世界 - Atom Feed"
   href="https://www.xihrni.com/atom.xml">
 <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700"> -->
 
 
-    <meta name="description" content="😳当前状态
-有些代码未加到忽略文件然后系统运行中被修改之后如果未处理进行拉取，在操作的过程中可能出现了如下状态
-
-&gt; git status
-# On branch develop
-# Your branch and 'origin/..." />
-    <meta name="keywords" content="merge,pull,git" />
+    <meta name="description" content="
+😳这两天换Windows笔记本，想在本地开发，装好git后执行 git clone xxx 提示 Permission denied (publickey).。想起是没有设置秘钥，然后按照之前的文章，生成秘钥、上传公钥，接着再次执行 g..." />
+    <meta name="keywords" content="" />
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css"> -->
     <link rel="stylesheet" href="https://www.xihrni.com/katex.min.css">
     <!-- <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script> -->
@@ -86,80 +82,33 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              Git 从远程拉取数据时提示：&#39;You have not concluded your merge (MERGE_HEAD exists).&#39; 解决方法
+              Git 远程克隆/拉取提示：&#39;Permission denied (publickey).&#39; 解决记录 for Windows版本
             </h2>
             <div class="post-info">
               <span>
-                2020-06-02
+                2022-05-16
               </span>
               <span>
                 2 min read
               </span>
               
-                <a href="https://www.xihrni.com/tag/merge/" class="post-tag">
-                  # merge
-                </a>
-              
-                <a href="https://www.xihrni.com/tag/pull/" class="post-tag">
-                  # pull
-                </a>
-              
-                <a href="https://www.xihrni.com/tag/9RuaOAU4j/" class="post-tag">
-                  # git
-                </a>
-              
             </div>
-            
-              <img class="post-feature-image" src="https://www.xihrni.com/post-images/git-cong-yuan-cheng-la-qu-shu-ju-shi-ti-shi-you-have-not-concluded-your-merge-merge_head-exists.png" alt="">
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <h3 id="当前状态">😳当前状态</h3>
-<p>有些代码未加到忽略文件然后系统运行中被修改之后如果未处理进行拉取，在操作的过程中可能出现了如下状态</p>
-<!-- more -->
-<pre><code class="language-shell">&gt; git status
-# On branch develop
-# Your branch and 'origin/develop' have diverged,
-# and have 9 and 7 different commits each, respectively.
-#   (use &quot;git pull&quot; to merge the remote branch into yours)
-#
-# All conflicts fixed but you are still merging.
-#   (use &quot;git commit&quot; to conclude merge)
-#
-# Changes not staged for commit:
-#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
-#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
-#
-#       modified:   config/site_config.php
-#       modified:   sitemap_article.xml
-#       modified:   sitemap_goods.xml
-#       modified:   sitemaps.xml
-#
-no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
-</code></pre>
-<p>这个时候可以先备份修改过的文件，然后重置到修改之前的状态再拉取试试</p>
-<pre><code class="language-shell">&gt; git checkout -- config/site_config.php
-&gt; git checkout -- sitemap_article.xml
-&gt; git checkout -- sitemap_goods.xml
-&gt; git checkout -- sitemap.xml
-&gt; git pull
-</code></pre>
-<p>如果提示以下信息则需要使用强制合并进行操作</p>
-<pre><code class="language-shell">&gt; git pull
-You have not concluded your merge (MERGE_HEAD exists).
-Please, commit your changes before you can merge.
-</code></pre>
-<h3 id="强制合并">强制合并</h3>
-<blockquote>
-<p>强制合并会覆盖本地版本，请先备份相关文件</p>
+                <blockquote>
+<p>😳这两天换Windows笔记本，想在本地开发，装好git后执行 <code>git clone xxx</code> 提示 <code>Permission denied (publickey).</code>。想起是没有设置秘钥，然后按照之前的文章，生成秘钥、上传公钥，接着再次执行 <code>git clone xxx</code>，发现还是提示 <code>Permission denied (publickey).</code></p>
 </blockquote>
-<pre><code class="language-shell">&gt; git fetch --all
-&gt; git reset --hard origin/master
-&gt; git fetch
-</code></pre>
-<p>再进行拉取则没有问题了</p>
-<pre><code class="language-shell">&gt; git pull
-</code></pre>
+<!-- more -->
+<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1652692166063.png" alt="Permission denied" loading="lazy"></figure>
+<h3 id="git-版本">Git 版本</h3>
+<p>折腾了半天：重新生成秘钥、指定秘钥、文件夹权限等，还换了远程仓库试了试，发现好像只有 <code>Coding</code> 的平台会这样。最后没办法还是提交工单找到了解决办法（Windows网上真就没什么人出问题？）😓，原来是Git客户端版本太高（大于或等于 <code>2.33.1</code>）导致 <code>RSA</code> 算法被禁用。</p>
+<blockquote>
+<p><a href="https://help.coding.net/docs/repo/faq.html#permission-denied">参考文章</a><br>
+<img src="https://www.xihrni.com/post-images/1652692829075.png" alt="参考文章" loading="lazy"></p>
+</blockquote>
+<p>经测试如果使用上面说的在 config 配置中加入上面两行，反而会报 <code>Bad configuration option: pubkeyacceptedalgorithms</code> 这样的错误，查了一下好像是 <code>OpenSS</code> 的版本又太低了，最后还是通过新的加密方式命令： <code>ssh-keygen -t ed25519 -C &quot;xxx@xx.xx&quot;</code>，重新生成了一下秘钥，上传新的秘钥靠谱，一次解决</p>
+<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1652693502202.png" alt="clone成功" loading="lazy"></figure>
 <p>😬</p>
 
               </div>
@@ -169,8 +118,7 @@ Please, commit your changes before you can merge.
 <ul>
 <li>
 <ul>
-<li><a href="#%E5%BD%93%E5%89%8D%E7%8A%B6%E6%80%81">😳当前状态</a></li>
-<li><a href="#%E5%BC%BA%E5%88%B6%E5%90%88%E5%B9%B6">强制合并</a></li>
+<li><a href="#git-%E7%89%88%E6%9C%AC">Git 版本</a></li>
 </ul>
 </li>
 </ul>
@@ -185,9 +133,9 @@ Please, commit your changes before you can merge.
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://www.xihrni.com/post/borderlands-2-she-zhi-wei-fan-ti-zhong-wen-epic-games-ping-tai/">
+            <a href="https://www.xihrni.com/post/xin-dian-nao-bei-zhi-ru-lockbit-le-suo-bing-du-ji-lu/">
               <h3 class="post-title">
-                Borderlands 2 设置为繁体中文（Epic Games 平台）
+                新电脑被植入 Lockbit 勒索病毒记录
               </h3>
             </a>
           </div>
