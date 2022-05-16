@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2022-05-16T17:16:47.942Z</updated>
+    <updated>2022-05-16T17:18:51.116Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
@@ -156,7 +156,7 @@ https://www.kaspersky.com.cn/resource-center/threats/lockbit-ransomware</p>
 <pre><code class="language-shell">vim ~/.ssh/config
 </code></pre>
 <p>输入 <code>i</code> 进入编辑状态，粘贴代码（删除注释），输入 <code>:wq</code> 保存文件并退出</p>
-<pre><code class="language-conf">Host e.coding.net # 主机
+<pre><code class="language-shell">Host e.coding.net # 主机
   HostName e.coding.net # 主机名称
   User xihrni # 用户名
   IdentityFile /Users/xihrni/.ssh/id_ed25519 # 私钥文件
