@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2022-05-16T17:16:06.344Z</updated>
+    <updated>2022-05-16T17:16:47.942Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
@@ -10,56 +10,6 @@
     <logo>https://www.xihrni.com/images/avatar.png</logo>
     <icon>https://www.xihrni.com/favicon.ico</icon>
     <rights>All rights reserved 2022, 我的世界</rights>
-    <entry>
-        <title type="html"><![CDATA[Git 指定远程仓库使用不同秘钥]]></title>
-        <id>https://www.xihrni.com/post/git-zhi-ding-yuan-cheng-cang-ku-shi-yong-bu-tong-mi-yao/</id>
-        <link href="https://www.xihrni.com/post/git-zhi-ding-yuan-cheng-cang-ku-shi-yong-bu-tong-mi-yao/">
-        </link>
-        <updated>2022-05-16T11:31:53.000Z</updated>
-        <summary type="html"><![CDATA[<blockquote>
-<p>😳针对不同的远程仓库操作想使用不同的秘钥文件，或者说使用别人已有的秘钥文件进行操作</p>
-</blockquote>
-]]></summary>
-        <content type="html"><![CDATA[<blockquote>
-<p>😳针对不同的远程仓库操作想使用不同的秘钥文件，或者说使用别人已有的秘钥文件进行操作</p>
-</blockquote>
-<!-- more -->
-<h3 id="生成-ssh-key">生成 SSH key</h3>
-<pre><code class="language-shell">ssh-keygen -t rsa -b 4096 -C &quot;xihrni@126.com&quot;
-</code></pre>
-<p>或使用</p>
-<pre><code class="language-shell">ssh-keygen -t ed25519 -C &quot;xihrni@126.com&quot;
-</code></pre>
-<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1652720009739.png" alt="ed25519" loading="lazy"></figure>
-<h3 id="添加-git-config-配置文件">添加 Git config 配置文件</h3>
-<p>在 <code>.ssh</code> 目录下新建 <code>config</code> 文件添加如下代码（案例为两个不同远程仓库，根据需求修改）</p>
-<pre><code class="language-shell">vim ~/.ssh/config
-</code></pre>
-<p>输入 <code>i</code> 进入编辑状态，粘贴代码（删除注释），输入 <code>:wq</code> 保存文件并退出</p>
-<pre><code class="language-conf">Host e.coding.net # 主机
-  HostName e.coding.net # 主机名称
-  User xihrni # 用户名
-  IdentityFile /Users/xihrni/.ssh/id_ed25519 # 私钥文件
-  IdentitiesOnly yes
-
-Host gitee.com
-  HostName gitee.com
-  User xihrni
-  IdentityFile /User/xihrni/.ssh/id_rsa
-  IdentitiesOnly yes
-</code></pre>
-<p><img src="https://www.xihrni.com/post-images/1652720900231.png" alt="config内容" loading="lazy"><br>
-<img src="https://www.xihrni.com/post-images/1652720905559.png" alt="秘钥文件目录" loading="lazy"></p>
-<p>此时操作如上两个远程仓库时会调用指定的秘钥进行认证（记得将对应的公钥上传到远程仓库）</p>
-<blockquote>
-<p>可通过此命令进行远程仓库身份验证</p>
-</blockquote>
-<pre><code class="language-shell">ssh -T git@e.coding.net
-</code></pre>
-<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1652721303610.png" alt="验证通过" loading="lazy"></figure>
-<p>😬</p>
-]]></content>
-    </entry>
     <entry>
         <title type="html"><![CDATA[Git 远程克隆/拉取提示：'Permission denied (publickey).' 解决记录 for Windows版本]]></title>
         <id>https://www.xihrni.com/post/git-yuan-cheng-ke-long-la-qu-ti-shi-permission-denied-publickey-jie-jue-ji-lu-for-windows-ban-ben/</id>
@@ -177,6 +127,56 @@ https://www.kaspersky.com.cn/resource-center/threats/lockbit-ransomware</p>
 <p>最后想起为什么 <code>known_hosts</code> 文件会在 <code>www</code> 用户目录呢，哦原来是用 <code>www</code> 用户执行的 <code>git</code> 命令，所以才在 www 用户目录生成了 <code>known_hosts</code> 文件</p>
 <p>接着把秘钥对复制到 <code>www</code> 用户目录下（或者用 <code>www</code> 用户重新生成），然后重新执行 <code>git clone</code> 命令，成功~</p>
 <figure data-type="image" tabindex="5"><img src="https://www.xihrni.com/post-images/1630412169314.png" alt="clone成功" loading="lazy"></figure>
+<p>😬</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Git 指定远程仓库使用不同秘钥]]></title>
+        <id>https://www.xihrni.com/post/git-zhi-ding-yuan-cheng-cang-ku-shi-yong-bu-tong-mi-yao/</id>
+        <link href="https://www.xihrni.com/post/git-zhi-ding-yuan-cheng-cang-ku-shi-yong-bu-tong-mi-yao/">
+        </link>
+        <updated>2021-05-16T11:31:53.000Z</updated>
+        <summary type="html"><![CDATA[<blockquote>
+<p>😳针对不同的远程仓库操作想使用不同的秘钥文件，或者说使用别人已有的秘钥文件进行操作</p>
+</blockquote>
+]]></summary>
+        <content type="html"><![CDATA[<blockquote>
+<p>😳针对不同的远程仓库操作想使用不同的秘钥文件，或者说使用别人已有的秘钥文件进行操作</p>
+</blockquote>
+<!-- more -->
+<h3 id="生成-ssh-key">生成 SSH key</h3>
+<pre><code class="language-shell">ssh-keygen -t rsa -b 4096 -C &quot;xihrni@126.com&quot;
+</code></pre>
+<p>或使用</p>
+<pre><code class="language-shell">ssh-keygen -t ed25519 -C &quot;xihrni@126.com&quot;
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1652720009739.png" alt="ed25519" loading="lazy"></figure>
+<h3 id="添加-git-config-配置文件">添加 Git config 配置文件</h3>
+<p>在 <code>.ssh</code> 目录下新建 <code>config</code> 文件添加如下代码（案例为两个不同远程仓库，根据需求修改）</p>
+<pre><code class="language-shell">vim ~/.ssh/config
+</code></pre>
+<p>输入 <code>i</code> 进入编辑状态，粘贴代码（删除注释），输入 <code>:wq</code> 保存文件并退出</p>
+<pre><code class="language-conf">Host e.coding.net # 主机
+  HostName e.coding.net # 主机名称
+  User xihrni # 用户名
+  IdentityFile /Users/xihrni/.ssh/id_ed25519 # 私钥文件
+  IdentitiesOnly yes
+
+Host gitee.com
+  HostName gitee.com
+  User xihrni
+  IdentityFile /User/xihrni/.ssh/id_rsa
+  IdentitiesOnly yes
+</code></pre>
+<p><img src="https://www.xihrni.com/post-images/1652720900231.png" alt="config内容" loading="lazy"><br>
+<img src="https://www.xihrni.com/post-images/1652720905559.png" alt="秘钥文件目录" loading="lazy"></p>
+<p>此时操作如上两个远程仓库时会调用指定的秘钥进行认证（记得将对应的公钥上传到远程仓库）</p>
+<blockquote>
+<p>可通过此命令进行远程仓库身份验证</p>
+</blockquote>
+<pre><code class="language-shell">ssh -T git@e.coding.net
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1652721303610.png" alt="验证通过" loading="lazy"></figure>
 <p>😬</p>
 ]]></content>
     </entry>
