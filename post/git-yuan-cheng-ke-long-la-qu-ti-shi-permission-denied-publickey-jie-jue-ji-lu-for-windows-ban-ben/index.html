@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Git 远程克隆/拉取提示：&#39;Permission denied (publickey).&#39; 解决记录 for Windows版本 | 我的世界</title>
-<link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1652693537309">
+<link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1652693749912">
 <!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet"> -->
 <link href="https://www.xihrni.com/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
@@ -14,7 +14,7 @@
 
     <meta name="description" content="
 😳这两天换Windows笔记本，想在本地开发，装好git后执行 git clone xxx 提示 Permission denied (publickey).。想起是没有设置秘钥，然后按照之前的文章，生成秘钥、上传公钥，接着再次执行 g..." />
-    <meta name="keywords" content="" />
+    <meta name="keywords" content="Coding,git" />
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css"> -->
     <link rel="stylesheet" href="https://www.xihrni.com/katex.min.css">
     <!-- <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script> -->
@@ -25,7 +25,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://www.xihrni.com">
-  <img class="avatar" src="https://www.xihrni.com/images/avatar.png?v=1652693537309" alt="">
+  <img class="avatar" src="https://www.xihrni.com/images/avatar.png?v=1652693749912" alt="">
   </a>
   <h1 class="site-title">
     我的世界
@@ -92,7 +92,17 @@
                 2 min read
               </span>
               
+                <a href="https://www.xihrni.com/tag/coding/" class="post-tag">
+                  # Coding
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/9RuaOAU4j/" class="post-tag">
+                  # git
+                </a>
+              
             </div>
+            
+              <img class="post-feature-image" src="https://www.xihrni.com/post-images/git-yuan-cheng-ke-long-la-qu-ti-shi-permission-denied-publickey-jie-jue-ji-lu-for-windows-ban-ben.png" alt="">
             
             <div class="post-content-wrapper">
               <div class="post-content">
@@ -107,7 +117,7 @@
 <p><a href="https://help.coding.net/docs/repo/faq.html#permission-denied">参考文章</a><br>
 <img src="https://www.xihrni.com/post-images/1652692829075.png" alt="参考文章" loading="lazy"></p>
 </blockquote>
-<p>经测试如果使用上面说的在 config 配置中加入上面两行，反而会报 <code>Bad configuration option: pubkeyacceptedalgorithms</code> 这样的错误，查了一下好像是 <code>OpenSS</code> 的版本又太低了，最后还是通过新的加密方式命令： <code>ssh-keygen -t ed25519 -C &quot;xxx@xx.xx&quot;</code>，重新生成了一下秘钥，上传新的秘钥靠谱，一次解决</p>
+<p>经测试如果使用上面说的在 config 配置中加入上面两行，反而会报 <code>Bad configuration option: pubkeyacceptedalgorithms</code> 这样的错误，查了一下好像是 <code>OpenSS</code> 的版本又太低了。最后还是通过新的加密方式命令： <code>ssh-keygen -t ed25519 -C &quot;xxx@xx.xx&quot;</code>，重新生成了一下秘钥，上传新的秘钥靠谱，一次解决</p>
 <figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1652693502202.png" alt="clone成功" loading="lazy"></figure>
 <p>😬</p>
 

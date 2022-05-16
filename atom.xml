@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2022-05-16T09:32:30.413Z</updated>
+    <updated>2022-05-16T09:35:54.079Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
@@ -31,7 +31,7 @@
 <p><a href="https://help.coding.net/docs/repo/faq.html#permission-denied">参考文章</a><br>
 <img src="https://www.xihrni.com/post-images/1652692829075.png" alt="参考文章" loading="lazy"></p>
 </blockquote>
-<p>经测试如果使用上面说的在 config 配置中加入上面两行，反而会报 <code>Bad configuration option: pubkeyacceptedalgorithms</code> 这样的错误，查了一下好像是 <code>OpenSS</code> 的版本又太低了，最后还是通过新的加密方式命令： <code>ssh-keygen -t ed25519 -C &quot;xxx@xx.xx&quot;</code>，重新生成了一下秘钥，上传新的秘钥靠谱，一次解决</p>
+<p>经测试如果使用上面说的在 config 配置中加入上面两行，反而会报 <code>Bad configuration option: pubkeyacceptedalgorithms</code> 这样的错误，查了一下好像是 <code>OpenSS</code> 的版本又太低了。最后还是通过新的加密方式命令： <code>ssh-keygen -t ed25519 -C &quot;xxx@xx.xx&quot;</code>，重新生成了一下秘钥，上传新的秘钥靠谱，一次解决</p>
 <figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1652693502202.png" alt="clone成功" loading="lazy"></figure>
 <p>😬</p>
 ]]></content>
