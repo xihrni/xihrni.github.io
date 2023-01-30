@@ -2,14 +2,54 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2022-05-16T17:18:51.116Z</updated>
+    <updated>2023-01-30T01:02:06.164Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
     <subtitle>君子和而不同。穷则独善其身，达则兼济天下。</subtitle>
     <logo>https://www.xihrni.com/images/avatar.png</logo>
     <icon>https://www.xihrni.com/favicon.ico</icon>
-    <rights>All rights reserved 2022, 我的世界</rights>
+    <rights>All rights reserved 2023, 我的世界</rights>
+    <entry>
+        <title type="html"><![CDATA[MacOS 13.1（Ventura）外接显示器开启自定义HiDPI]]></title>
+        <id>https://www.xihrni.com/post/macos-131venturawai-jie-xian-shi-qi-kai-qi-zi-ding-yi-hidpi/</id>
+        <link href="https://www.xihrni.com/post/macos-131venturawai-jie-xian-shi-qi-kai-qi-zi-ding-yi-hidpi/">
+        </link>
+        <updated>2023-01-28T11:23:52.000Z</updated>
+        <summary type="html"><![CDATA[<blockquote>
+<p>😳更新13版本系统之前使用的是SwitchResX进行尝试开启HiDPI，但常规也只能强制开启2/1的分辨率，这样会导致布局非常紧凑，使用3.5k、2.5k、2k显示器的用户应该非常懂（比如2560<em>1080原生分辨率，开启2/1的HiDPI，布局模拟成了1280</em>540的分辨率，然后在一个25寸或者29寸的显示器上显示出这么小的布局可想而知有多么难受。但是如果不开HiDPI，由于MacOS系统的特性，导致字体看着会有锯齿）</p>
+</blockquote>
+]]></summary>
+        <content type="html"><![CDATA[<blockquote>
+<p>😳更新13版本系统之前使用的是SwitchResX进行尝试开启HiDPI，但常规也只能强制开启2/1的分辨率，这样会导致布局非常紧凑，使用3.5k、2.5k、2k显示器的用户应该非常懂（比如2560<em>1080原生分辨率，开启2/1的HiDPI，布局模拟成了1280</em>540的分辨率，然后在一个25寸或者29寸的显示器上显示出这么小的布局可想而知有多么难受。但是如果不开HiDPI，由于MacOS系统的特性，导致字体看着会有锯齿）</p>
+</blockquote>
+<!-- more -->
+<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1675036865524.png" alt="1080P分辨率显示器只能开启2分之1的HiDPI" loading="lazy"></figure>
+<h3 id="betterdisplay">BetterDisplay</h3>
+<blockquote>
+<p>BetterDisplay 可用于在 Mac 创建虚拟高分辨率显示器然后以屏幕镜像形式输出到物理低分辨率显示器。软件原名「BetterDummy，自 1.2.6 版本更名」此软件能替代一键 HiDPi 脚本，在 macOS 11.0 及以上版本推荐 2K 及 1080P 屏幕用户使用。</p>
+</blockquote>
+<p>原本使用这个软件可以通过开启一个虚拟屏幕后镜像给物理屏幕达到开启HiDPI的方式，由于MacOS对于4K以下的分辨率进行限制无法开启HiDPI，所以虚拟屏幕自定义分辨率到4K以上进行欺骗系统，但是由于增加了一个虚拟屏幕还是会导致性能的损耗，以及会在不同显示器间出现各式各样的问题，这个方法一直未使用。</p>
+<p>最近更新完系统后又搜了搜开启HiDPI的方法，发现这款软件已经实现直接开启HiDPI，无需自己计算填写分辨率，即可列出所有可选择的HiDPI分辨率进行选择，非常方便。</p>
+<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1675037948740.png" alt="3440*1440分辨率显示器开启所有HiDPI选项" loading="lazy"></figure>
+<p>以上是我34寸显示器，3440<em>1440原生分辨率设置之后自动开启的HiDPI分辨率选项，测试下来我的目视距离（眼睛到显示器）2560</em>1080HiDPI看起来最舒服。</p>
+<h3 id="软件设置">软件设置</h3>
+<ol>
+<li>下载并打开软件，目前版本为 <code>v1.3.16</code> 👉🏻<a href="https://github.com/waydabber/BetterDisplay">github下载地址</a></li>
+<li>在菜单栏中找到此软件图标，进入设置<br>
+<img src="https://www.xihrni.com/post-images/1675039953960.png" alt="" loading="lazy"></li>
+<li>在需要开启的显示器下方勾选这3项<br>
+<img src="https://www.xihrni.com/post-images/1675040069637.png" alt="" loading="lazy"></li>
+<li>点击应用后重启电脑</li>
+<li>在系统设置-显示器中点击显示所有分辨率已经可以看到全部HiDPI选项了<br>
+<img src="https://www.xihrni.com/post-images/1675040189319.png" alt="" loading="lazy"></li>
+</ol>
+<blockquote>
+<p>参考网址：https://betheme.net/houduan/44667.html</p>
+</blockquote>
+<p>😬</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Git 远程克隆/拉取提示：'Permission denied (publickey).' 解决记录 for Windows版本]]></title>
         <id>https://www.xihrni.com/post/git-yuan-cheng-ke-long-la-qu-ti-shi-permission-denied-publickey-jie-jue-ji-lu-for-windows-ban-ben/</id>
@@ -616,148 +656,6 @@ Please, commit your changes before you can merge.
 <p>启动界面还是英文不用理他，点 <code>PLAY</code> 进入游戏后就是繁体中文了<br>
 <img src="https://www.xihrni.com/post-images/1591058065557.png" alt="游戏启动界面" loading="lazy"><br>
 <img src="https://www.xihrni.com/post-images/1591058184453.png" alt="游戏菜单界面" loading="lazy"><br>
-😬</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[关于 PHP 连接本地 localhost 上的 Redis 特别慢的处理记录]]></title>
-        <id>https://www.xihrni.com/post/guan-yu-php-lian-jie-localhost-shang-de-redis-te-bie-man-de-chu-li-ji-lu/</id>
-        <link href="https://www.xihrni.com/post/guan-yu-php-lian-jie-localhost-shang-de-redis-te-bie-man-de-chu-li-ji-lu/">
-        </link>
-        <updated>2020-05-28T05:43:58.000Z</updated>
-        <summary type="html"><![CDATA[<blockquote>
-<p>😳 本地的 Yii2 项目配置 Redis 缓存后接口速度非常慢，检查了一下后发现每次都是在连接 Redis 的时候耗时最长，一开始还以为是 Yii2 框架的扩展问题，后来用 php-cli 执行单个文件也会出现太慢的情况。</p>
-</blockquote>
-]]></summary>
-        <content type="html"><![CDATA[<blockquote>
-<p>😳 本地的 Yii2 项目配置 Redis 缓存后接口速度非常慢，检查了一下后发现每次都是在连接 Redis 的时候耗时最长，一开始还以为是 Yii2 框架的扩展问题，后来用 php-cli 执行单个文件也会出现太慢的情况。</p>
-</blockquote>
-<!-- more -->
-<h3 id="连接-redis">连接 Redis</h3>
-<p>PHP 连接 Redis 代码：</p>
-<pre><code class="language-php">&lt;?php // redis.php
-echo time() . &quot;\r\n&quot;;
-$redis = new Redis();
-$redis-&gt;connect('localhost', 6379);
-echo 'Server is running: ' . $redis-&gt;ping() . &quot;\r\n&quot;;
-echo time() . &quot;\r\n&quot;;
-</code></pre>
-<p>使用 php-cli 执行，发现时间相差2秒：</p>
-<pre><code class="language-shell">PS &gt; php -f redis.php
-1590629905
-Server is running: +PONG
-1590629907
-</code></pre>
-<p>但是将连接地址换成 <code>127.0.0.1</code> 之后却正常：</p>
-<pre><code class="language-shell">PS &gt; php -f redis.php
-1590629918
-Server is running: +PONG
-1590629918
-</code></pre>
-<h3 id="问题原因">问题原因</h3>
-<p>上网查了些资料后发现 Windows 从 Win7 以后优先使用 IPv6 的协议，使 <code>localhost</code> 走了 IPv6 协议：</p>
-<pre><code class="language-shell">PS &gt; hostname
-G-AA00604
-
-PS &gt; ping G-AA00604
-
-正在 Ping G-AA00604 [fe80::5cd6:59d3:ad04:b26f%14] 具有 32 字节的数据:
-来自 fe80::5cd6:59d3:ad04:b26f%14 的回复: 字节=32 时间&lt;1ms TTL=128
-来自 fe80::5cd6:59d3:ad04:b26f%14 的回复: 字节=32 时间&lt;1ms TTL=128
-来自 fe80::5cd6:59d3:ad04:b26f%14 的回复: 字节=32 时间&lt;1ms TTL=128
-来自 fe80::5cd6:59d3:ad04:b26f%14 的回复: 字节=32 时间&lt;1ms TTL=128
-
-fe80::5cd6:59d3:ad04:b26f%14 的 Ping 统计信息:
-    数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，
-往返行程的估计时间(以毫秒为单位):
-    最短 = 0ms，最长 = 0ms，平均 = 0ms
-</code></pre>
-<p>从上面的 <code>ping</code> 命令请求自己本机的主机名称，可以看到返回的是 IPv6 的地址类型，我们再来看一下网络接口的优先级：</p>
-<pre><code class="language-shell">PS &gt; netsh interface ipv6 show prefixpolicies
-查询活动状态...
-
-优先顺序    标签   前缀
-----------  -----  --------------------------------
-        50      0  ::1/128
-        40      1  ::/0
-        35      4  ::ffff:0:0/96
-        30      2  2002::/16
-        5       5  2001::/32
-        3       13  fc00::/7
-        1       11  fec0::/10
-        1       12  3ffe::/16
-        1       3  ::/96
-
-</code></pre>
-<p>可以看到  IPv6 的地址类型在最上面，而 IPv4 的地址类型在最下面</p>
-<h3 id="解决办法">解决办法</h3>
-<p>既然 IPv4 的优先级较低，那么我们就改变一下优先级（使用管理员权限）</p>
-<pre><code class="language-shell">PS &gt; netsh int ipv6 set prefix ::/96 50 0
-确定。
-
-PS &gt; netsh int ipv6 set prefix ::ffff:0:0/96 40 1
-确定。
-
-PS &gt; netsh int ipv6 set prefix 2002::/16 35 2
-确定。
-
-PS &gt; netsh int ipv6 set prefix 2001::/32 30 3
-确定。
-
-PS &gt; netsh int ipv6 set prefix ::1/128 10 4
-确定。
-
-PS &gt; netsh int ipv6 set prefix ::/0 5 5
-确定。
-
-PS &gt; netsh int ipv6 set prefix fc00::/7 3 13
-确定。
-
-PS &gt; netsh int ipv6 set prefix fec0::/10 1 11
-确定。
-
-PS &gt; netsh int ipv6 set prefix 3ffe::/16 1 12
-确定。
-
-</code></pre>
-<p>改完之后我们再看一下网络接口的优先级：</p>
-<pre><code class="language-shell">PS &gt; netsh interface ipv6 show prefixpolicies
-查询活动状态...
-
-优先顺序    标签   前缀
-----------  -----  --------------------------------
-        50      0  ::/96
-        40      1  ::ffff:0:0/96
-        35      2  2002::/16
-        30      3  2001::/32
-        10      4  ::1/128
-         5      5  ::/0
-         3     13  fc00::/7
-         1     12  3ffe::/16
-         1     11  fec0::/10
-
-</code></pre>
-<p>看到 IPv4 的优先级已经在最上方了，那我们再 <code>ping</code> 一下：</p>
-<pre><code class="language-shell">PS &gt; ping G-AA00604
-
-正在 Ping G-AA00604 [192.168.56.1] 具有 32 字节的数据:
-来自 192.168.56.1 的回复: 字节=32 时间&lt;1ms TTL=128
-来自 192.168.56.1 的回复: 字节=32 时间&lt;1ms TTL=128
-来自 192.168.56.1 的回复: 字节=32 时间&lt;1ms TTL=128
-来自 192.168.56.1 的回复: 字节=32 时间&lt;1ms TTL=128
-
-192.168.56.1 的 Ping 统计信息:
-    数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，
-往返行程的估计时间(以毫秒为单位):
-    最短 = 0ms，最长 = 0ms，平均 = 0ms
-</code></pre>
-<p>可以看到已经反回了 IPv4 的地址类型，再试试连接 <code>localhost</code> 的 Redis：</p>
-<pre><code class="language-shell">PS &gt; php -f redis.php
-1590630198
-Server is running: +PONG
-1590630198
-</code></pre>
-<p>到此，已经解决了连接 <code>localhost</code> 慢的问题，其他应用也可使用此方式解决，比如：MySQL、MemCacahe 等<br>
 😬</p>
 ]]></content>
     </entry>
