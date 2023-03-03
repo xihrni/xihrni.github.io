@@ -1,0 +1,291 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Klipper使用USB免驱摄像头配置 | 我的世界</title>
+<link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1677831376231">
+<!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet"> -->
+<link href="https://www.xihrni.com/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Klipper使用USB免驱摄像头配置 | 我的世界 - Atom Feed"
+  href="https://www.xihrni.com/atom.xml">
+<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700"> -->
+
+
+    <meta name="description" content="
+😳年前在群友的一番 “推荐” 下，在闲鱼收了3个500W像素的USB摄像头，想着可以给我两台机器装上用来监控打印状态（机器放的离电脑桌远）。这样可以不用走过去查看，或者以后代理到公网人在外面时也能偶尔看一眼
+
+
+
+MJPG-Stream..." />
+    <meta name="keywords" content="Klipper,Crowsnest,USB摄像头,Fluidd" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css"> -->
+    <link rel="stylesheet" href="https://www.xihrni.com/katex.min.css">
+    <!-- <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script> -->
+    <script src="https://www.xihrni.com/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://www.xihrni.com">
+  <img class="avatar" src="https://www.xihrni.com/images/avatar.png?v=1677831376231" alt="">
+  </a>
+  <h1 class="site-title">
+    我的世界
+  </h1>
+  <p class="site-description">
+    君子和而不同。穷则独善其身，达则兼济天下。
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/xihrni" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Klipper使用USB免驱摄像头配置
+            </h2>
+            <div class="post-info">
+              <span>
+                2023-01-30
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+                <a href="https://www.xihrni.com/tag/klipper/" class="post-tag">
+                  # Klipper
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/crowsnest/" class="post-tag">
+                  # Crowsnest
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/usb-she-xiang-tou/" class="post-tag">
+                  # USB摄像头
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/fluidd/" class="post-tag">
+                  # Fluidd
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <blockquote>
+<p>😳年前在群友的一番 <code>“推荐”</code> 下，在闲鱼收了3个500W像素的USB摄像头，想着可以给我两台机器装上用来监控打印状态（机器放的离电脑桌远）。这样可以不用走过去查看，或者以后代理到公网人在外面时也能偶尔看一眼</p>
+</blockquote>
+<!-- more -->
+<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1675042678540.jpeg" alt="闲鱼摄像头卖家" loading="lazy"></figure>
+<h3 id="mjpg-streamer">MJPG-Streamer</h3>
+<p>原本通过 <code>kiauh</code> 助手安装 <code>MJPG-Streamer</code> 来驱动 <code>Webcam</code> 服务已经不行了，最新版 <code>5.0</code> 之后的<code>kiauh</code> 助手已经禁止安装 <code>MJPG-Streamer</code>，就算此时用老的版本进行安装也会出现无法下载相关依赖而导致的报错，最终安装失败</p>
+<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1677777713553.png" alt=" 助手" loading="lazy"></figure>
+<h3 id="crowsnest">Crowsnest</h3>
+<blockquote>
+<p>官方介绍：<br>
+它继承了他的名字从帆船乌鸦窝。<br>
+乌鸦巢是一艘船的主桅杆上部的结构，或用作瞭望台的结构。 见https://en.wikipedia.org/wiki/Crow 's_nest<br>
+因此，这将是您的打印机的“瞭望点”。</p>
+</blockquote>
+<blockquote>
+<p>网友介绍：<br>
+一般免驱即插即用摄像头，均可以在 linux、armbian 等系统下的 klipper 支持使用，无需另外安装驱动<br>
+不同于常规的的 MJPG-Streamer 方式安装，Mainsail 下的 Crowsnest 依靠 µStreamer，提供更轻量更快速的替代服务，具备支持断线重连后信号恢复，而无需重启服务<br>
+摄像头支持的分辨率及刷新率等参数可以通过 Crowsnest.log 查看</p>
+</blockquote>
+<h4 id="安装">安装</h4>
+<pre><code class="language-shell"># 记得先切换到运行 Klipper 的普通用户，例：su klipper
+cd ~
+git clone https://github.com/mainsail-crew/crowsnest.git
+cd crowsnest
+sudo make install
+</code></pre>
+<p>如果编译安装完成后（make install)，你发现下面的配置文件并没有出现请尝试编译配置后再进行安装（请先看完后面的文章没问题再回来执行这段）</p>
+<pre><code class="language-shell">sudo make config
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="https://www.xihrni.com/post-images/1677826440404.png" alt="Crowsnest配置文件" loading="lazy"></figure>
+<h4 id="配置">配置</h4>
+<p>先在 <code>moonraker.conf</code> 配置中添加以下代码实现可以在 <code>Mainsail</code> 或 <code>fluidd</code> 网页端进行控制</p>
+<pre><code class="language-ini">[update_manager crowsnest]
+type: git_repo
+path: ~/crowsnest
+origin: https://github.com/mainsail-crew/crowsnest.git
+managed_services: crowsnest
+install_script: tools/install.sh
+</code></pre>
+<figure data-type="image" tabindex="4"><img src="https://www.xihrni.com/post-images/1677826678406.png" alt="在  或  网页端进行控制Crowsnest" loading="lazy"></figure>
+<p><code>crowsnest.conf</code> 文件默认配置</p>
+<pre><code class="language-ini">[crowsnest]
+log_path: ~/printer_data/logs/crowsnest.log # 日志文件路径
+log_level: verbose # 日志等级
+delete_log: false # 是否每次重启时删除日志
+
+[cam 1]
+mode: mjpg # mjpg/rtsp
+port: 8080 # 端口
+device: /dev/v4l/by-id/usb-058f_USB2.0_Camera-video-index0 # 设备ID，和主板连接类似
+resolution: 1024x768 # 分辨率，4：3可用：2592x1944 2560x1920 1600x1200 1200x900 640x480
+max_fps: 15 # 最大帧率
+#custom_flags: # 您可以使用自定义标志运行流服务
+#v4l2ctl: # 添加v4l2-ctl参数来设置您的摄像机，请参阅记录您的摄像机的能力
+</code></pre>
+<p>插上USB摄像头后可以使用 <code>ls /dev/v4l/by-id</code> 查看ID值，或者使用 <code>isusb</code> 查看是否有设备接入</p>
+<figure data-type="image" tabindex="5"><img src="https://www.xihrni.com/post-images/1677829138235.png" alt="issub命令" loading="lazy"></figure>
+<h4 id="网页端">网页端</h4>
+<p>在 Klipper 网页管理端的系统设置中找到摄像头进行添加</p>
+<figure data-type="image" tabindex="6"><img src="https://www.xihrni.com/post-images/1677829906610.png" alt="摄像头配置" loading="lazy"></figure>
+<p>然后在首页仪表板就能看到这个模块了，摄像头画面加载的会比其它模块慢很多，所以有时候刷新不出来画面多等等<br>
+（请忽略我这个渣渣画质，这10几元的摄像头真不行😰）</p>
+<figure data-type="image" tabindex="7"><img src="https://www.xihrni.com/post-images/1677830089554.png" alt="" loading="lazy"></figure>
+<p>其它还有对焦距离、多摄像头、延时拍摄等可以参考以下网址</p>
+<blockquote>
+<p>参考网址：https://github.com/mainsail-crew/crowsnest<br>
+参考网址：https://www.bilibili.com/read/cv20924273?from=search&amp;spm_id_from=333.337.0.0</p>
+</blockquote>
+<p>😬</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#mjpg-streamer">MJPG-Streamer</a></li>
+<li><a href="#crowsnest">Crowsnest</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85">安装</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE">配置</a></li>
+<li><a href="#%E7%BD%91%E9%A1%B5%E7%AB%AF">网页端</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://www.xihrni.com/post/macos-131venturawai-jie-xian-shi-qi-kai-qi-zi-ding-yi-hidpi/">
+              <h3 class="post-title">
+                MacOS 13.1（Ventura）外接显示器开启自定义HiDPI
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a class="margin-10-left-right" href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>|<a class="margin-10-left-right" href="https://beian.miit.gov.cn" target="_blank">粤ICP备2021115781号</a>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?5d5eb0906105cf159da64f5d0625e7fa";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+  <a class="rss" href="https://www.xihrni.com/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

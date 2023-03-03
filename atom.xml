@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2023-01-30T01:02:06.164Z</updated>
+    <updated>2023-03-03T08:16:19.351Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
@@ -11,28 +11,111 @@
     <icon>https://www.xihrni.com/favicon.ico</icon>
     <rights>All rights reserved 2023, 我的世界</rights>
     <entry>
+        <title type="html"><![CDATA[Klipper使用USB免驱摄像头配置]]></title>
+        <id>https://www.xihrni.com/post/klipper-shi-yong-usb-mian-qu-she-xiang-tou-pei-zhi/</id>
+        <link href="https://www.xihrni.com/post/klipper-shi-yong-usb-mian-qu-she-xiang-tou-pei-zhi/">
+        </link>
+        <updated>2023-01-30T01:13:16.000Z</updated>
+        <summary type="html"><![CDATA[<blockquote>
+<p>😳年前在群友的一番 <code>“推荐”</code> 下，在闲鱼收了3个500W像素的USB摄像头，想着可以给我两台机器装上用来监控打印状态（机器放的离电脑桌远）。这样可以不用走过去查看，或者以后代理到公网人在外面时也能偶尔看一眼</p>
+</blockquote>
+]]></summary>
+        <content type="html"><![CDATA[<blockquote>
+<p>😳年前在群友的一番 <code>“推荐”</code> 下，在闲鱼收了3个500W像素的USB摄像头，想着可以给我两台机器装上用来监控打印状态（机器放的离电脑桌远）。这样可以不用走过去查看，或者以后代理到公网人在外面时也能偶尔看一眼</p>
+</blockquote>
+<!-- more -->
+<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1675042678540.jpeg" alt="闲鱼摄像头卖家" loading="lazy"></figure>
+<h3 id="mjpg-streamer">MJPG-Streamer</h3>
+<p>原本通过 <code>kiauh</code> 助手安装 <code>MJPG-Streamer</code> 来驱动 <code>Webcam</code> 服务已经不行了，最新版 <code>5.0</code> 之后的<code>kiauh</code> 助手已经禁止安装 <code>MJPG-Streamer</code>，就算此时用老的版本进行安装也会出现无法下载相关依赖而导致的报错，最终安装失败</p>
+<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1677777713553.png" alt=" 助手" loading="lazy"></figure>
+<h3 id="crowsnest">Crowsnest</h3>
+<blockquote>
+<p>官方介绍：<br>
+它继承了他的名字从帆船乌鸦窝。<br>
+乌鸦巢是一艘船的主桅杆上部的结构，或用作瞭望台的结构。 见https://en.wikipedia.org/wiki/Crow 's_nest<br>
+因此，这将是您的打印机的“瞭望点”。</p>
+</blockquote>
+<blockquote>
+<p>网友介绍：<br>
+一般免驱即插即用摄像头，均可以在 linux、armbian 等系统下的 klipper 支持使用，无需另外安装驱动<br>
+不同于常规的的 MJPG-Streamer 方式安装，Mainsail 下的 Crowsnest 依靠 µStreamer，提供更轻量更快速的替代服务，具备支持断线重连后信号恢复，而无需重启服务<br>
+摄像头支持的分辨率及刷新率等参数可以通过 Crowsnest.log 查看</p>
+</blockquote>
+<h4 id="安装">安装</h4>
+<pre><code class="language-shell"># 记得先切换到运行 Klipper 的普通用户，例：su klipper
+cd ~
+git clone https://github.com/mainsail-crew/crowsnest.git
+cd crowsnest
+sudo make install
+</code></pre>
+<p>如果编译安装完成后（make install)，你发现下面的配置文件并没有出现请尝试编译配置后再进行安装（请先看完后面的文章没问题再回来执行这段）</p>
+<pre><code class="language-shell">sudo make config
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="https://www.xihrni.com/post-images/1677826440404.png" alt="Crowsnest配置文件" loading="lazy"></figure>
+<h4 id="配置">配置</h4>
+<p>先在 <code>moonraker.conf</code> 配置中添加以下代码实现可以在 <code>Mainsail</code> 或 <code>fluidd</code> 网页端进行控制</p>
+<pre><code class="language-ini">[update_manager crowsnest]
+type: git_repo
+path: ~/crowsnest
+origin: https://github.com/mainsail-crew/crowsnest.git
+managed_services: crowsnest
+install_script: tools/install.sh
+</code></pre>
+<figure data-type="image" tabindex="4"><img src="https://www.xihrni.com/post-images/1677826678406.png" alt="在  或  网页端进行控制Crowsnest" loading="lazy"></figure>
+<p><code>crowsnest.conf</code> 文件默认配置</p>
+<pre><code class="language-ini">[crowsnest]
+log_path: ~/printer_data/logs/crowsnest.log # 日志文件路径
+log_level: verbose # 日志等级
+delete_log: false # 是否每次重启时删除日志
+
+[cam 1]
+mode: mjpg # mjpg/rtsp
+port: 8080 # 端口
+device: /dev/v4l/by-id/usb-058f_USB2.0_Camera-video-index0 # 设备ID，和主板连接类似
+resolution: 1024x768 # 分辨率，4：3可用：2592x1944 2560x1920 1600x1200 1200x900 640x480
+max_fps: 15 # 最大帧率
+#custom_flags: # 您可以使用自定义标志运行流服务
+#v4l2ctl: # 添加v4l2-ctl参数来设置您的摄像机，请参阅记录您的摄像机的能力
+</code></pre>
+<p>插上USB摄像头后可以使用 <code>ls /dev/v4l/by-id</code> 查看ID值，或者使用 <code>isusb</code> 查看是否有设备接入</p>
+<figure data-type="image" tabindex="5"><img src="https://www.xihrni.com/post-images/1677829138235.png" alt="issub命令" loading="lazy"></figure>
+<h4 id="网页端">网页端</h4>
+<p>在 Klipper 网页管理端的系统设置中找到摄像头进行添加</p>
+<figure data-type="image" tabindex="6"><img src="https://www.xihrni.com/post-images/1677829906610.png" alt="摄像头配置" loading="lazy"></figure>
+<p>然后在首页仪表板就能看到这个模块了，摄像头画面加载的会比其它模块慢很多，所以有时候刷新不出来画面多等等<br>
+（请忽略我这个渣渣画质，这10几元的摄像头真不行😰）</p>
+<figure data-type="image" tabindex="7"><img src="https://www.xihrni.com/post-images/1677830089554.png" alt="" loading="lazy"></figure>
+<p>其它还有对焦距离、多摄像头、延时拍摄等可以参考以下网址</p>
+<blockquote>
+<p>参考网址：https://github.com/mainsail-crew/crowsnest<br>
+参考网址：https://www.bilibili.com/read/cv20924273?from=search&amp;spm_id_from=333.337.0.0</p>
+</blockquote>
+<p>😬</p>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[MacOS 13.1（Ventura）外接显示器开启自定义HiDPI]]></title>
         <id>https://www.xihrni.com/post/macos-131venturawai-jie-xian-shi-qi-kai-qi-zi-ding-yi-hidpi/</id>
         <link href="https://www.xihrni.com/post/macos-131venturawai-jie-xian-shi-qi-kai-qi-zi-ding-yi-hidpi/">
         </link>
         <updated>2023-01-28T11:23:52.000Z</updated>
         <summary type="html"><![CDATA[<blockquote>
-<p>😳更新13版本系统之前使用的是SwitchResX进行尝试开启HiDPI，但常规也只能强制开启2/1的分辨率，这样会导致布局非常紧凑，使用3.5k、2.5k、2k显示器的用户应该非常懂（比如2560<em>1080原生分辨率，开启2/1的HiDPI，布局模拟成了1280</em>540的分辨率，然后在一个25寸或者29寸的显示器上显示出这么小的布局可想而知有多么难受。但是如果不开HiDPI，由于MacOS系统的特性，导致字体看着会有锯齿）</p>
+<p>😳更新13版本系统之前使用的是 <code>SwitchResX</code> 进行尝试开启HiDPI，但常规也只能强制开启 <code>2/1</code> 的分辨率，这样会导致布局非常紧凑，使用3.5k、2.5k、2k显示器的用户应该非常懂（比如2560×1080原生分辨率，开启 <code>2/1</code> 的HiDPI，布局模拟成了1280×540的分辨率，然后在一个25寸或者29寸的显示器上显示出这么小的布局可想而知有多么难受。但是如果不开HiDPI，由于MacOS系统的特性，导致字体看着会有锯齿）</p>
 </blockquote>
 ]]></summary>
         <content type="html"><![CDATA[<blockquote>
-<p>😳更新13版本系统之前使用的是SwitchResX进行尝试开启HiDPI，但常规也只能强制开启2/1的分辨率，这样会导致布局非常紧凑，使用3.5k、2.5k、2k显示器的用户应该非常懂（比如2560<em>1080原生分辨率，开启2/1的HiDPI，布局模拟成了1280</em>540的分辨率，然后在一个25寸或者29寸的显示器上显示出这么小的布局可想而知有多么难受。但是如果不开HiDPI，由于MacOS系统的特性，导致字体看着会有锯齿）</p>
+<p>😳更新13版本系统之前使用的是 <code>SwitchResX</code> 进行尝试开启HiDPI，但常规也只能强制开启 <code>2/1</code> 的分辨率，这样会导致布局非常紧凑，使用3.5k、2.5k、2k显示器的用户应该非常懂（比如2560×1080原生分辨率，开启 <code>2/1</code> 的HiDPI，布局模拟成了1280×540的分辨率，然后在一个25寸或者29寸的显示器上显示出这么小的布局可想而知有多么难受。但是如果不开HiDPI，由于MacOS系统的特性，导致字体看着会有锯齿）</p>
 </blockquote>
 <!-- more -->
 <figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1675036865524.png" alt="1080P分辨率显示器只能开启2分之1的HiDPI" loading="lazy"></figure>
 <h3 id="betterdisplay">BetterDisplay</h3>
 <blockquote>
-<p>BetterDisplay 可用于在 Mac 创建虚拟高分辨率显示器然后以屏幕镜像形式输出到物理低分辨率显示器。软件原名「BetterDummy，自 1.2.6 版本更名」此软件能替代一键 HiDPi 脚本，在 macOS 11.0 及以上版本推荐 2K 及 1080P 屏幕用户使用。</p>
+<p>BetterDisplay 可用于在 MacOS 创建虚拟高分辨率显示器然后以屏幕镜像形式输出到物理低分辨率显示器。软件原名「BetterDummy，自 1.2.6 版本更名」此软件能替代一键 HiDPi 脚本，在 macOS 11.0 及以上版本推荐 2K 及 1080P 屏幕用户使用。</p>
 </blockquote>
 <p>原本使用这个软件可以通过开启一个虚拟屏幕后镜像给物理屏幕达到开启HiDPI的方式，由于MacOS对于4K以下的分辨率进行限制无法开启HiDPI，所以虚拟屏幕自定义分辨率到4K以上进行欺骗系统，但是由于增加了一个虚拟屏幕还是会导致性能的损耗，以及会在不同显示器间出现各式各样的问题，这个方法一直未使用。</p>
 <p>最近更新完系统后又搜了搜开启HiDPI的方法，发现这款软件已经实现直接开启HiDPI，无需自己计算填写分辨率，即可列出所有可选择的HiDPI分辨率进行选择，非常方便。</p>
 <figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1675037948740.png" alt="3440*1440分辨率显示器开启所有HiDPI选项" loading="lazy"></figure>
-<p>以上是我34寸显示器，3440<em>1440原生分辨率设置之后自动开启的HiDPI分辨率选项，测试下来我的目视距离（眼睛到显示器）2560</em>1080HiDPI看起来最舒服。</p>
+<p>以上是我34寸显示器，3440×1440原生分辨率设置之后自动开启的HiDPI分辨率选项，测试下来我的目视距离（眼睛到显示器）2560×1080(HiDPI)看起来最舒服。</p>
 <h3 id="软件设置">软件设置</h3>
 <ol>
 <li>下载并打开软件，目前版本为 <code>v1.3.16</code> 👉🏻<a href="https://github.com/waydabber/BetterDisplay">github下载地址</a></li>
@@ -637,26 +720,6 @@ Please, commit your changes before you can merge.
 <pre><code class="language-shell">&gt; git pull
 </code></pre>
 <p>😬</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Borderlands 2 设置为繁体中文（Epic Games 平台）]]></title>
-        <id>https://www.xihrni.com/post/borderlands-2-she-zhi-wei-fan-ti-zhong-wen-epic-games-ping-tai/</id>
-        <link href="https://www.xihrni.com/post/borderlands-2-she-zhi-wei-fan-ti-zhong-wen-epic-games-ping-tai/">
-        </link>
-        <updated>2020-06-02T00:24:01.000Z</updated>
-        <summary type="html"><![CDATA[<p>😳打开 Epic Games 平台先安装好游戏后进入设置界面</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>😳打开 Epic Games 平台先安装好游戏后进入设置界面</p>
-<!-- more -->
-<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1591057609359.png" alt="Epic Games 平台设置界面" loading="lazy"></figure>
-<p>滑动到最下方的管理游戏，展开 BORDERLANDS 2，勾选 <code>额外命令行参数</code> 后在输入框粘贴此字符： <code>-epiclocale=zh-Hant</code><br>
-<img src="https://www.xihrni.com/post-images/1591057832534.png" alt="Epic Games 平台设置界面" loading="lazy"></p>
-<p>返回到游戏库启动即可</p>
-<p>启动界面还是英文不用理他，点 <code>PLAY</code> 进入游戏后就是繁体中文了<br>
-<img src="https://www.xihrni.com/post-images/1591058065557.png" alt="游戏启动界面" loading="lazy"><br>
-<img src="https://www.xihrni.com/post-images/1591058184453.png" alt="游戏菜单界面" loading="lazy"><br>
-😬</p>
 ]]></content>
     </entry>
 </feed>
