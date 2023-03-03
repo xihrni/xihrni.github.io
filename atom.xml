@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2023-03-03T08:16:19.351Z</updated>
+    <updated>2023-03-03T12:07:21.651Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
@@ -24,7 +24,7 @@
 <p>😳年前在群友的一番 <code>“推荐”</code> 下，在闲鱼收了3个500W像素的USB摄像头，想着可以给我两台机器装上用来监控打印状态（机器放的离电脑桌远）。这样可以不用走过去查看，或者以后代理到公网人在外面时也能偶尔看一眼</p>
 </blockquote>
 <!-- more -->
-<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1675042678540.jpeg" alt="闲鱼摄像头卖家" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1677845217842.jpeg" alt="闲鱼摄像头卖家" loading="lazy"></figure>
 <h3 id="mjpg-streamer">MJPG-Streamer</h3>
 <p>原本通过 <code>kiauh</code> 助手安装 <code>MJPG-Streamer</code> 来驱动 <code>Webcam</code> 服务已经不行了，最新版 <code>5.0</code> 之后的<code>kiauh</code> 助手已经禁止安装 <code>MJPG-Streamer</code>，就算此时用老的版本进行安装也会出现无法下载相关依赖而导致的报错，最终安装失败</p>
 <figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1677777713553.png" alt=" 助手" loading="lazy"></figure>
