@@ -2,19 +2,29 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>MacOS 13.1（Ventura）外接显示器开启自定义HiDPI | 我的世界</title>
+<title>Linux 给普通用户添加 sudo 权限 | 我的世界</title>
 <link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1681894712047">
 <!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet"> -->
 <link href="https://www.xihrni.com/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="MacOS 13.1（Ventura）外接显示器开启自定义HiDPI | 我的世界 - Atom Feed"
+<link rel="alternate" type="application/atom+xml" title="Linux 给普通用户添加 sudo 权限 | 我的世界 - Atom Feed"
   href="https://www.xihrni.com/atom.xml">
 <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700"> -->
 
 
     <meta name="description" content="
-😳更新13版本系统之前使用的是 SwitchResX 进行尝试开启HiDPI，但常规也只能强制开启 2/1 的分辨率，这样会导致布局非常紧凑，使用3.5k、2.5k、2k显示器的用户应该非常懂（比如2560×1080原生分辨率，开启 2..." />
-    <meta name="keywords" content="hidpi,ventura,BetterDisplay,macos" />
+😳在 Linux 中，普通用户可以通过添加到 sudo 组来获得 sudo 权限
+
+
+
+首先使用管理员账户登录
+使用以下命令打开 /etc/sudoers 文件：
+
+sudo nano /etc/sudoers
+
+
+在文件中查找以下行：..." />
+    <meta name="keywords" content="linux" />
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css"> -->
     <link rel="stylesheet" href="https://www.xihrni.com/katex.min.css">
     <!-- <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script> -->
@@ -82,82 +92,61 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              MacOS 13.1（Ventura）外接显示器开启自定义HiDPI
+              Linux 给普通用户添加 sudo 权限
             </h2>
             <div class="post-info">
               <span>
-                2023-01-28
+                2023-04-19
               </span>
               <span>
-                3 min read
+                1 min read
               </span>
               
-                <a href="https://www.xihrni.com/tag/hidpi/" class="post-tag">
-                  # hidpi
-                </a>
-              
-                <a href="https://www.xihrni.com/tag/ventura/" class="post-tag">
-                  # ventura
-                </a>
-              
-                <a href="https://www.xihrni.com/tag/betterdisplay/" class="post-tag">
-                  # BetterDisplay
-                </a>
-              
-                <a href="https://www.xihrni.com/tag/macos/" class="post-tag">
-                  # macos
+                <a href="https://www.xihrni.com/tag/linux/" class="post-tag">
+                  # linux
                 </a>
               
             </div>
             
-              <img class="post-feature-image" src="https://www.xihrni.com/post-images/macos-131venturawai-jie-xian-shi-qi-kai-qi-zi-ding-yi-hidpi.png" alt="">
+              <img class="post-feature-image" src="https://www.xihrni.com/post-images/linux-gei-pu-tong-yong-hu-tian-jia-sudo-quan-xian.png" alt="">
             
             <div class="post-content-wrapper">
               <div class="post-content">
                 <blockquote>
-<p>😳更新13版本系统之前使用的是 <code>SwitchResX</code> 进行尝试开启HiDPI，但常规也只能强制开启 <code>2/1</code> 的分辨率，这样会导致布局非常紧凑，使用3.5k、2.5k、2k显示器的用户应该非常懂（比如2560×1080原生分辨率，开启 <code>2/1</code> 的HiDPI，布局模拟成了1280×540的分辨率，然后在一个25寸或者29寸的显示器上显示出这么小的布局可想而知有多么难受。但是如果不开HiDPI，由于MacOS系统的特性，导致字体看着会有锯齿）</p>
+<p>😳在 Linux 中，普通用户可以通过添加到 sudo 组来获得 sudo 权限</p>
 </blockquote>
 <!-- more -->
-<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1675036865524.png" alt="1080P分辨率显示器只能开启2分之1的HiDPI" loading="lazy"></figure>
-<h3 id="betterdisplay">BetterDisplay</h3>
-<blockquote>
-<p>BetterDisplay 可用于在 MacOS 创建虚拟高分辨率显示器然后以屏幕镜像形式输出到物理低分辨率显示器。软件原名「BetterDummy，自 1.2.6 版本更名」此软件能替代一键 HiDPi 脚本，在 macOS 11.0 及以上版本推荐 2K 及 1080P 屏幕用户使用。</p>
-</blockquote>
-<p>原本使用这个软件可以通过开启一个虚拟屏幕后镜像给物理屏幕达到开启HiDPI的方式，由于MacOS对于4K以下的分辨率进行限制无法开启HiDPI，所以虚拟屏幕自定义分辨率到4K以上进行欺骗系统，但是由于增加了一个虚拟屏幕还是会导致性能的损耗，以及会在不同显示器间出现各式各样的问题，这个方法一直未使用。</p>
-<p>最近更新完系统后又搜了搜开启HiDPI的方法，发现这款软件已经实现直接开启HiDPI，无需自己计算填写分辨率，即可列出所有可选择的HiDPI分辨率进行选择，非常方便。</p>
-<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1675037948740.png" alt="3440*1440分辨率显示器开启所有HiDPI选项" loading="lazy"></figure>
-<p>以上是我34寸显示器，3440×1440原生分辨率设置之后自动开启的HiDPI分辨率选项，测试下来我的目视距离（眼睛到显示器）2560×1080(HiDPI)看起来最舒服。</p>
-<h3 id="软件设置">软件设置</h3>
 <ol>
-<li>下载并打开软件，目前版本为 <code>v1.3.16</code> 👉🏻<a href="https://github.com/waydabber/BetterDisplay">github下载地址</a></li>
-<li>在菜单栏中找到此软件图标，进入设置<br>
-<img src="https://www.xihrni.com/post-images/1675039953960.png" alt="" loading="lazy"></li>
-<li>在需要开启的显示器下方勾选这3项<br>
-<img src="https://www.xihrni.com/post-images/1675040069637.png" alt="" loading="lazy"></li>
-<li>点击应用后重启电脑</li>
-<li>在系统设置-显示器中点击显示所有分辨率已经可以看到全部HiDPI选项了<br>
-<img src="https://www.xihrni.com/post-images/1675040189319.png" alt="" loading="lazy"></li>
+<li>首先使用管理员账户登录</li>
+<li>使用以下命令打开 /etc/sudoers 文件：</li>
 </ol>
-<blockquote>
-<p>参考网址：https://betheme.net/houduan/44667.html</p>
-</blockquote>
+<pre><code class="language-shell">sudo nano /etc/sudoers
+</code></pre>
+<ol start="3">
+<li>在文件中查找以下行：</li>
+</ol>
+<pre><code class="language-txt">%sudo ALL=(ALL:ALL) ALL
+</code></pre>
+<ol start="4">
+<li>添加普通用户到 sudo 组（其中，username 是普通用户的用户名）：</li>
+</ol>
+<pre><code class="language-shell">sudo usermod -aG sudo username
+</code></pre>
+<ol start="5">
+<li>保存文件并退出：</li>
+</ol>
+<pre><code class="language-shell">Ctrl + O
+Ctrl + X
+</code></pre>
+<ol start="6">
+<li>让普通用户登录系统，并使用 sudo 命令执行需要管理员权限的操作。</li>
+</ol>
+<p>这样，就已经成功地给普通用户添加了 sudo 权限。注意，使用 sudo 命令执行的操作是有风险的，因此请谨慎操作。</p>
 <p>😬</p>
 
               </div>
               <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#betterdisplay">BetterDisplay</a></li>
-<li><a href="#%E8%BD%AF%E4%BB%B6%E8%AE%BE%E7%BD%AE">软件设置</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
+                
               </div>
             </div>
           </article>
@@ -166,9 +155,9 @@
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://www.xihrni.com/post/ji-yu-armbian-de-linux-xi-tong-geng-xin-guo-nei-yuan-2/">
+            <a href="https://www.xihrni.com/post/klipper-shi-yong-usb-mian-qu-she-xiang-tou-pei-zhi/">
               <h3 class="post-title">
-                基于 Armbian 的 Linux 系统更新国内源（2
+                Klipper使用USB免驱摄像头配置
               </h3>
             </a>
           </div>

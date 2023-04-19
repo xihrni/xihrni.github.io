@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2023-04-19T08:47:29.488Z</updated>
+    <updated>2023-04-19T08:58:35.441Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
@@ -10,6 +10,49 @@
     <logo>https://www.xihrni.com/images/avatar.png</logo>
     <icon>https://www.xihrni.com/favicon.ico</icon>
     <rights>All rights reserved 2023, 我的世界</rights>
+    <entry>
+        <title type="html"><![CDATA[Linux 给普通用户添加 sudo 权限]]></title>
+        <id>https://www.xihrni.com/post/linux-gei-pu-tong-yong-hu-tian-jia-sudo-quan-xian/</id>
+        <link href="https://www.xihrni.com/post/linux-gei-pu-tong-yong-hu-tian-jia-sudo-quan-xian/">
+        </link>
+        <updated>2023-04-19T08:47:38.000Z</updated>
+        <summary type="html"><![CDATA[<blockquote>
+<p>😳在 Linux 中，普通用户可以通过添加到 sudo 组来获得 sudo 权限</p>
+</blockquote>
+]]></summary>
+        <content type="html"><![CDATA[<blockquote>
+<p>😳在 Linux 中，普通用户可以通过添加到 sudo 组来获得 sudo 权限</p>
+</blockquote>
+<!-- more -->
+<ol>
+<li>首先使用管理员账户登录</li>
+<li>使用以下命令打开 /etc/sudoers 文件：</li>
+</ol>
+<pre><code class="language-shell">sudo nano /etc/sudoers
+</code></pre>
+<ol start="3">
+<li>在文件中查找以下行：</li>
+</ol>
+<pre><code class="language-txt">%sudo ALL=(ALL:ALL) ALL
+</code></pre>
+<ol start="4">
+<li>添加普通用户到 sudo 组（其中，username 是普通用户的用户名）：</li>
+</ol>
+<pre><code class="language-shell">sudo usermod -aG sudo username
+</code></pre>
+<ol start="5">
+<li>保存文件并退出：</li>
+</ol>
+<pre><code class="language-shell">Ctrl + O
+Ctrl + X
+</code></pre>
+<ol start="6">
+<li>让普通用户登录系统，并使用 sudo 命令执行需要管理员权限的操作。</li>
+</ol>
+<p>这样，就已经成功地给普通用户添加了 sudo 权限。注意，使用 sudo 命令执行的操作是有风险的，因此请谨慎操作。</p>
+<p>😬</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Klipper使用USB免驱摄像头配置]]></title>
         <id>https://www.xihrni.com/post/klipper-shi-yong-usb-mian-qu-she-xiang-tou-pei-zhi/</id>
@@ -430,64 +473,6 @@ Host gitee.com
 <pre><code class="language-shell">ssh -T git@e.coding.net
 </code></pre>
 <figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1652721303610.png" alt="验证通过" loading="lazy"></figure>
-<p>😬</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[CentOS 挂载新磁盘（阿里云ECS）]]></title>
-        <id>https://www.xihrni.com/post/a-li-yun-ecs-centos7-gua-zai-xin-ci-pan/</id>
-        <link href="https://www.xihrni.com/post/a-li-yun-ecs-centos7-gua-zai-xin-ci-pan/">
-        </link>
-        <updated>2020-12-30T01:57:51.000Z</updated>
-        <summary type="html"><![CDATA[<blockquote>
-<p>😳 服务器磁盘已满，新购了一块云盘，包年包月的磁盘会自动挂载，不用重启，但是需要手动进入系统格式化磁盘、分区、挂载路径<br>
-本文只适用小于2T容量的磁盘</p>
-</blockquote>
-]]></summary>
-        <content type="html"><![CDATA[<blockquote>
-<p>😳 服务器磁盘已满，新购了一块云盘，包年包月的磁盘会自动挂载，不用重启，但是需要手动进入系统格式化磁盘、分区、挂载路径<br>
-本文只适用小于2T容量的磁盘</p>
-</blockquote>
-<!-- more -->
-<p>先查看当前磁盘信息</p>
-<pre><code class="language-shell">&gt; fdisk -l
-</code></pre>
-<p><img src="https://www.xihrni.com/post-images/1609294893165.png" alt="fdisk -l" loading="lazy"><br>
-<code>/dev/vdc</code> 就是新添加的磁盘</p>
-<h3 id="创建分区">创建分区</h3>
-<p>进入分区模式</p>
-<pre><code class="language-shell">&gt; fdisk -u /dev/vdc
-</code></pre>
-<ol>
-<li>输入 <code>n</code> 创建一个新分区</li>
-<li>输入 <code>p</code> 选择分区类型为主分区</li>
-<li>输入分区编号，直接按回车键选择默认值下一步</li>
-<li>输入第一个可用的扇区编号，直接按回车键选择默认值下一步</li>
-<li>输入最后一个扇区编号，直接按回车键选择默认值下一步</li>
-<li>输入 <code>p</code> 查看分区情况</li>
-<li>输入 <code>w</code> 开始分区，并且分区完成后会自动退出分区模式</li>
-</ol>
-<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1609295585447.png" alt="fdisk -u" loading="lazy"></figure>
-<p>查看新分区信息</p>
-<pre><code class="language-shell">&gt; fdisk -lu /dev/vdc
-</code></pre>
-<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1609296021975.png" alt="fdisk -lu" loading="lazy"></figure>
-<h3 id="创建文件系统">创建文件系统</h3>
-<p>创建一个ext4文件系统</p>
-<pre><code class="language-shell">&gt; mkfs -t ext4 /dev/vdc1
-</code></pre>
-<figure data-type="image" tabindex="3"><img src="https://www.xihrni.com/post-images/1609296123347.png" alt="mkfs -t" loading="lazy"></figure>
-<h3 id="挂载分区">挂载分区</h3>
-<p>写入新分区信息，启动开机自动挂载分区</p>
-<blockquote>
-<p>如果要把数据盘单独挂载到某个文件夹，例如单独用来存放网页，则将命令中/mnt替换成所需的挂载点路径。</p>
-</blockquote>
-<pre><code class="language-shell">&gt; cp /etc/fstab /etc/fstab.bak # 备份原本的文件
-&gt; echo `blkid /dev/vdc1 | awk '{print $2}' | sed 's/\&quot;//g'` /mnt ext4 defaults 0 0 &gt;&gt; /etc/fstab
-</code></pre>
-<p>挂载分区</p>
-<pre><code class="language-shell">&gt; mount /dev/vdc1 /mnt
-</code></pre>
 <p>😬</p>
 ]]></content>
     </entry>
