@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>RK3399/树莓派基于 Armbian 的 Linux 系统更新国内源 | 我的世界</title>
-<link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1681887908632">
+<link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1681890133994">
 <!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet"> -->
 <link href="https://www.xihrni.com/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
@@ -25,7 +25,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://www.xihrni.com">
-  <img class="avatar" src="https://www.xihrni.com/images/avatar.png?v=1681887908632" alt="">
+  <img class="avatar" src="https://www.xihrni.com/images/avatar.png?v=1681890133994" alt="">
   </a>
   <h1 class="site-title">
     我的世界
@@ -127,10 +127,10 @@
             <div class="post-content-wrapper">
               <div class="post-content">
                 <blockquote>
-<p>😳收了块RK3399（六核）的机器，听说比树莓派4B（四核）还强，用来给机器做上位机，提前让卖家刷好Linux系统，拿到手发现是 <code>Ubuntu 20.04.6 LTS (Focal Fossa)</code> ，登录机器上去无法更新软件包，轻车熟路的更改源后再次尝试，结果阿里云、腾讯云、清华云和网易云等源都无法更新，找了个遍发现全网几乎都是一样的方法，最后翻了很久发现原来是这个原因。。。<br>
-<img src="https://www.xihrni.com/post-images/1681875599326.png" alt="Ubuntu 20.04.6 LTS" loading="lazy"></p>
+<p>😳收了块RK3399（六核）的机器，听说比树莓派4B（四核）还强，用来给机器做上位机，提前让卖家刷好Linux系统，拿到手发现是 <code>Ubuntu 20.04.6 LTS (Focal Fossa)</code> ，登录机器上去无法更新软件包，轻车熟路的更改源后再次尝试，结果阿里云、腾讯云、清华云和网易云等源都无法更新，找了个遍发现全网几乎都是一样的方法，最后翻了很久发现原来是这个原因。。。</p>
 </blockquote>
 <!-- more -->
+<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1681875599326.png" alt="Ubuntu 20.04.6 LTS" loading="lazy"></figure>
 <h3 id="常见方法">常见方法</h3>
 <ol>
 <li>打开配置文件</li>
@@ -174,7 +174,7 @@ deb-src https://mirrors.aliyun.com/ubuntu-ports/ focal-updates main restricted u
 deb https://mirrors.aliyun.com/ubuntu-ports/ focal-backports main restricted universe multiverse
 deb-src https://mirrors.aliyun.com/ubuntu-ports/ focal-backports main restricted universe multiverse
 </code></pre>
-<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1681876573798.png" alt="阿里云源" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1681876573798.png" alt="阿里云源" loading="lazy"></figure>
 <p>😬注意看就是地址最后面加了个 <code>-ports</code>，之后才顺利更新完成</p>
 
               </div>
