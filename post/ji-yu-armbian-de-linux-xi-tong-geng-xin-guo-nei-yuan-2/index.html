@@ -2,19 +2,24 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>MacOS 13.1（Ventura）外接显示器开启自定义HiDPI | 我的世界</title>
+<title>基于 Armbian 的 Linux 系统更新国内源（2 | 我的世界</title>
 <link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1681887908632">
 <!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet"> -->
 <link href="https://www.xihrni.com/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="MacOS 13.1（Ventura）外接显示器开启自定义HiDPI | 我的世界 - Atom Feed"
+<link rel="alternate" type="application/atom+xml" title="基于 Armbian 的 Linux 系统更新国内源（2 | 我的世界 - Atom Feed"
   href="https://www.xihrni.com/atom.xml">
 <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700"> -->
 
 
     <meta name="description" content="
-😳更新13版本系统之前使用的是 SwitchResX 进行尝试开启HiDPI，但常规也只能强制开启 2/1 的分辨率，这样会导致布局非常紧凑，使用3.5k、2.5k、2k显示器的用户应该非常懂（比如2560×1080原生分辨率，开启 2..." />
-    <meta name="keywords" content="hidpi,ventura,BetterDisplay,macos" />
+😳帮一个群友给他的电视盒子换国内源，硬件是电视盒子系统是 Debain。最开我以为是他和我上次一样没有找到合适的源地址，然后一顿操作，结果还是不行。在最后搞了2个小时后，重新认真看了一下错误提示，发现原来是本地时间不对
+
+
+
+更新时间
+..." />
+    <meta name="keywords" content="debain,armbian,国内源,rk3399,树莓派,香橙派" />
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css"> -->
     <link rel="stylesheet" href="https://www.xihrni.com/katex.min.css">
     <!-- <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script> -->
@@ -82,65 +87,66 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              MacOS 13.1（Ventura）外接显示器开启自定义HiDPI
+              基于 Armbian 的 Linux 系统更新国内源（2
             </h2>
             <div class="post-info">
               <span>
-                2023-01-28
+                2023-01-16
               </span>
               <span>
-                3 min read
+                1 min read
               </span>
               
-                <a href="https://www.xihrni.com/tag/hidpi/" class="post-tag">
-                  # hidpi
+                <a href="https://www.xihrni.com/tag/debain/" class="post-tag">
+                  # debain
                 </a>
               
-                <a href="https://www.xihrni.com/tag/ventura/" class="post-tag">
-                  # ventura
+                <a href="https://www.xihrni.com/tag/armbian/" class="post-tag">
+                  # armbian
                 </a>
               
-                <a href="https://www.xihrni.com/tag/betterdisplay/" class="post-tag">
-                  # BetterDisplay
+                <a href="https://www.xihrni.com/tag/guo-nei-yuan/" class="post-tag">
+                  # 国内源
                 </a>
               
-                <a href="https://www.xihrni.com/tag/macos/" class="post-tag">
-                  # macos
+                <a href="https://www.xihrni.com/tag/rk3399/" class="post-tag">
+                  # rk3399
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/shu-mei-pai/" class="post-tag">
+                  # 树莓派
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/xiang-cheng-pai/" class="post-tag">
+                  # 香橙派
                 </a>
               
             </div>
             
-              <img class="post-feature-image" src="https://www.xihrni.com/post-images/macos-131venturawai-jie-xian-shi-qi-kai-qi-zi-ding-yi-hidpi.png" alt="">
+              <img class="post-feature-image" src="https://www.xihrni.com/post-images/ji-yu-armbian-de-linux-xi-tong-geng-xin-guo-nei-yuan-2.png" alt="">
             
             <div class="post-content-wrapper">
               <div class="post-content">
                 <blockquote>
-<p>😳更新13版本系统之前使用的是 <code>SwitchResX</code> 进行尝试开启HiDPI，但常规也只能强制开启 <code>2/1</code> 的分辨率，这样会导致布局非常紧凑，使用3.5k、2.5k、2k显示器的用户应该非常懂（比如2560×1080原生分辨率，开启 <code>2/1</code> 的HiDPI，布局模拟成了1280×540的分辨率，然后在一个25寸或者29寸的显示器上显示出这么小的布局可想而知有多么难受。但是如果不开HiDPI，由于MacOS系统的特性，导致字体看着会有锯齿）</p>
+<p>😳帮一个群友给他的电视盒子换国内源，硬件是电视盒子系统是 <code>Debain</code>。最开我以为是他和我上次一样没有找到合适的源地址，然后一顿操作，结果还是不行。在最后搞了2个小时后，重新认真看了一下错误提示，发现原来是本地时间不对<br>
+<img src="https://www.xihrni.com/post-images/1681887197960.png" alt="更新软件包报错" loading="lazy"></p>
 </blockquote>
 <!-- more -->
-<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1675036865524.png" alt="1080P分辨率显示器只能开启2分之1的HiDPI" loading="lazy"></figure>
-<h3 id="betterdisplay">BetterDisplay</h3>
+<h3 id="更新时间">更新时间</h3>
+<p>认真读完错误提示后，发现他意思是文件已经过期了 x 天 x 小时什么的，我一想怎么会过期呢（最开始是以为源太老了），然后查看了一眼系统时间，果然对不上，原来问题出在这，更新时间后，重新换源一切正常~</p>
 <blockquote>
-<p>BetterDisplay 可用于在 MacOS 创建虚拟高分辨率显示器然后以屏幕镜像形式输出到物理低分辨率显示器。软件原名「BetterDummy，自 1.2.6 版本更名」此软件能替代一键 HiDPi 脚本，在 macOS 11.0 及以上版本推荐 2K 及 1080P 屏幕用户使用。</p>
+<p>忘记截图，网上找的<br>
+<img src="https://www.xihrni.com/post-images/1681887477767.png" alt="时间对不上" loading="lazy"></p>
 </blockquote>
-<p>原本使用这个软件可以通过开启一个虚拟屏幕后镜像给物理屏幕达到开启HiDPI的方式，由于MacOS对于4K以下的分辨率进行限制无法开启HiDPI，所以虚拟屏幕自定义分辨率到4K以上进行欺骗系统，但是由于增加了一个虚拟屏幕还是会导致性能的损耗，以及会在不同显示器间出现各式各样的问题，这个方法一直未使用。</p>
-<p>最近更新完系统后又搜了搜开启HiDPI的方法，发现这款软件已经实现直接开启HiDPI，无需自己计算填写分辨率，即可列出所有可选择的HiDPI分辨率进行选择，非常方便。</p>
-<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1675037948740.png" alt="3440*1440分辨率显示器开启所有HiDPI选项" loading="lazy"></figure>
-<p>以上是我34寸显示器，3440×1440原生分辨率设置之后自动开启的HiDPI分辨率选项，测试下来我的目视距离（眼睛到显示器）2560×1080(HiDPI)看起来最舒服。</p>
-<h3 id="软件设置">软件设置</h3>
-<ol>
-<li>下载并打开软件，目前版本为 <code>v1.3.16</code> 👉🏻<a href="https://github.com/waydabber/BetterDisplay">github下载地址</a></li>
-<li>在菜单栏中找到此软件图标，进入设置<br>
-<img src="https://www.xihrni.com/post-images/1675039953960.png" alt="" loading="lazy"></li>
-<li>在需要开启的显示器下方勾选这3项<br>
-<img src="https://www.xihrni.com/post-images/1675040069637.png" alt="" loading="lazy"></li>
-<li>点击应用后重启电脑</li>
-<li>在系统设置-显示器中点击显示所有分辨率已经可以看到全部HiDPI选项了<br>
-<img src="https://www.xihrni.com/post-images/1675040189319.png" alt="" loading="lazy"></li>
-</ol>
-<blockquote>
-<p>参考网址：https://betheme.net/houduan/44667.html</p>
-</blockquote>
+<p>网络通畅的话就用这行命令同步时间</p>
+<pre><code class="language-shell">hwclock -s
+</code></pre>
+<p>不行就手动改一下</p>
+<pre><code class="language-shell">date -s &quot;2023-01-15 23:50:00&quot;
+</code></pre>
+<p>接着更新依赖，成功</p>
+<pre><code class="language-shell">apt update
+</code></pre>
 <p>😬</p>
 
               </div>
@@ -150,8 +156,7 @@
 <ul>
 <li>
 <ul>
-<li><a href="#betterdisplay">BetterDisplay</a></li>
-<li><a href="#%E8%BD%AF%E4%BB%B6%E8%AE%BE%E7%BD%AE">软件设置</a></li>
+<li><a href="#%E6%9B%B4%E6%96%B0%E6%97%B6%E9%97%B4">更新时间</a></li>
 </ul>
 </li>
 </ul>
@@ -166,9 +171,9 @@
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://www.xihrni.com/post/ji-yu-armbian-de-linux-xi-tong-geng-xin-guo-nei-yuan-2/">
+            <a href="https://www.xihrni.com/post/shu-mei-pai-4brk3399-armbian-geng-xin-guo-nei-yuan/">
               <h3 class="post-title">
-                基于 Armbian 的 Linux 系统更新国内源（2
+                RK3399/树莓派基于 Armbian 的 Linux 系统更新国内源
               </h3>
             </a>
           </div>

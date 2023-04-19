@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2023-04-19T03:59:47.682Z</updated>
+    <updated>2023-04-19T07:05:14.021Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
@@ -130,6 +130,40 @@ max_fps: 15 # 最大帧率
 <blockquote>
 <p>参考网址：https://betheme.net/houduan/44667.html</p>
 </blockquote>
+<p>😬</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[基于 Armbian 的 Linux 系统更新国内源（2]]></title>
+        <id>https://www.xihrni.com/post/ji-yu-armbian-de-linux-xi-tong-geng-xin-guo-nei-yuan-2/</id>
+        <link href="https://www.xihrni.com/post/ji-yu-armbian-de-linux-xi-tong-geng-xin-guo-nei-yuan-2/">
+        </link>
+        <updated>2023-01-16T06:41:43.000Z</updated>
+        <summary type="html"><![CDATA[<blockquote>
+<p>😳帮一个群友给他的电视盒子换国内源，硬件是电视盒子系统是 <code>Debain</code>。最开我以为是他和我上次一样没有找到合适的源地址，然后一顿操作，结果还是不行。在最后搞了2个小时后，重新认真看了一下错误提示，发现原来是本地时间不对<br>
+<img src="https://www.xihrni.com/post-images/1681887197960.png" alt="更新软件包报错" loading="lazy"></p>
+</blockquote>
+]]></summary>
+        <content type="html"><![CDATA[<blockquote>
+<p>😳帮一个群友给他的电视盒子换国内源，硬件是电视盒子系统是 <code>Debain</code>。最开我以为是他和我上次一样没有找到合适的源地址，然后一顿操作，结果还是不行。在最后搞了2个小时后，重新认真看了一下错误提示，发现原来是本地时间不对<br>
+<img src="https://www.xihrni.com/post-images/1681887197960.png" alt="更新软件包报错" loading="lazy"></p>
+</blockquote>
+<!-- more -->
+<h3 id="更新时间">更新时间</h3>
+<p>认真读完错误提示后，发现他意思是文件已经过期了 x 天 x 小时什么的，我一想怎么会过期呢（最开始是以为源太老了），然后查看了一眼系统时间，果然对不上，原来问题出在这，更新时间后，重新换源一切正常~</p>
+<blockquote>
+<p>忘记截图，网上找的<br>
+<img src="https://www.xihrni.com/post-images/1681887477767.png" alt="时间对不上" loading="lazy"></p>
+</blockquote>
+<p>网络通畅的话就用这行命令同步时间</p>
+<pre><code class="language-shell">hwclock -s
+</code></pre>
+<p>不行就手动改一下</p>
+<pre><code class="language-shell">date -s &quot;2023-01-15 23:50:00&quot;
+</code></pre>
+<p>接着更新依赖，成功</p>
+<pre><code class="language-shell">apt update
+</code></pre>
 <p>😬</p>
 ]]></content>
     </entry>
@@ -614,115 +648,6 @@ if ($data['variables']) {
     // 验证返回
     // ...
 }
-</code></pre>
-<p>😬</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Yii2 自定义组件配置 PhpStorm 编辑器代码提示]]></title>
-        <id>https://www.xihrni.com/post/yii2-zi-ding-yi-zu-jian-pei-zhi-phpstorm-bian-ji-qi-dai-ma-ti-shi/</id>
-        <link href="https://www.xihrni.com/post/yii2-zi-ding-yi-zu-jian-pei-zhi-phpstorm-bian-ji-qi-dai-ma-ti-shi/">
-        </link>
-        <updated>2020-06-05T01:34:03.000Z</updated>
-        <summary type="html"><![CDATA[<h3 id="自定义组件配置">😳自定义组件配置</h3>
-<p>在 <code>web.php</code> 的组件配置中添加了一个自定义用户组件</p>
-]]></summary>
-        <content type="html"><![CDATA[<h3 id="自定义组件配置">😳自定义组件配置</h3>
-<p>在 <code>web.php</code> 的组件配置中添加了一个自定义用户组件</p>
-<!-- more -->
-<pre><code class="language-php">&lt;?php
-
-$config = [
-    ...
-    'components' =&gt; [
-        ...
-        'admin' =&gt; [
-            'class' =&gt; 'yii\web\User',
-            'identityClass' =&gt; 'app\models\Admin',
-            'enableAutoLogin' =&gt; true,
-            'enableSession' =&gt; false,
-            'loginUrl' =&gt; null,
-        ],
-        ...
-    ],
-    ...
-]
-
-...
-
-return $config;
-</code></pre>
-<p>当在使用的时候 PhpStorm 编辑器则会提示“Property accessed via magic method”信息，并且无法关联类也无法进行自动提示代码补全</p>
-<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1591321895158.png" alt="提示“Property accessed via magic method”信息" loading="lazy"></figure>
-<h3 id="创建声明类文件">创建声明类文件</h3>
-<p>给 IDE 一些提示的最好方法是使用自己的 Yii 文件，运行代码时它实际上并不使用。这个文件可以命名为 <code>Yii.php</code> ，在项目根目录创建。其内容如下：</p>
-<pre><code class="language-php">&lt;?php
-
-use app\models\Admin;
-
-/**
- * Yii bootstrap file.
- * Used for enhanced IDE code autocompletion.
- */
-class Yii extends \yii\BaseYii
-{
-    /**
-     * @var BaseApplication|WebApplication|ConsoleApplication the application instance
-     */
-    public static $app;
-}
-
-/**
- * Class BaseApplication
- * Used for properties that are identical for both WebApplication and ConsoleApplication
- *
-// * @property \app\components\RbacManager $authManager The auth manager for this application. Null is returned if auth manager is not configured. This property is read-only. Extended component.
-// * @property \app\components\Mailer $mailer The mailer component. This property is read-only. Extended component.
- */
-abstract class BaseApplication extends yii\base\Application
-{
-}
-
-/**
- * Class WebApplication
- * Include only Web application related components here
- *
- * @property Admin $admin The user component. This property is read-only. Extended component.
-// * @property \app\components\User $user The user component. This property is read-only. Extended component.
-// * @property \app\components\MyResponse $response The response component. This property is read-only. Extended component.
-// * @property \app\components\ErrorHandler $errorHandler The error handler application component. This property is read-only. Extended component.
- */
-class WebApplication extends yii\web\Application
-{
-}
-
-/**
- * Class ConsoleApplication
- * Include only Console application related components here
- *
-// * @property \app\components\ConsoleUser $user The user component. This property is read-only. Extended component.
- */
-class ConsoleApplication extends yii\console\Application
-{
-}
-</code></pre>
-<blockquote>
-<p><code>BaseApplication</code> 表示包含所有环境下的 Yii 类<br>
-<code>WebApplication</code> 表示 Web 环境下的 Yii 类<br>
-<code>ConsoleApplication</code> 表示 Cli 环境下的 Yii 类</p>
-</blockquote>
-<p>由于已经有一个 Yii 的类了，所以 PhpStorm 编辑器会提示“Multiple Implementations”，我们需要将 <code>vendor/yiisoft/yii2/Yii.php</code> 文件标记为纯文本</p>
-<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1591322367077.png" alt="将  文件标记为纯文本" loading="lazy"></figure>
-<p>可以看到我们在给每个对应的类添加了 @property 文档注释，之后再去实际业务代码中会发现已经不会提示“Property accessed via magic method”信息了并且能像正常的类关联和自动提示代码补全</p>
-<figure data-type="image" tabindex="3"><img src="https://www.xihrni.com/post-images/1591322835443.png" alt="正常的类关联和自动提示代码补全" loading="lazy"></figure>
-<h3 id="忽略版本控制">忽略版本控制</h3>
-<p>可以将自定义的 <code>Yii.php</code> 加入到 <code>.gitignore</code> 忽略文件中提交到代码版本进行推送到线上协作，也可以加入到本地全局忽略文件不进行提交</p>
-<blockquote>
-<p>如果已有全局忽略文件则直接在文件中追加 <code>/Yii.php</code> 字符串即可</p>
-</blockquote>
-<pre><code class="language-shell">&gt; git config --global core.excludesfile ~/.gitignore_global
-# 如果没有 `.gitignore_global` 文件则进行创建
-&gt; echo '/Yii.php' &gt; .gitignore_global
 </code></pre>
 <p>😬</p>
 ]]></content>
