@@ -1,0 +1,274 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RK3399/树莓派基于 Armbian 的 Linux 系统更新国内源 | 我的世界</title>
+<link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1681876778624">
+<!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet"> -->
+<link href="https://www.xihrni.com/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="RK3399/树莓派基于 Armbian 的 Linux 系统更新国内源 | 我的世界 - Atom Feed"
+  href="https://www.xihrni.com/atom.xml">
+<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700"> -->
+
+
+    <meta name="description" content="
+😳收了块RK3399（六核）的机器，听说比树莓派4B（四核）还强，用来给机器做上位机，提前让卖家刷好Linux系统，拿到手发现是 Ubuntu 20.04.6 LTS (Focal Fossa) ，登录机器上去无法更新软件包，轻车熟路的..." />
+    <meta name="keywords" content="armbian,ubuntu,国内源,rk3399,树莓派,香橙派,linux" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css"> -->
+    <link rel="stylesheet" href="https://www.xihrni.com/katex.min.css">
+    <!-- <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script> -->
+    <script src="https://www.xihrni.com/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://www.xihrni.com">
+  <img class="avatar" src="https://www.xihrni.com/images/avatar.png?v=1681876778624" alt="">
+  </a>
+  <h1 class="site-title">
+    我的世界
+  </h1>
+  <p class="site-description">
+    君子和而不同。穷则独善其身，达则兼济天下。
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/xihrni" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              RK3399/树莓派基于 Armbian 的 Linux 系统更新国内源
+            </h2>
+            <div class="post-info">
+              <span>
+                2022-10-20
+              </span>
+              <span>
+                3 min read
+              </span>
+              
+                <a href="https://www.xihrni.com/tag/armbian/" class="post-tag">
+                  # armbian
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/ubuntu/" class="post-tag">
+                  # ubuntu
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/guo-nei-yuan/" class="post-tag">
+                  # 国内源
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/rk3399/" class="post-tag">
+                  # rk3399
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/shu-mei-pai/" class="post-tag">
+                  # 树莓派
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/xiang-cheng-pai/" class="post-tag">
+                  # 香橙派
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/linux/" class="post-tag">
+                  # linux
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://www.xihrni.com/post-images/shu-mei-pai-4brk3399-armbian-geng-xin-guo-nei-yuan.png" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <blockquote>
+<p>😳收了块RK3399（六核）的机器，听说比树莓派4B（四核）还强，用来给机器做上位机，提前让卖家刷好Linux系统，拿到手发现是 <code>Ubuntu 20.04.6 LTS (Focal Fossa)</code> ，登录机器上去无法更新软件包，轻车熟路的更改源后再次尝试，结果阿里云、腾讯云、清华云和网易云等源都无法更新，找了个遍发现全网几乎都是一样的方法，最后翻了很久发现原来是这个原因。。。<br>
+<img src="https://www.xihrni.com/post-images/1681875599326.png" alt="Ubuntu 20.04.6 LTS" loading="lazy"></p>
+</blockquote>
+<!-- more -->
+<h3 id="常见方法">常见方法</h3>
+<ol>
+<li>打开配置文件</li>
+</ol>
+<pre><code class="language-shell">sudo nano /etc/apt/sources.list
+</code></pre>
+<ol start="2">
+<li>将现有的源替换为国内的源，例如：</li>
+</ol>
+<pre><code class="language-shell">deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal main restricted universe multiverse
+deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-updates main restricted universe multiverse
+deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-updates main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-backports main restricted universe multiverse
+deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-backports main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted universe multiverse
+deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted universe multiverse
+</code></pre>
+<ol start="3">
+<li>保存文件并退出</li>
+</ol>
+<pre><code class="language-shell">Ctrl + O
+Ctrl + X
+</code></pre>
+<ol start="4">
+<li>更新软件包索引</li>
+</ol>
+<pre><code class="language-shell">sudo apt update
+</code></pre>
+<h3 id="基于-armbian-的-liunx-系统">基于 Armbian 的 Liunx 系统</h3>
+<p>唯一不同的地方就是基于 Armbian 的 Liunx 系统软件包地址和普通的 Linux 系统不一样，这里用阿里云源举例，源替换地址为：</p>
+<pre><code class="language-shell">deb https://mirrors.aliyun.com/ubuntu-ports/ focal main restricted universe multiverse
+deb-src https://mirrors.aliyun.com/ubuntu-ports/ focal main restricted universe multiverse
+
+deb https://mirrors.aliyun.com/ubuntu-ports/ focal-security main restricted universe multiverse
+deb-src https://mirrors.aliyun.com/ubuntu-ports/ focal-security main restricted universe multiverse
+
+deb https://mirrors.aliyun.com/ubuntu-ports/ focal-updates main restricted universe multiverse
+deb-src https://mirrors.aliyun.com/ubuntu-ports/ focal-updates main restricted universe multiverse
+
+deb https://mirrors.aliyun.com/ubuntu-ports/ focal-backports main restricted universe multiverse
+deb-src https://mirrors.aliyun.com/ubuntu-ports/ focal-backports main restricted universe multiverse
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1681876573798.png" alt="阿里云源" loading="lazy"></figure>
+<p>😬注意看就是地址最后面加了个 <code>-ports</code>，之后才顺利更新完成</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E5%B8%B8%E8%A7%81%E6%96%B9%E6%B3%95">常见方法</a></li>
+<li><a href="#%E5%9F%BA%E4%BA%8E-armbian-%E7%9A%84-liunx-%E7%B3%BB%E7%BB%9F">基于 Armbian 的 Liunx 系统</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://www.xihrni.com/post/git-yuan-cheng-ke-long-la-qu-ti-shi-permission-denied-publickey-jie-jue-ji-lu-for-windows-ban-ben/">
+              <h3 class="post-title">
+                Git 远程克隆/拉取提示：&#39;Permission denied (publickey).&#39; 解决记录 for Windows版本
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a class="margin-10-left-right" href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>|<a class="margin-10-left-right" href="https://beian.miit.gov.cn" target="_blank">粤ICP备2021115781号</a>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?5d5eb0906105cf159da64f5d0625e7fa";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+  <a class="rss" href="https://www.xihrni.com/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

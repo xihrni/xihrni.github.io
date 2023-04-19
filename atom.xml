@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2023-03-22T03:18:14.264Z</updated>
+    <updated>2023-04-19T03:59:47.682Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
@@ -131,6 +131,69 @@ max_fps: 15 # 最大帧率
 <p>参考网址：https://betheme.net/houduan/44667.html</p>
 </blockquote>
 <p>😬</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[RK3399/树莓派基于 Armbian 的 Linux 系统更新国内源]]></title>
+        <id>https://www.xihrni.com/post/shu-mei-pai-4brk3399-armbian-geng-xin-guo-nei-yuan/</id>
+        <link href="https://www.xihrni.com/post/shu-mei-pai-4brk3399-armbian-geng-xin-guo-nei-yuan/">
+        </link>
+        <updated>2022-10-20T03:20:33.000Z</updated>
+        <summary type="html"><![CDATA[<blockquote>
+<p>😳收了块RK3399（六核）的机器，听说比树莓派4B（四核）还强，用来给机器做上位机，提前让卖家刷好Linux系统，拿到手发现是 <code>Ubuntu 20.04.6 LTS (Focal Fossa)</code> ，登录机器上去无法更新软件包，轻车熟路的更改源后再次尝试，结果阿里云、腾讯云、清华云和网易云等源都无法更新，找了个遍发现全网几乎都是一样的方法，最后翻了很久发现原来是这个原因。。。<br>
+<img src="https://www.xihrni.com/post-images/1681875599326.png" alt="Ubuntu 20.04.6 LTS" loading="lazy"></p>
+</blockquote>
+]]></summary>
+        <content type="html"><![CDATA[<blockquote>
+<p>😳收了块RK3399（六核）的机器，听说比树莓派4B（四核）还强，用来给机器做上位机，提前让卖家刷好Linux系统，拿到手发现是 <code>Ubuntu 20.04.6 LTS (Focal Fossa)</code> ，登录机器上去无法更新软件包，轻车熟路的更改源后再次尝试，结果阿里云、腾讯云、清华云和网易云等源都无法更新，找了个遍发现全网几乎都是一样的方法，最后翻了很久发现原来是这个原因。。。<br>
+<img src="https://www.xihrni.com/post-images/1681875599326.png" alt="Ubuntu 20.04.6 LTS" loading="lazy"></p>
+</blockquote>
+<!-- more -->
+<h3 id="常见方法">常见方法</h3>
+<ol>
+<li>打开配置文件</li>
+</ol>
+<pre><code class="language-shell">sudo nano /etc/apt/sources.list
+</code></pre>
+<ol start="2">
+<li>将现有的源替换为国内的源，例如：</li>
+</ol>
+<pre><code class="language-shell">deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal main restricted universe multiverse
+deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-updates main restricted universe multiverse
+deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-updates main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-backports main restricted universe multiverse
+deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-backports main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted universe multiverse
+deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted universe multiverse
+</code></pre>
+<ol start="3">
+<li>保存文件并退出</li>
+</ol>
+<pre><code class="language-shell">Ctrl + O
+Ctrl + X
+</code></pre>
+<ol start="4">
+<li>更新软件包索引</li>
+</ol>
+<pre><code class="language-shell">sudo apt update
+</code></pre>
+<h3 id="基于-armbian-的-liunx-系统">基于 Armbian 的 Liunx 系统</h3>
+<p>唯一不同的地方就是基于 Armbian 的 Liunx 系统软件包地址和普通的 Linux 系统不一样，这里用阿里云源举例，源替换地址为：</p>
+<pre><code class="language-shell">deb https://mirrors.aliyun.com/ubuntu-ports/ focal main restricted universe multiverse
+deb-src https://mirrors.aliyun.com/ubuntu-ports/ focal main restricted universe multiverse
+
+deb https://mirrors.aliyun.com/ubuntu-ports/ focal-security main restricted universe multiverse
+deb-src https://mirrors.aliyun.com/ubuntu-ports/ focal-security main restricted universe multiverse
+
+deb https://mirrors.aliyun.com/ubuntu-ports/ focal-updates main restricted universe multiverse
+deb-src https://mirrors.aliyun.com/ubuntu-ports/ focal-updates main restricted universe multiverse
+
+deb https://mirrors.aliyun.com/ubuntu-ports/ focal-backports main restricted universe multiverse
+deb-src https://mirrors.aliyun.com/ubuntu-ports/ focal-backports main restricted universe multiverse
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1681876573798.png" alt="阿里云源" loading="lazy"></figure>
+<p>😬注意看就是地址最后面加了个 <code>-ports</code>，之后才顺利更新完成</p>
 ]]></content>
     </entry>
     <entry>
@@ -660,64 +723,6 @@ class ConsoleApplication extends yii\console\Application
 <pre><code class="language-shell">&gt; git config --global core.excludesfile ~/.gitignore_global
 # 如果没有 `.gitignore_global` 文件则进行创建
 &gt; echo '/Yii.php' &gt; .gitignore_global
-</code></pre>
-<p>😬</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Git 从远程拉取数据时提示：'You have not concluded your merge (MERGE_HEAD exists).' 解决方法]]></title>
-        <id>https://www.xihrni.com/post/git-cong-yuan-cheng-la-qu-shu-ju-shi-ti-shi-you-have-not-concluded-your-merge-merge_head-exists/</id>
-        <link href="https://www.xihrni.com/post/git-cong-yuan-cheng-la-qu-shu-ju-shi-ti-shi-you-have-not-concluded-your-merge-merge_head-exists/">
-        </link>
-        <updated>2020-06-02T03:07:51.000Z</updated>
-        <summary type="html"><![CDATA[<h3 id="当前状态">😳当前状态</h3>
-<p>有些代码未加到忽略文件然后系统运行中被修改之后如果未处理进行拉取，在操作的过程中可能出现了如下状态</p>
-]]></summary>
-        <content type="html"><![CDATA[<h3 id="当前状态">😳当前状态</h3>
-<p>有些代码未加到忽略文件然后系统运行中被修改之后如果未处理进行拉取，在操作的过程中可能出现了如下状态</p>
-<!-- more -->
-<pre><code class="language-shell">&gt; git status
-# On branch develop
-# Your branch and 'origin/develop' have diverged,
-# and have 9 and 7 different commits each, respectively.
-#   (use &quot;git pull&quot; to merge the remote branch into yours)
-#
-# All conflicts fixed but you are still merging.
-#   (use &quot;git commit&quot; to conclude merge)
-#
-# Changes not staged for commit:
-#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
-#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
-#
-#       modified:   config/site_config.php
-#       modified:   sitemap_article.xml
-#       modified:   sitemap_goods.xml
-#       modified:   sitemaps.xml
-#
-no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
-</code></pre>
-<p>这个时候可以先备份修改过的文件，然后重置到修改之前的状态再拉取试试</p>
-<pre><code class="language-shell">&gt; git checkout -- config/site_config.php
-&gt; git checkout -- sitemap_article.xml
-&gt; git checkout -- sitemap_goods.xml
-&gt; git checkout -- sitemap.xml
-&gt; git pull
-</code></pre>
-<p>如果提示以下信息则需要使用强制合并进行操作</p>
-<pre><code class="language-shell">&gt; git pull
-You have not concluded your merge (MERGE_HEAD exists).
-Please, commit your changes before you can merge.
-</code></pre>
-<h3 id="强制合并">强制合并</h3>
-<blockquote>
-<p>强制合并会覆盖本地版本，请先备份相关文件</p>
-</blockquote>
-<pre><code class="language-shell">&gt; git fetch --all
-&gt; git reset --hard origin/master
-&gt; git fetch
-</code></pre>
-<p>再进行拉取则没有问题了</p>
-<pre><code class="language-shell">&gt; git pull
 </code></pre>
 <p>😬</p>
 ]]></content>
