@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2023-04-19T07:42:18.679Z</updated>
+    <updated>2023-04-19T08:15:10.085Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
@@ -255,6 +255,40 @@ deb-src https://mirrors.aliyun.com/ubuntu-ports/ focal-backports main restricted
 ]]></content>
     </entry>
     <entry>
+        <title type="html"><![CDATA[Linux 的 useradd 和 adduser 有什么区别？]]></title>
+        <id>https://www.xihrni.com/post/linux-de-useradd-he-adduser-you-shi-me-qu-bie/</id>
+        <link href="https://www.xihrni.com/post/linux-de-useradd-he-adduser-you-shi-me-qu-bie/">
+        </link>
+        <updated>2022-04-22T08:02:13.000Z</updated>
+        <summary type="html"><![CDATA[<blockquote>
+<p>😳在给新买的香橙派zero安装 <code>klipper</code> 时，打算用普通用户进行安装，由于香橙派是基于 <code>Armbian</code> 的 <code>Linux Debian</code> 发行版，结果发现创建用户时不一样的地方</p>
+</blockquote>
+]]></summary>
+        <content type="html"><![CDATA[<blockquote>
+<p>😳在给新买的香橙派zero安装 <code>klipper</code> 时，打算用普通用户进行安装，由于香橙派是基于 <code>Armbian</code> 的 <code>Linux Debian</code> 发行版，结果发现创建用户时不一样的地方</p>
+</blockquote>
+<!-- more -->
+<h3 id="useradd">useradd</h3>
+<ul>
+<li><code>useradd</code> 是一个标准的 <code>Linux</code> 命令，在大多数 Linux 发行版中都可用</li>
+<li><code>useradd</code> 是一个命令行工具，需要使用各种选项和参数来配置新用户的设置</li>
+<li><code>useradd</code> 使用的是默认设置，并不会提示用户输入任何信息</li>
+</ul>
+<h3 id="adduser">adduser</h3>
+<ul>
+<li><code>adduser</code> 是一个 <code>Debian</code> 及其衍生版中的命令，在其他发行版中可能不可用</li>
+<li><code>adduser</code> 是一个图形界面工具，可以通过提示用户输入所需信息来配置新用户的设置</li>
+<li><code>adduser</code> 可以提示用户输入新用户的详细信息，如用户名、密码、家目录等</li>
+</ul>
+<blockquote>
+<p>总的来说，如果需要从命令行创建用户，那么可以使用 useradd。如果需要从图形界面创建用户，那么可以使用 adduser。但是需要注意，在不同的 Linux 发行版中，这两个命令的具体实现可能会有所不同。</p>
+</blockquote>
+<p>本来使用 <code>useradd</code> 创建好了用户，结果发现没有 <code>home</code> 下的用户家目录，最后用 <code>adduser</code> 命令创建则可以</p>
+<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1681891961039.png" alt="adduser" loading="lazy"></figure>
+<p>😁</p>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[新电脑被植入 Lockbit 勒索病毒记录]]></title>
         <id>https://www.xihrni.com/post/xin-dian-nao-bei-zhi-ru-lockbit-le-suo-bing-du-ji-lu/</id>
         <link href="https://www.xihrni.com/post/xin-dian-nao-bei-zhi-ru-lockbit-le-suo-bing-du-ji-lu/">
@@ -452,200 +486,6 @@ Host gitee.com
 </code></pre>
 <p>挂载分区</p>
 <pre><code class="language-shell">&gt; mount /dev/vdc1 /mnt
-</code></pre>
-<p>😬</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[MySQL 条件批量更新与插入（PHP实现）]]></title>
-        <id>https://www.xihrni.com/post/mysql-tiao-jian-pi-liang-geng-xin-yu-cha-ru-php-shi-xian/</id>
-        <link href="https://www.xihrni.com/post/mysql-tiao-jian-pi-liang-geng-xin-yu-cha-ru-php-shi-xian/">
-        </link>
-        <updated>2020-06-17T01:54:38.000Z</updated>
-        <summary type="html"><![CDATA[<blockquote>
-<p>😳有个接口需要同时修改关联数据，但是传过来的关联数据包含原本的数据（更新）和新的数据（插入），为了区分则让前端将原来的数据必须传ID，看看如何在一个接口中实现更新和插入操作</p>
-</blockquote>
-]]></summary>
-        <content type="html"><![CDATA[<blockquote>
-<p>😳有个接口需要同时修改关联数据，但是传过来的关联数据包含原本的数据（更新）和新的数据（插入），为了区分则让前端将原来的数据必须传ID，看看如何在一个接口中实现更新和插入操作</p>
-</blockquote>
-<!-- more -->
-<h3 id="接口需求">接口需求</h3>
-<p>请求地址</p>
-<pre><code class="language-text">POST {{domain}}/v1/user/api-envs/:id
-</code></pre>
-<p>请求数据</p>
-<pre><code class="language-json">{
-	&quot;title&quot;: &quot;环境变量组1&quot;,
-	&quot;variables&quot;: [
-		{
-			&quot;id&quot;: 1,
-			&quot;name&quot;: &quot;admin_token1&quot;,
-			&quot;value&quot;: &quot;123456&quot;
-		},
-		{
-			&quot;name&quot;: &quot;user_token&quot;,
-			&quot;value&quot;: &quot;456789&quot;
-		},
-		{
-			&quot;id&quot;: 2,
-			&quot;name&quot;: &quot;admin_token2&quot;,
-			&quot;value&quot;: &quot;1234567&quot;
-		},
-		{
-			&quot;id&quot;: 4,
-			&quot;name&quot;: &quot;admin_token4&quot;,
-			&quot;value&quot;: &quot;1234568&quot;
-		},
-		{
-			&quot;name&quot;: &quot;user_token2&quot;,
-			&quot;value&quot;: &quot;4567890&quot;
-		}
-	]
-}
-</code></pre>
-<p>数据库表结构<br>
-<code>api_env</code> 环境</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">名称</th>
-<th style="text-align:left">类型</th>
-<th style="text-align:right">备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">id</td>
-<td style="text-align:left">int(11) unsigned</td>
-<td style="text-align:right">ID</td>
-</tr>
-<tr>
-<td style="text-align:left">title</td>
-<td style="text-align:left">varchar(32)</td>
-<td style="text-align:right">标题</td>
-</tr>
-<tr>
-<td style="text-align:left">created_at</td>
-<td style="text-align:left">timestamp</td>
-<td style="text-align:right">创建时间</td>
-</tr>
-</tbody>
-</table>
-<p><code>api_env_variable</code> 环境变量</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">名称</th>
-<th style="text-align:left">类型</th>
-<th style="text-align:right">备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">id</td>
-<td style="text-align:left">int(11) unsigned</td>
-<td style="text-align:right">ID</td>
-</tr>
-<tr>
-<td style="text-align:left">env_id</td>
-<td style="text-align:left">int(11) unsigned</td>
-<td style="text-align:right">环境ID</td>
-</tr>
-<tr>
-<td style="text-align:left">name</td>
-<td style="text-align:left">varchar(32)</td>
-<td style="text-align:right">名称</td>
-</tr>
-<tr>
-<td style="text-align:left">value</td>
-<td style="text-align:left">varchar(255)</td>
-<td style="text-align:right">值</td>
-</tr>
-<tr>
-<td style="text-align:left">created_at</td>
-<td style="text-align:left">timestamp</td>
-<td style="text-align:right">创建时间</td>
-</tr>
-</tbody>
-</table>
-<h3 id="mysql-条件批量更新语句">MySQL 条件批量更新语句</h3>
-<pre><code class="language-sql">UPDATE `api_env_variable`
-SET `name` = CASE `id`
-    WHEN 1 THEN 'admin_token1' 
-    WHEN 2 THEN 'admin_token2'
-    WHEN 4 THEN 'admin_token4'
-END
-WHERE `id` IN (1,2,4)
-</code></pre>
-<p>后面的条件 <code>id</code> 用于提升效率，还可加 <code>AND</code> 条件筛选</p>
-<h3 id="php-实现">PHP 实现</h3>
-<p>使用 Yii2 框架进行示例：</p>
-<pre><code class="language-php">$data = Yii::$app-&gt;request-&gt;post();
-
-// 更新环境数据
-// ... 
-
-// 更新和插入环境变量数据
-if ($data['variables']) {
-    $updateData = []; // 需要更新的数据
-    $insertData = []; // 需要插入的数据
-    foreach ($data['variables'] as $v) {
-        // 过滤数据
-        if ($v['name'] &amp;&amp; $v['value']) {
-            // 判断是插入还是更新
-            $v['id'] ? $updateData[] = $v : $insertData[] = $v;
-        }
-    }
-
-    // 开启事务
-    $result = Yii::$app-&gt;db-&gt;transaction(function ($e) use ($id, $updateData, $insertData) {
-        $table = ApiEnvVariable::tableName();
-
-        // 更新
-        if ($updateData) {
-            $ids = $name = $value = '';
-            foreach ($updateData as $v) {
-                $ids   .= $v['id'] . ',';
-                $name  .= &quot; WHEN ${v['id']} THEN '${v['name']}'&quot;;
-                $value .= &quot; WHEN ${v['id']} THEN '${v['value']}'&quot;;
-            }
-
-            $ids = rtrim($ids, ',');
-            $sql = &quot;UPDATE ${table} SET name = CASE id ${name} END, value = CASE id ${value} END WHERE id IN (${ids}) AND is_trash = 0&quot;;
-
-            try {
-                $result = Yii::$app-&gt;db-&gt;createCommand($sql)-&gt;execute();
-                // var_dump($result);
-            } catch (Exception $e) {
-                // var_dump($e-&gt;getMessage());
-                throw new ServerErrorHttpException(Yii::t('app/error', 'Update failed.'));
-                $e-&gt;transaction-&gt;rollBack();
-            }
-        }
-
-        // 插入
-        if ($insertData) {
-            $insertData = array_map(function ($v) use ($id) {
-                return [
-                    'env_id' =&gt; $id,
-                    'name'   =&gt; $v['name'],
-                    'value'  =&gt; $v['value'],
-                ];
-            }, $insertData);
-
-            return Yii::$app-&gt;db-&gt;createCommand()
-                -&gt;batchInsert($table, ['env_id', 'name', 'value'], $insertData)
-                -&gt;execute();
-        }
-
-        // $e-&gt;transaction-&gt;commit(); // 无错误或异常执行完自动提交事务
-        return true;
-    });
-
-    // 验证返回
-    // ...
-}
 </code></pre>
 <p>😬</p>
 ]]></content>

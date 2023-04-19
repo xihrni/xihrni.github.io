@@ -2,25 +2,24 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>CentOS 安装 Composer 并配置环境 | 我的世界</title>
+<title>Linux 的 useradd 和 adduser 有什么区别？ | 我的世界</title>
 <link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1681892099114">
 <!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet"> -->
 <link href="https://www.xihrni.com/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="CentOS 安装 Composer 并配置环境 | 我的世界 - Atom Feed"
+<link rel="alternate" type="application/atom+xml" title="Linux 的 useradd 和 adduser 有什么区别？ | 我的世界 - Atom Feed"
   href="https://www.xihrni.com/atom.xml">
 <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700"> -->
 
 
-    <meta name="description" content="😳PHP CLI
-首先检测 PHP CLI 版本，输入命令
+    <meta name="description" content="
+😳在给新买的香橙派zero安装 klipper 时，打算用普通用户进行安装，由于香橙派是基于 Armbian 的 Linux Debian 发行版，结果发现创建用户时不一样的地方
 
-&gt; php -v
-PHP 5.2.3 (cli) ...
 
-需要更换 PHP CLI 版本，使用 BT 面板中 7.2 的版本，设置一个别名
-&gt; vi ~/.bas..." />
-    <meta name="keywords" content="composer,php包管理工具,centos" />
+useradd
+
+useradd 是一个标准的 Li..." />
+    <meta name="keywords" content="香橙派,linux" />
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css"> -->
     <link rel="stylesheet" href="https://www.xihrni.com/katex.min.css">
     <!-- <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script> -->
@@ -88,95 +87,52 @@ PHP 5.2.3 (cli) ...
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              CentOS 安装 Composer 并配置环境
+              Linux 的 useradd 和 adduser 有什么区别？
             </h2>
             <div class="post-info">
               <span>
-                2019-07-23
+                2022-04-22
               </span>
               <span>
                 2 min read
               </span>
               
-                <a href="https://www.xihrni.com/tag/composer/" class="post-tag">
-                  # composer
+                <a href="https://www.xihrni.com/tag/xiang-cheng-pai/" class="post-tag">
+                  # 香橙派
                 </a>
               
-                <a href="https://www.xihrni.com/tag/php-bao-guan-li-gong-ju/" class="post-tag">
-                  # php包管理工具
-                </a>
-              
-                <a href="https://www.xihrni.com/tag/centos/" class="post-tag">
-                  # centos
+                <a href="https://www.xihrni.com/tag/linux/" class="post-tag">
+                  # linux
                 </a>
               
             </div>
             
-              <img class="post-feature-image" src="https://www.xihrni.com/post-images/centos-an-zhuang-composer-bing-pei-zhi-huan-jing.png" alt="">
+              <img class="post-feature-image" src="https://www.xihrni.com/post-images/linux-de-useradd-he-adduser-you-shi-me-qu-bie.png" alt="">
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <h3 id="php-cli">😳PHP CLI</h3>
-<p>首先检测 PHP CLI 版本，输入命令</p>
-<!-- more -->
-<pre><code class="language-shell">&gt; php -v
-PHP 5.2.3 (cli) ...
-</code></pre>
-<p>需要更换 PHP CLI 版本，使用 BT 面板中 <code>7.2</code> 的版本，设置一个别名</p>
-<pre><code class="language-shell">&gt; vi ~/.bashrc
-</code></pre>
-<p>输入 <code>i</code> 进入编辑模式，新增一行</p>
-<pre><code class="language-shell">alias php='/www/server/php/72/bin/php'
-</code></pre>
-<p>输入 <code>:wq</code> 保存并退出</p>
-<p>再次执行 <code>php -v</code> 查看版本，输出</p>
-<pre><code class="language-shell">PHP 7.2.4 (cli) (built: Nov 12 2018 10:47:44) ( NTS )
-Copyright (c) 1997-2018 The PHP Group
-Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
-</code></pre>
-<p>看到已经是 <code>7.2.4</code> 的版本</p>
-<h3 id="composer">Composer</h3>
-<p>使用 PHP 下载安装文件</p>
-<pre><code class="language-shell">&gt; php -r &quot;copy('https://getcomposer.org/installer', 'composer-setup.php');&quot;
-</code></pre>
-<p>验证文件是否正确</p>
-<pre><code class="language-shell">&gt; php -r &quot;if (hash_file('sha384', 'composer-setup.php') === '48e3236262b34d30969dca3c37281b3b4bbe3221bda826ac6a9a62d6444cdb0dcd0615698a5cbe587c3f0fe57a54d8f5') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;&quot;
-</code></pre>
-<p>输出 <code>Installer verified</code> 则为正确，执行安装文件</p>
-<pre><code class="language-shell">&gt; php composer-setup.php
-</code></pre>
-<p>接着删除安装文件</p>
-<pre><code class="language-shell">&gt; php -r &quot;unlink('composer-setup.php');&quot;
-</code></pre>
-<p>移动到全局</p>
-<pre><code class="language-shell">&gt; mv composer.phar /usr/local/bin/composer
-</code></pre>
-<p>中国镜像</p>
-<pre><code class="language-shell">&gt; composer config -g repo.packagist composer https://packagist.phpcomposer.com
-# 或使用阿里云镜像
-&gt; composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
-</code></pre>
-<h3 id="composer-命令">Composer 命令</h3>
-<p>安装/更新项目依赖</p>
-<pre><code class="language-shell">&gt; cd '你的项目地址'
-&gt; composer install
-# 或
-&gt; composer update
-</code></pre>
-<p>如果报错</p>
-<pre><code class="language-shell">&gt; Unsupported declare 'strict_types' ...
-</code></pre>
-<p>PHP版本错误，原因是因为直接使用 composer 命令应该调用到了老版本的 PHP CLI，添加一个别名即可</p>
-<pre><code class="language-shell">&gt; vi ~/.bashrc
-</code></pre>
-<p>输入 <code>i</code> 进入编辑模式，新增一行</p>
-<pre><code class="language-shell">&gt; alias composer='php /usr/local/bin/composer'
-</code></pre>
-<p>输入 <code>:wq</code> 保存并退出</p>
-<blockquote>
-<p>重新登录 SSH 即可生效 <code>.bashrc</code> 文件<br>
-😬</p>
+                <blockquote>
+<p>😳在给新买的香橙派zero安装 <code>klipper</code> 时，打算用普通用户进行安装，由于香橙派是基于 <code>Armbian</code> 的 <code>Linux Debian</code> 发行版，结果发现创建用户时不一样的地方</p>
 </blockquote>
+<!-- more -->
+<h3 id="useradd">useradd</h3>
+<ul>
+<li><code>useradd</code> 是一个标准的 <code>Linux</code> 命令，在大多数 Linux 发行版中都可用</li>
+<li><code>useradd</code> 是一个命令行工具，需要使用各种选项和参数来配置新用户的设置</li>
+<li><code>useradd</code> 使用的是默认设置，并不会提示用户输入任何信息</li>
+</ul>
+<h3 id="adduser">adduser</h3>
+<ul>
+<li><code>adduser</code> 是一个 <code>Debian</code> 及其衍生版中的命令，在其他发行版中可能不可用</li>
+<li><code>adduser</code> 是一个图形界面工具，可以通过提示用户输入所需信息来配置新用户的设置</li>
+<li><code>adduser</code> 可以提示用户输入新用户的详细信息，如用户名、密码、家目录等</li>
+</ul>
+<blockquote>
+<p>总的来说，如果需要从命令行创建用户，那么可以使用 useradd。如果需要从图形界面创建用户，那么可以使用 adduser。但是需要注意，在不同的 Linux 发行版中，这两个命令的具体实现可能会有所不同。</p>
+</blockquote>
+<p>本来使用 <code>useradd</code> 创建好了用户，结果发现没有 <code>home</code> 下的用户家目录，最后用 <code>adduser</code> 命令创建则可以</p>
+<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1681891961039.png" alt="adduser" loading="lazy"></figure>
+<p>😁</p>
 
               </div>
               <div class="toc-container">
@@ -185,9 +141,8 @@ Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
 <ul>
 <li>
 <ul>
-<li><a href="#php-cli">😳PHP CLI</a></li>
-<li><a href="#composer">Composer</a></li>
-<li><a href="#composer-%E5%91%BD%E4%BB%A4">Composer 命令</a></li>
+<li><a href="#useradd">useradd</a></li>
+<li><a href="#adduser">adduser</a></li>
 </ul>
 </li>
 </ul>
@@ -202,9 +157,9 @@ Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://www.xihrni.com/post/yii2-jiang-csv-wen-jian-dao-ru-dao-shu-ju-ku/">
+            <a href="https://www.xihrni.com/post/xin-dian-nao-bei-zhi-ru-lockbit-le-suo-bing-du-ji-lu/">
               <h3 class="post-title">
-                Yii2 将 CSV 文件导入到数据库
+                新电脑被植入 Lockbit 勒索病毒记录
               </h3>
             </a>
           </div>
