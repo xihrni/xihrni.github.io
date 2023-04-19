@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.xihrni.com</id>
     <title>我的世界</title>
-    <updated>2023-04-19T08:15:10.085Z</updated>
+    <updated>2023-04-19T08:22:49.197Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.xihrni.com"/>
     <link rel="self" href="https://www.xihrni.com/atom.xml"/>
@@ -255,7 +255,7 @@ deb-src https://mirrors.aliyun.com/ubuntu-ports/ focal-backports main restricted
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Linux 的 useradd 和 adduser 有什么区别？]]></title>
+        <title type="html"><![CDATA[Linux 的 useradd 和 adduser 命令有什么区别？]]></title>
         <id>https://www.xihrni.com/post/linux-de-useradd-he-adduser-you-shi-me-qu-bie/</id>
         <link href="https://www.xihrni.com/post/linux-de-useradd-he-adduser-you-shi-me-qu-bie/">
         </link>
@@ -268,22 +268,22 @@ deb-src https://mirrors.aliyun.com/ubuntu-ports/ focal-backports main restricted
 <p>😳在给新买的香橙派zero安装 <code>klipper</code> 时，打算用普通用户进行安装，由于香橙派是基于 <code>Armbian</code> 的 <code>Linux Debian</code> 发行版，结果发现创建用户时不一样的地方</p>
 </blockquote>
 <!-- more -->
-<h3 id="useradd">useradd</h3>
+<h3 id="useradd-命令">useradd 命令</h3>
 <ul>
 <li><code>useradd</code> 是一个标准的 <code>Linux</code> 命令，在大多数 Linux 发行版中都可用</li>
 <li><code>useradd</code> 是一个命令行工具，需要使用各种选项和参数来配置新用户的设置</li>
 <li><code>useradd</code> 使用的是默认设置，并不会提示用户输入任何信息</li>
 </ul>
-<h3 id="adduser">adduser</h3>
+<h3 id="adduser-命令">adduser 命令</h3>
 <ul>
 <li><code>adduser</code> 是一个 <code>Debian</code> 及其衍生版中的命令，在其他发行版中可能不可用</li>
 <li><code>adduser</code> 是一个图形界面工具，可以通过提示用户输入所需信息来配置新用户的设置</li>
 <li><code>adduser</code> 可以提示用户输入新用户的详细信息，如用户名、密码、家目录等</li>
 </ul>
 <blockquote>
-<p>总的来说，如果需要从命令行创建用户，那么可以使用 useradd。如果需要从图形界面创建用户，那么可以使用 adduser。但是需要注意，在不同的 Linux 发行版中，这两个命令的具体实现可能会有所不同。</p>
+<p>总的来说，如果需要从命令行创建用户，那么可以使用 <code>useradd</code> 命令。如果需要从图形界面创建用户，那么可以使用 <code>adduser</code> 命令。但是需要注意，在不同的 <code>Linux</code> 发行版中，这两个命令的具体实现可能会有所不同。</p>
 </blockquote>
-<p>本来使用 <code>useradd</code> 创建好了用户，结果发现没有 <code>home</code> 下的用户家目录，最后用 <code>adduser</code> 命令创建则可以</p>
+<p>在本次安装过程中，首先使用 <code>useradd</code> 创建了用户，但是发现没有用户家目录（<code>/home/user</code>），最终使用 <code>adduser</code> 命令创建后，包含了用户家目录</p>
 <figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1681891961039.png" alt="adduser" loading="lazy"></figure>
 <p>😁</p>
 ]]></content>

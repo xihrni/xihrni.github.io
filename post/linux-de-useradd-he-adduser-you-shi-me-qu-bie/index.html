@@ -2,12 +2,12 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Linux 的 useradd 和 adduser 有什么区别？ | 我的世界</title>
-<link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1681892099114">
+<title>Linux 的 useradd 和 adduser 命令有什么区别？ | 我的世界</title>
+<link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1681892567158">
 <!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet"> -->
 <link href="https://www.xihrni.com/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="Linux 的 useradd 和 adduser 有什么区别？ | 我的世界 - Atom Feed"
+<link rel="alternate" type="application/atom+xml" title="Linux 的 useradd 和 adduser 命令有什么区别？ | 我的世界 - Atom Feed"
   href="https://www.xihrni.com/atom.xml">
 <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700"> -->
 
@@ -16,10 +16,10 @@
 😳在给新买的香橙派zero安装 klipper 时，打算用普通用户进行安装，由于香橙派是基于 Armbian 的 Linux Debian 发行版，结果发现创建用户时不一样的地方
 
 
-useradd
+useradd 命令
 
-useradd 是一个标准的 Li..." />
-    <meta name="keywords" content="香橙派,linux" />
+useradd 是一个标准的..." />
+    <meta name="keywords" content="香橙派,Klipper,linux" />
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css"> -->
     <link rel="stylesheet" href="https://www.xihrni.com/katex.min.css">
     <!-- <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script> -->
@@ -30,7 +30,7 @@ useradd 是一个标准的 Li..." />
       <div class="main-content">
         <div class="site-header">
   <a href="https://www.xihrni.com">
-  <img class="avatar" src="https://www.xihrni.com/images/avatar.png?v=1681892099114" alt="">
+  <img class="avatar" src="https://www.xihrni.com/images/avatar.png?v=1681892567158" alt="">
   </a>
   <h1 class="site-title">
     我的世界
@@ -87,7 +87,7 @@ useradd 是一个标准的 Li..." />
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              Linux 的 useradd 和 adduser 有什么区别？
+              Linux 的 useradd 和 adduser 命令有什么区别？
             </h2>
             <div class="post-info">
               <span>
@@ -99,6 +99,10 @@ useradd 是一个标准的 Li..." />
               
                 <a href="https://www.xihrni.com/tag/xiang-cheng-pai/" class="post-tag">
                   # 香橙派
+                </a>
+              
+                <a href="https://www.xihrni.com/tag/klipper/" class="post-tag">
+                  # Klipper
                 </a>
               
                 <a href="https://www.xihrni.com/tag/linux/" class="post-tag">
@@ -115,22 +119,22 @@ useradd 是一个标准的 Li..." />
 <p>😳在给新买的香橙派zero安装 <code>klipper</code> 时，打算用普通用户进行安装，由于香橙派是基于 <code>Armbian</code> 的 <code>Linux Debian</code> 发行版，结果发现创建用户时不一样的地方</p>
 </blockquote>
 <!-- more -->
-<h3 id="useradd">useradd</h3>
+<h3 id="useradd-命令">useradd 命令</h3>
 <ul>
 <li><code>useradd</code> 是一个标准的 <code>Linux</code> 命令，在大多数 Linux 发行版中都可用</li>
 <li><code>useradd</code> 是一个命令行工具，需要使用各种选项和参数来配置新用户的设置</li>
 <li><code>useradd</code> 使用的是默认设置，并不会提示用户输入任何信息</li>
 </ul>
-<h3 id="adduser">adduser</h3>
+<h3 id="adduser-命令">adduser 命令</h3>
 <ul>
 <li><code>adduser</code> 是一个 <code>Debian</code> 及其衍生版中的命令，在其他发行版中可能不可用</li>
 <li><code>adduser</code> 是一个图形界面工具，可以通过提示用户输入所需信息来配置新用户的设置</li>
 <li><code>adduser</code> 可以提示用户输入新用户的详细信息，如用户名、密码、家目录等</li>
 </ul>
 <blockquote>
-<p>总的来说，如果需要从命令行创建用户，那么可以使用 useradd。如果需要从图形界面创建用户，那么可以使用 adduser。但是需要注意，在不同的 Linux 发行版中，这两个命令的具体实现可能会有所不同。</p>
+<p>总的来说，如果需要从命令行创建用户，那么可以使用 <code>useradd</code> 命令。如果需要从图形界面创建用户，那么可以使用 <code>adduser</code> 命令。但是需要注意，在不同的 <code>Linux</code> 发行版中，这两个命令的具体实现可能会有所不同。</p>
 </blockquote>
-<p>本来使用 <code>useradd</code> 创建好了用户，结果发现没有 <code>home</code> 下的用户家目录，最后用 <code>adduser</code> 命令创建则可以</p>
+<p>在本次安装过程中，首先使用 <code>useradd</code> 创建了用户，但是发现没有用户家目录（<code>/home/user</code>），最终使用 <code>adduser</code> 命令创建后，包含了用户家目录</p>
 <figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1681891961039.png" alt="adduser" loading="lazy"></figure>
 <p>😁</p>
 
@@ -141,8 +145,8 @@ useradd 是一个标准的 Li..." />
 <ul>
 <li>
 <ul>
-<li><a href="#useradd">useradd</a></li>
-<li><a href="#adduser">adduser</a></li>
+<li><a href="#useradd-%E5%91%BD%E4%BB%A4">useradd 命令</a></li>
+<li><a href="#adduser-%E5%91%BD%E4%BB%A4">adduser 命令</a></li>
 </ul>
 </li>
 </ul>
