@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://www.xihrni.com</id>
-    <title>我的世界</title>
-    <updated>2023-10-11T02:45:23.869Z</updated>
+    <id>https://www.peoai.cn</id>
+    <title>小菠萝个人技术分享</title>
+    <updated>2023-11-06T03:51:16.699Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://www.xihrni.com"/>
-    <link rel="self" href="https://www.xihrni.com/atom.xml"/>
+    <link rel="alternate" href="https://www.peoai.cn"/>
+    <link rel="self" href="https://www.peoai.cn/atom.xml"/>
     <subtitle>君子和而不同。穷则独善其身，达则兼济天下。</subtitle>
-    <logo>https://www.xihrni.com/images/avatar.png</logo>
-    <icon>https://www.xihrni.com/favicon.ico</icon>
-    <rights>All rights reserved 2023, 我的世界</rights>
+    <logo>https://www.peoai.cn/images/avatar.png</logo>
+    <icon>https://www.peoai.cn/favicon.ico</icon>
+    <rights>All rights reserved 2023, 小菠萝个人技术分享</rights>
     <entry>
         <title type="html"><![CDATA[在 Ubuntu 中同时部署 ChatGPT-Next-Chat（React SSR）、One API（Go）、Antd（Vue） 和 PHP 项目]]></title>
-        <id>https://www.xihrni.com/post/zai-ubuntu-zhong-tong-shi-bu-shu-chatgpt-next-chatone-apiantdv-he-php-xiang-mu/</id>
-        <link href="https://www.xihrni.com/post/zai-ubuntu-zhong-tong-shi-bu-shu-chatgpt-next-chatone-apiantdv-he-php-xiang-mu/">
+        <id>https://www.peoai.cn/post/zai-ubuntu-zhong-tong-shi-bu-shu-chatgpt-next-chatone-apiantdv-he-php-xiang-mu/</id>
+        <link href="https://www.peoai.cn/post/zai-ubuntu-zhong-tong-shi-bu-shu-chatgpt-next-chatone-apiantdv-he-php-xiang-mu/">
         </link>
         <updated>2023-10-09T02:19:46.000Z</updated>
         <summary type="html"><![CDATA[<blockquote>
@@ -100,8 +100,8 @@ go env -w GOPROXY=https://goproxy.io
 <pre><code class="language-shell">wget -O install.sh https://download.bt.cn/install/install-ubuntu_6.0.sh &amp;&amp; sudo bash install.sh ed8484bec
 </code></pre>
 <p>服务器安全组或防火墙需要放行宝塔管理面板端口，具体端口号在安装宝塔完成之后会输出在命令行中<br>
-<img src="https://www.xihrni.com/post-images/1696907912338.png" alt="" loading="lazy"><br>
-<img src="https://www.xihrni.com/post-images/1696907662316.png" alt="" loading="lazy"></p>
+<img src="https://www.peoai.cn/post-images/1696907912338.png" alt="" loading="lazy"><br>
+<img src="https://www.peoai.cn/post-images/1696907662316.png" alt="" loading="lazy"></p>
 <p>由于使用宝塔面板，运行用户是 www，所以需要给此用户也添加 go 模块下载代理<br>
 如果没有 www 用户目录需创建</p>
 <pre><code class="language-shell">mkdir /home/www
@@ -128,13 +128,13 @@ sudo -u www build -ldflags &quot;-s -w&quot; -o one-api
 <pre><code class="language-shell">sudo -u www ./one-api --port 3000 --log-dir ./logs
 </code></pre>
 <p>部署在宝塔中，在 <code>Go项目</code> 中添加<br>
-<img src="https://www.xihrni.com/post-images/1696907109316.png" alt="" loading="lazy"></p>
+<img src="https://www.peoai.cn/post-images/1696907109316.png" alt="" loading="lazy"></p>
 <p>由于需要使用 MySQL，所以修改项目添加了 <code>--sql-dsn</code> 启动命令（不方便添加环境变量）</p>
 <pre><code>./one-api --port 3001 --log-dir ./logs --sql-dsn &quot;oneapi:x7E7e5ipfj44fsak@tcp(localhost:3306)/oneapi&quot;
 </code></pre>
 <h3 id="部署-php-项目">部署 PHP 项目</h3>
 <p>在宝塔 <code>PHP项目</code> 中添加站点<br>
-<img src="https://www.xihrni.com/post-images/1696907305843.png" alt="" loading="lazy"></p>
+<img src="https://www.peoai.cn/post-images/1696907305843.png" alt="" loading="lazy"></p>
 <p>由于使用 YII2 框架，需要变更运行目录和伪静态</p>
 <pre><code># 运行目录改为 /web
 
@@ -157,7 +157,7 @@ npm install
 npm run build
 </code></pre>
 <p>在宝塔 <code>PHP项目</code> 中添加静态站点<br>
-<img src="https://www.xihrni.com/post-images/1696930479570.png" alt="" loading="lazy"></p>
+<img src="https://www.peoai.cn/post-images/1696930479570.png" alt="" loading="lazy"></p>
 <p>上传项目目录下编译好的文件（ <code>dist</code> ）到网站内即可访问，需注意域名路径</p>
 <h3 id="部署-chatgpt-next-web-项目">部署 ChatGPT Next Web 项目</h3>
 <p>下载源码并编译</p>
@@ -172,17 +172,17 @@ sudo -u www yarn build
 <pre><code class="language-shell">sudo -u www yarn start
 </code></pre>
 <p>部署在宝塔中，在 <code>其他项目</code> 中添加<br>
-<img src="https://www.xihrni.com/post-images/1696989737554.png" alt="" loading="lazy"></p>
+<img src="https://www.peoai.cn/post-images/1696989737554.png" alt="" loading="lazy"></p>
 <p>如果出现启动失败，可以在 <code>/www/server/other_project/scripts</code> 目录下找到生成的启动脚本，自己手动执行一下看看报什么错误<br>
-<img src="https://www.xihrni.com/post-images/1696989837853.png" alt="" loading="lazy"><br>
+<img src="https://www.peoai.cn/post-images/1696989837853.png" alt="" loading="lazy"><br>
 比如我这里就提示日志文件没有权限，手动给一下写入权限就能启动了</p>
 <p>😬</p>
 ]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[Klipper使用USB免驱摄像头配置]]></title>
-        <id>https://www.xihrni.com/post/klipper-shi-yong-usb-mian-qu-she-xiang-tou-pei-zhi/</id>
-        <link href="https://www.xihrni.com/post/klipper-shi-yong-usb-mian-qu-she-xiang-tou-pei-zhi/">
+        <id>https://www.peoai.cn/post/klipper-shi-yong-usb-mian-qu-she-xiang-tou-pei-zhi/</id>
+        <link href="https://www.peoai.cn/post/klipper-shi-yong-usb-mian-qu-she-xiang-tou-pei-zhi/">
         </link>
         <updated>2023-01-30T01:13:16.000Z</updated>
         <summary type="html"><![CDATA[<blockquote>
@@ -193,10 +193,10 @@ sudo -u www yarn build
 <p>😳年前在群友的一番 <code>“推荐”</code> 下，在闲鱼收了3个500W像素的USB摄像头，想着可以给我两台机器装上用来监控打印状态（机器放的离电脑桌远）。这样可以不用走过去查看，或者以后代理到公网人在外面时也能偶尔看一眼</p>
 </blockquote>
 <!-- more -->
-<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1677845217842.jpeg" alt="闲鱼摄像头卖家" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://www.peoai.cn/post-images/1677845217842.jpeg" alt="闲鱼摄像头卖家" loading="lazy"></figure>
 <h3 id="mjpg-streamer">MJPG-Streamer</h3>
 <p>原本通过 <code>kiauh</code> 助手安装 <code>MJPG-Streamer</code> 来驱动 <code>Webcam</code> 服务已经不行了，最新版 <code>5.0</code> 之后的<code>kiauh</code> 助手已经禁止安装 <code>MJPG-Streamer</code>，就算此时用老的版本进行安装也会出现无法下载相关依赖而导致的报错，最终安装失败</p>
-<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1677777713553.png" alt=" 助手" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://www.peoai.cn/post-images/1677777713553.png" alt=" 助手" loading="lazy"></figure>
 <h3 id="crowsnest">Crowsnest</h3>
 <blockquote>
 <p>官方介绍：<br>
@@ -220,7 +220,7 @@ sudo make install
 <p>如果编译安装完成后（make install)，你发现下面的配置文件并没有出现请尝试编译配置后再进行安装（请先看完后面的文章没问题再回来执行这段）</p>
 <pre><code class="language-shell">sudo make config
 </code></pre>
-<figure data-type="image" tabindex="3"><img src="https://www.xihrni.com/post-images/1677826440404.png" alt="Crowsnest配置文件" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="https://www.peoai.cn/post-images/1677826440404.png" alt="Crowsnest配置文件" loading="lazy"></figure>
 <h4 id="配置">配置</h4>
 <p>先在 <code>moonraker.conf</code> 配置中添加以下代码实现可以在 <code>Mainsail</code> 或 <code>fluidd</code> 网页端进行控制</p>
 <pre><code class="language-ini">[update_manager crowsnest]
@@ -230,7 +230,7 @@ origin: https://github.com/mainsail-crew/crowsnest.git
 managed_services: crowsnest
 install_script: tools/install.sh
 </code></pre>
-<figure data-type="image" tabindex="4"><img src="https://www.xihrni.com/post-images/1677826678406.png" alt="在  或  网页端进行控制Crowsnest" loading="lazy"></figure>
+<figure data-type="image" tabindex="4"><img src="https://www.peoai.cn/post-images/1677826678406.png" alt="在  或  网页端进行控制Crowsnest" loading="lazy"></figure>
 <p><code>crowsnest.conf</code> 文件默认配置</p>
 <pre><code class="language-ini">[crowsnest]
 log_path: ~/printer_data/logs/crowsnest.log # 日志文件路径
@@ -247,13 +247,13 @@ max_fps: 15 # 最大帧率
 #v4l2ctl: # 添加v4l2-ctl参数来设置您的摄像机，请参阅记录您的摄像机的能力
 </code></pre>
 <p>插上USB摄像头后可以使用 <code>ls /dev/v4l/by-id</code> 查看ID值，或者使用 <code>isusb</code> 查看是否有设备接入</p>
-<figure data-type="image" tabindex="5"><img src="https://www.xihrni.com/post-images/1677829138235.png" alt="issub命令" loading="lazy"></figure>
+<figure data-type="image" tabindex="5"><img src="https://www.peoai.cn/post-images/1677829138235.png" alt="issub命令" loading="lazy"></figure>
 <h4 id="网页端">网页端</h4>
 <p>在 Klipper 网页管理端的系统设置中找到摄像头进行添加</p>
-<figure data-type="image" tabindex="6"><img src="https://www.xihrni.com/post-images/1677829906610.png" alt="摄像头配置" loading="lazy"></figure>
+<figure data-type="image" tabindex="6"><img src="https://www.peoai.cn/post-images/1677829906610.png" alt="摄像头配置" loading="lazy"></figure>
 <p>然后在首页仪表板就能看到这个模块了，摄像头画面加载的会比其它模块慢很多，所以有时候刷新不出来画面多等等<br>
 （请忽略我这个渣渣画质，这10几元的摄像头真不行😰）</p>
-<figure data-type="image" tabindex="7"><img src="https://www.xihrni.com/post-images/1677830089554.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="7"><img src="https://www.peoai.cn/post-images/1677830089554.png" alt="" loading="lazy"></figure>
 <p>其它还有对焦距离、多摄像头、延时拍摄等可以参考以下网址</p>
 <blockquote>
 <p>参考网址：https://github.com/mainsail-crew/crowsnest<br>
@@ -264,8 +264,8 @@ max_fps: 15 # 最大帧率
     </entry>
     <entry>
         <title type="html"><![CDATA[MacOS 13.1（Ventura）外接显示器开启自定义HiDPI]]></title>
-        <id>https://www.xihrni.com/post/macos-131venturawai-jie-xian-shi-qi-kai-qi-zi-ding-yi-hidpi/</id>
-        <link href="https://www.xihrni.com/post/macos-131venturawai-jie-xian-shi-qi-kai-qi-zi-ding-yi-hidpi/">
+        <id>https://www.peoai.cn/post/macos-131venturawai-jie-xian-shi-qi-kai-qi-zi-ding-yi-hidpi/</id>
+        <link href="https://www.peoai.cn/post/macos-131venturawai-jie-xian-shi-qi-kai-qi-zi-ding-yi-hidpi/">
         </link>
         <updated>2023-01-28T11:23:52.000Z</updated>
         <summary type="html"><![CDATA[<blockquote>
@@ -276,25 +276,25 @@ max_fps: 15 # 最大帧率
 <p>😳更新13版本系统之前使用的是 <code>SwitchResX</code> 进行尝试开启HiDPI，但常规也只能强制开启 <code>2/1</code> 的分辨率，这样会导致布局非常紧凑，使用3.5k、2.5k、2k显示器的用户应该非常懂（比如2560×1080原生分辨率，开启 <code>2/1</code> 的HiDPI，布局模拟成了1280×540的分辨率，然后在一个25寸或者29寸的显示器上显示出这么小的布局可想而知有多么难受。但是如果不开HiDPI，由于MacOS系统的特性，导致字体看着会有锯齿）</p>
 </blockquote>
 <!-- more -->
-<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1675036865524.png" alt="1080P分辨率显示器只能开启2分之1的HiDPI" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://www.peoai.cn/post-images/1675036865524.png" alt="1080P分辨率显示器只能开启2分之1的HiDPI" loading="lazy"></figure>
 <h3 id="betterdisplay">BetterDisplay</h3>
 <blockquote>
 <p>BetterDisplay 可用于在 MacOS 创建虚拟高分辨率显示器然后以屏幕镜像形式输出到物理低分辨率显示器。软件原名「BetterDummy，自 1.2.6 版本更名」此软件能替代一键 HiDPi 脚本，在 macOS 11.0 及以上版本推荐 2K 及 1080P 屏幕用户使用。</p>
 </blockquote>
 <p>原本使用这个软件可以通过开启一个虚拟屏幕后镜像给物理屏幕达到开启HiDPI的方式，由于MacOS对于4K以下的分辨率进行限制无法开启HiDPI，所以虚拟屏幕自定义分辨率到4K以上进行欺骗系统，但是由于增加了一个虚拟屏幕还是会导致性能的损耗，以及会在不同显示器间出现各式各样的问题，这个方法一直未使用。</p>
 <p>最近更新完系统后又搜了搜开启HiDPI的方法，发现这款软件已经实现直接开启HiDPI，无需自己计算填写分辨率，即可列出所有可选择的HiDPI分辨率进行选择，非常方便。</p>
-<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1675037948740.png" alt="3440*1440分辨率显示器开启所有HiDPI选项" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://www.peoai.cn/post-images/1675037948740.png" alt="3440*1440分辨率显示器开启所有HiDPI选项" loading="lazy"></figure>
 <p>以上是我34寸显示器，3440×1440原生分辨率设置之后自动开启的HiDPI分辨率选项，测试下来我的目视距离（眼睛到显示器）2560×1080(HiDPI)看起来最舒服。</p>
 <h3 id="软件设置">软件设置</h3>
 <ol>
 <li>下载并打开软件，目前版本为 <code>v1.3.16</code> 👉🏻<a href="https://github.com/waydabber/BetterDisplay">github下载地址</a></li>
 <li>在菜单栏中找到此软件图标，进入设置<br>
-<img src="https://www.xihrni.com/post-images/1675039953960.png" alt="" loading="lazy"></li>
+<img src="https://www.peoai.cn/post-images/1675039953960.png" alt="" loading="lazy"></li>
 <li>在需要开启的显示器下方勾选这3项<br>
-<img src="https://www.xihrni.com/post-images/1675040069637.png" alt="" loading="lazy"></li>
+<img src="https://www.peoai.cn/post-images/1675040069637.png" alt="" loading="lazy"></li>
 <li>点击应用后重启电脑</li>
 <li>在系统设置-显示器中点击显示所有分辨率已经可以看到全部HiDPI选项了<br>
-<img src="https://www.xihrni.com/post-images/1675040189319.png" alt="" loading="lazy"></li>
+<img src="https://www.peoai.cn/post-images/1675040189319.png" alt="" loading="lazy"></li>
 </ol>
 <blockquote>
 <p>参考网址：https://betheme.net/houduan/44667.html</p>
@@ -304,8 +304,8 @@ max_fps: 15 # 最大帧率
     </entry>
     <entry>
         <title type="html"><![CDATA[基于 Armbian 的 Linux 系统更新国内源（2]]></title>
-        <id>https://www.xihrni.com/post/ji-yu-armbian-de-linux-xi-tong-geng-xin-guo-nei-yuan-2/</id>
-        <link href="https://www.xihrni.com/post/ji-yu-armbian-de-linux-xi-tong-geng-xin-guo-nei-yuan-2/">
+        <id>https://www.peoai.cn/post/ji-yu-armbian-de-linux-xi-tong-geng-xin-guo-nei-yuan-2/</id>
+        <link href="https://www.peoai.cn/post/ji-yu-armbian-de-linux-xi-tong-geng-xin-guo-nei-yuan-2/">
         </link>
         <updated>2023-01-16T06:41:43.000Z</updated>
         <summary type="html"><![CDATA[<blockquote>
@@ -316,12 +316,12 @@ max_fps: 15 # 最大帧率
 <p>😳帮一个群友给他的电视盒子换国内源，硬件是电视盒子系统是 <code>Debain</code>。最开我以为是他和我上次一样没有找到合适的源地址，然后一顿操作，结果还是不行。在最后搞了2个小时后，重新认真看了一下错误提示，发现原来是本地时间不对</p>
 </blockquote>
 <!-- more -->
-<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1681887197960.png" alt="更新软件包报错" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://www.peoai.cn/post-images/1681887197960.png" alt="更新软件包报错" loading="lazy"></figure>
 <h3 id="更新时间">更新时间</h3>
 <p>认真读完错误提示后，发现他意思是文件已经过期了 x 天 x 小时什么的，我一想怎么会过期呢（最开始是以为源太老了），然后查看了一眼系统时间，果然对不上，原来问题出在这，更新时间后，重新换源一切正常~</p>
 <blockquote>
 <p>忘记截图，网上找的<br>
-<img src="https://www.xihrni.com/post-images/1681887477767.png" alt="时间对不上" loading="lazy"></p>
+<img src="https://www.peoai.cn/post-images/1681887477767.png" alt="时间对不上" loading="lazy"></p>
 </blockquote>
 <p>网络通畅的话就用这行命令同步时间</p>
 <pre><code class="language-shell">hwclock -s
@@ -337,8 +337,8 @@ max_fps: 15 # 最大帧率
     </entry>
     <entry>
         <title type="html"><![CDATA[RK3399/树莓派基于 Armbian 的 Linux 系统更新国内源]]></title>
-        <id>https://www.xihrni.com/post/shu-mei-pai-4brk3399-armbian-geng-xin-guo-nei-yuan/</id>
-        <link href="https://www.xihrni.com/post/shu-mei-pai-4brk3399-armbian-geng-xin-guo-nei-yuan/">
+        <id>https://www.peoai.cn/post/shu-mei-pai-4brk3399-armbian-geng-xin-guo-nei-yuan/</id>
+        <link href="https://www.peoai.cn/post/shu-mei-pai-4brk3399-armbian-geng-xin-guo-nei-yuan/">
         </link>
         <updated>2022-10-20T03:20:33.000Z</updated>
         <summary type="html"><![CDATA[<blockquote>
@@ -349,7 +349,7 @@ max_fps: 15 # 最大帧率
 <p>😳收了块RK3399（六核）的机器，听说比树莓派4B（四核）还强，用来给机器做上位机，提前让卖家刷好Linux系统，拿到手发现是 <code>Ubuntu 20.04.6 LTS (Focal Fossa)</code> ，登录机器上去无法更新软件包，轻车熟路的更改源后再次尝试，结果阿里云、腾讯云、清华云和网易云等源都无法更新，找了个遍发现全网几乎都是一样的方法，最后翻了很久发现原来是这个原因。。。</p>
 </blockquote>
 <!-- more -->
-<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1681875599326.png" alt="Ubuntu 20.04.6 LTS" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://www.peoai.cn/post-images/1681875599326.png" alt="Ubuntu 20.04.6 LTS" loading="lazy"></figure>
 <h3 id="常见方法">常见方法</h3>
 <ol>
 <li>打开配置文件</li>
@@ -393,15 +393,15 @@ deb-src https://mirrors.aliyun.com/ubuntu-ports/ focal-updates main restricted u
 deb https://mirrors.aliyun.com/ubuntu-ports/ focal-backports main restricted universe multiverse
 deb-src https://mirrors.aliyun.com/ubuntu-ports/ focal-backports main restricted universe multiverse
 </code></pre>
-<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1681876573798.png" alt="阿里云源" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://www.peoai.cn/post-images/1681876573798.png" alt="阿里云源" loading="lazy"></figure>
 <p>注意看就是地址最后面加了个 <code>-ports</code>，之后才顺利更新完成</p>
 <p>😬</p>
 ]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[Git 远程克隆/拉取提示：'Permission denied (publickey).' 解决记录 for Windows版本]]></title>
-        <id>https://www.xihrni.com/post/git-yuan-cheng-ke-long-la-qu-ti-shi-permission-denied-publickey-jie-jue-ji-lu-for-windows-ban-ben/</id>
-        <link href="https://www.xihrni.com/post/git-yuan-cheng-ke-long-la-qu-ti-shi-permission-denied-publickey-jie-jue-ji-lu-for-windows-ban-ben/">
+        <id>https://www.peoai.cn/post/git-yuan-cheng-ke-long-la-qu-ti-shi-permission-denied-publickey-jie-jue-ji-lu-for-windows-ban-ben/</id>
+        <link href="https://www.peoai.cn/post/git-yuan-cheng-ke-long-la-qu-ti-shi-permission-denied-publickey-jie-jue-ji-lu-for-windows-ban-ben/">
         </link>
         <updated>2022-05-16T08:49:17.000Z</updated>
         <summary type="html"><![CDATA[<blockquote>
@@ -412,22 +412,22 @@ deb-src https://mirrors.aliyun.com/ubuntu-ports/ focal-backports main restricted
 <p>😳这两天换Windows笔记本，想在本地开发，装好git后执行 <code>git clone xxx</code> 提示 <code>Permission denied (publickey).</code>。想起是没有设置秘钥，然后按照之前的文章，生成秘钥、上传公钥，接着再次执行 <code>git clone xxx</code>，发现还是提示 <code>Permission denied (publickey).</code></p>
 </blockquote>
 <!-- more -->
-<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1652692166063.png" alt="Permission denied" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://www.peoai.cn/post-images/1652692166063.png" alt="Permission denied" loading="lazy"></figure>
 <h3 id="git-版本">Git 版本</h3>
 <p>折腾了半天：重新生成秘钥、指定秘钥、文件夹权限等，还换了远程仓库试了试，发现好像只有 <code>Coding</code> 的平台会这样。最后没办法还是提交工单找到了解决办法（Windows网上真就没什么人出问题？）😓，原来是Git客户端版本太高（大于或等于 <code>2.33.1</code>）导致 <code>RSA</code> 算法被禁用。</p>
 <blockquote>
 <p><a href="https://help.coding.net/docs/repo/faq.html#permission-denied">参考文章</a><br>
-<img src="https://www.xihrni.com/post-images/1652692829075.png" alt="参考文章" loading="lazy"></p>
+<img src="https://www.peoai.cn/post-images/1652692829075.png" alt="参考文章" loading="lazy"></p>
 </blockquote>
 <p>经测试如果使用上面说的在 config 配置中加入上面两行，反而会报 <code>Bad configuration option: pubkeyacceptedalgorithms</code> 这样的错误，查了一下好像是 <code>OpenSS</code> 的版本又太低了。最后还是通过新的加密方式命令： <code>ssh-keygen -t ed25519 -C &quot;xxx@xx.xx&quot;</code>，重新生成了一下秘钥，上传新的秘钥靠谱，一次解决</p>
-<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1652693502202.png" alt="clone成功" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://www.peoai.cn/post-images/1652693502202.png" alt="clone成功" loading="lazy"></figure>
 <p>😬</p>
 ]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[Linux 的 useradd 和 adduser 命令有什么区别？]]></title>
-        <id>https://www.xihrni.com/post/linux-de-useradd-he-adduser-you-shi-me-qu-bie/</id>
-        <link href="https://www.xihrni.com/post/linux-de-useradd-he-adduser-you-shi-me-qu-bie/">
+        <id>https://www.peoai.cn/post/linux-de-useradd-he-adduser-you-shi-me-qu-bie/</id>
+        <link href="https://www.peoai.cn/post/linux-de-useradd-he-adduser-you-shi-me-qu-bie/">
         </link>
         <updated>2022-04-22T08:02:13.000Z</updated>
         <summary type="html"><![CDATA[<blockquote>
@@ -454,14 +454,14 @@ deb-src https://mirrors.aliyun.com/ubuntu-ports/ focal-backports main restricted
 <p>总的来说，如果需要从命令行创建用户，那么可以使用 <code>useradd</code> 命令。如果需要从图形界面创建用户，那么可以使用 <code>adduser</code> 命令。但是需要注意，在不同的 <code>Linux</code> 发行版中，这两个命令的具体实现可能会有所不同。</p>
 </blockquote>
 <p>在本次安装过程中，首先使用 <code>useradd</code> 创建了用户，但是发现没有用户家目录（<code>/home/user</code>），最终使用 <code>adduser</code> 命令创建后，包含了用户家目录</p>
-<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1681891961039.png" alt="adduser" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://www.peoai.cn/post-images/1681891961039.png" alt="adduser" loading="lazy"></figure>
 <p>😬</p>
 ]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[新电脑被植入 Lockbit 勒索病毒记录]]></title>
-        <id>https://www.xihrni.com/post/xin-dian-nao-bei-zhi-ru-lockbit-le-suo-bing-du-ji-lu/</id>
-        <link href="https://www.xihrni.com/post/xin-dian-nao-bei-zhi-ru-lockbit-le-suo-bing-du-ji-lu/">
+        <id>https://www.peoai.cn/post/xin-dian-nao-bei-zhi-ru-lockbit-le-suo-bing-du-ji-lu/</id>
+        <link href="https://www.peoai.cn/post/xin-dian-nao-bei-zhi-ru-lockbit-le-suo-bing-du-ji-lu/">
         </link>
         <updated>2021-09-04T02:51:31.000Z</updated>
         <summary type="html"><![CDATA[<blockquote>
@@ -472,28 +472,28 @@ deb-src https://mirrors.aliyun.com/ubuntu-ports/ focal-backports main restricted
 <p>😳帮客户推荐了一台品牌主机：HP 战99 Pro（i5 16G 512G固态那款），客户自己去找供应商买的。买回来后我帮忙重新安装了win10专业版系统，由于家庭版系统不能远程桌面，主要安装了一些常用软件、开发环境（宝塔面板）、编辑器之类的，还配置了 <code>frp</code> 代理远程桌面端口，由于不太放心所以安装了腾讯安全管家</p>
 </blockquote>
 <!-- more -->
-<p><img src="https://www.xihrni.com/post-images/1631070601756.png" alt="win10专业版" loading="lazy"><br>
-<img src="https://www.xihrni.com/post-images/1631070818619.png" alt="frp客户端配置" loading="lazy"></p>
+<p><img src="https://www.peoai.cn/post-images/1631070601756.png" alt="win10专业版" loading="lazy"><br>
+<img src="https://www.peoai.cn/post-images/1631070818619.png" alt="frp客户端配置" loading="lazy"></p>
 <h3 id="远程连接异常">远程连接异常</h3>
 <blockquote>
 <p>这台主机目的是为了部署一个网站放到本地网络访问使用，所以为了能远程更新操作配置了 <code>frp</code> 将端口开放到外网请求，可以使用Windows自带的远程桌面，另外还装了向日葵防止 <code>frp</code> 连接不上时可以检查问题（向日葵远程太卡）</p>
 </blockquote>
 <p>在第4天突然访问电脑的时候出现一直连接中，进度条来来回回滚动也不提示连接失败，最开始以为是我这边网络问题，找了其他人帮忙访问也是一样的结果，首先怀疑是 <code>frp</code> 是否连接正常，访问管理面板发现主机在线中</p>
-<p><img src="https://www.xihrni.com/post-images/1631076081071.png" alt="远程桌面连接中" loading="lazy"><br>
-<img src="https://www.xihrni.com/post-images/1631076327702.png" alt="frp管理面板" loading="lazy"></p>
+<p><img src="https://www.peoai.cn/post-images/1631076081071.png" alt="远程桌面连接中" loading="lazy"><br>
+<img src="https://www.peoai.cn/post-images/1631076327702.png" alt="frp管理面板" loading="lazy"></p>
 <p>然后用向日葵连接想检查一下 <code>frp</code> 问题，居然也一直连接连中。这时想着估计就是客户那边本地网络的问题，打电话过去了解却说网络没有任何变化一切正常</p>
-<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1631076766667.png" alt="向日葵远控" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://www.peoai.cn/post-images/1631076766667.png" alt="向日葵远控" loading="lazy"></figure>
 <p>前一天的上午还有连接过并没有问题。这个时候开始判断那台电脑可能网络问题或者是系统升级什么之类的开始不断尝试连接，再过了大概15分钟左右，远程桌面突然连上了（因为一直没有点取消）</p>
 <h3 id="lockbit-勒索病毒">Lockbit 勒索病毒</h3>
 <p>连上之后发现系统通知有提示发现威胁，并且病毒防护程序被关闭，心里一惊估计不妙</p>
-<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1631078814006.png" alt="Windows系统通知" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://www.peoai.cn/post-images/1631078814006.png" alt="Windows系统通知" loading="lazy"></figure>
 <p>提示在前一天的下午出现了病毒程序，除系统目录外的所有目录大部分常用文件都被加密了，同时还放了一个说明文档（说明此电脑已被加密，如果要解密则需要支付XX价格之类的），加密文件为源文件名称+ <code>.lockbit</code> 后缀</p>
-<p><img src="https://www.xihrni.com/post-images/1631078998026.png" alt="压缩文件" loading="lazy"><br>
-<img src="https://www.xihrni.com/post-images/1631079280321.png" alt="代码文件" loading="lazy"><br>
-<img src="https://www.xihrni.com/post-images/1631079353610.png" alt="说明文档" loading="lazy"><br>
-<img src="https://www.xihrni.com/post-images/1631079532589.png" alt="说明文档翻译" loading="lazy"></p>
+<p><img src="https://www.peoai.cn/post-images/1631078998026.png" alt="压缩文件" loading="lazy"><br>
+<img src="https://www.peoai.cn/post-images/1631079280321.png" alt="代码文件" loading="lazy"><br>
+<img src="https://www.peoai.cn/post-images/1631079353610.png" alt="说明文档" loading="lazy"><br>
+<img src="https://www.peoai.cn/post-images/1631079532589.png" alt="说明文档翻译" loading="lazy"></p>
 <p>并且操作时非常卡，打开一个目录要1分多钟，检查任务管理器发现一个奇怪的进程，右键打开目录后发现还有个远程软件，可疑的文件应该是目录植入程序，并且放在用户目录音乐文件夹下</p>
-<figure data-type="image" tabindex="3"><img src="https://www.xihrni.com/post-images/1631079694239.png" alt="木马程序" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="https://www.peoai.cn/post-images/1631079694239.png" alt="木马程序" loading="lazy"></figure>
 <h3 id="解密防护">解密&amp;防护</h3>
 <p>直接先将进程结束后删除这两个文件，然后上网搜寻解密方法发现暂时无解。安装了一些国产软件想对文件进行解密，干脆直接没检测到被加密文件。访问说明文档里面的两个解密网址也无法打开，不知道是网页已经失效还是需要科学上网已经不清楚了</p>
 <p>后来在论坛发现到目前为止还是很多人遇到这个病毒，基本上也没什么办法，只能重新安装系统。而需要的文件则一般靠文件恢复的方式找回，解密目前还是困难重重</p>
@@ -511,8 +511,8 @@ https://www.kaspersky.com.cn/resource-center/threats/lockbit-ransomware</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[Git 远程克隆/拉取提示：'Permission denied (publickey).' 解决记录]]></title>
-        <id>https://www.xihrni.com/post/git-yuan-cheng-ke-long-la-qu-ti-shi-permission-denied-publickey/</id>
-        <link href="https://www.xihrni.com/post/git-yuan-cheng-ke-long-la-qu-ti-shi-permission-denied-publickey/">
+        <id>https://www.peoai.cn/post/git-yuan-cheng-ke-long-la-qu-ti-shi-permission-denied-publickey/</id>
+        <link href="https://www.peoai.cn/post/git-yuan-cheng-ke-long-la-qu-ti-shi-permission-denied-publickey/">
         </link>
         <updated>2021-08-23T10:58:33.000Z</updated>
         <summary type="html"><![CDATA[<blockquote>
@@ -523,39 +523,39 @@ https://www.kaspersky.com.cn/resource-center/threats/lockbit-ransomware</p>
 <p>😳准备把存放在Coding平台上的代码发布到某一台服务器上时，执行 <code>git clone xxx</code> 突然提示 <code>Permission denied (publickey).</code></p>
 </blockquote>
 <!-- more -->
-<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1630398641542.png" alt="Permission denied" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://www.peoai.cn/post-images/1630398641542.png" alt="Permission denied" loading="lazy"></figure>
 <h3 id="部署公钥">部署公钥</h3>
 <p>最开始以为是公钥复制错了，所以把仓库里面的公钥删除，重新将服务器上的公钥进行部署（最后一条）</p>
-<p><img src="https://www.xihrni.com/post-images/1630412914894.png" alt="部署公钥" loading="lazy"><br>
-<img src="https://www.xihrni.com/post-images/1630399322338.png" alt="部署公钥" loading="lazy"></p>
+<p><img src="https://www.peoai.cn/post-images/1630412914894.png" alt="部署公钥" loading="lazy"><br>
+<img src="https://www.peoai.cn/post-images/1630399322338.png" alt="部署公钥" loading="lazy"></p>
 <p>但是依然提示 <code>Permission denied (publickey).</code></p>
 <h3 id="known_hosts">known_hosts</h3>
 <p>后来上网查找问题时发现有人说可能是因为第一次 <code>git clone</code> 的时候提示：'Are you sure you want to continue connecting (yes/no)?' 没有输入 <code>yes</code> 就直接回车了导致的</p>
-<p><img src="https://www.xihrni.com/post-images/1630412953703.png" alt="" loading="lazy"><br>
-<img src="https://www.xihrni.com/post-images/1630400353463.png" alt="需要输入yes" loading="lazy"></p>
+<p><img src="https://www.peoai.cn/post-images/1630412953703.png" alt="" loading="lazy"><br>
+<img src="https://www.peoai.cn/post-images/1630400353463.png" alt="需要输入yes" loading="lazy"></p>
 <p>但是我却发现我重新输入 <code>git clone</code> 怎么也不会重新提示，让我输入 <code>yes</code> 的步骤。就开始在网上查询如何让我的 <code>git clone</code> 命令重新提示这步，但是怎么查询貌似都没有结果，直到我想起 <code>known_hosts</code> 文件</p>
 <blockquote>
 <p>ssh 会把你每个你访问过计算机的公钥（public key）都记录在 <code>~/.ssh/known_hosts</code>。当下次访问相同计算机时，OpenSSH会核对公钥。如果公钥不同，OpenSSH会发出警告，避免你受到 DNS Hijack 之类的攻击</p>
 </blockquote>
 <p>然后我打算查看一下我的 <code>known_hosts</code> 文件，却发现了一点蹊跷之处。我的 <code>~/.ssh</code> 目录下面没有这个文件，这就很奇怪了</p>
-<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1630400888669.png" alt="ssh目录" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://www.peoai.cn/post-images/1630400888669.png" alt="ssh目录" loading="lazy"></figure>
 <p>只有最开始生成的秘钥对和一些其他机器的公钥文件，并且我还上网查了是不是 ssh 配置相关，没有生成<code>known_hosts</code> 文件，发现并不是。找了好一会突然想起，难道这个文件在 <code>www</code> 用户（此时我登录用户为 <code>root</code>）？立马去 <code>/home/www/.ssh</code> 目录下发现，果然在这里</p>
-<figure data-type="image" tabindex="3"><img src="https://www.xihrni.com/post-images/1630401299855.png" alt="www用户目录" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="https://www.peoai.cn/post-images/1630401299855.png" alt="www用户目录" loading="lazy"></figure>
 <p>我删除了里面这唯一一条记录，重新进行 <code>git clone</code>，果然进行了提示</p>
-<figure data-type="image" tabindex="4"><img src="https://www.xihrni.com/post-images/1630401520775.png" alt="重新提示" loading="lazy"></figure>
+<figure data-type="image" tabindex="4"><img src="https://www.peoai.cn/post-images/1630401520775.png" alt="重新提示" loading="lazy"></figure>
 <p>但是！我输入完 <code>yes</code> 后，依然还是相同的提示... <code>Permission denied (publickey).</code></p>
 <h3 id="www用户">WWW用户</h3>
 <p>接着又试了很多方法，比如有人说要重新生成秘钥对，也试过了依然还是同样的错误，还有人说用 <code>git -T</code> 绑定一下，也试过提示正确的公钥指纹</p>
 <p>最后想起为什么 <code>known_hosts</code> 文件会在 <code>www</code> 用户目录呢，哦原来是用 <code>www</code> 用户执行的 <code>git</code> 命令，所以才在 www 用户目录生成了 <code>known_hosts</code> 文件</p>
 <p>接着把秘钥对复制到 <code>www</code> 用户目录下（或者用 <code>www</code> 用户重新生成），然后重新执行 <code>git clone</code> 命令，成功~</p>
-<figure data-type="image" tabindex="5"><img src="https://www.xihrni.com/post-images/1630412169314.png" alt="clone成功" loading="lazy"></figure>
+<figure data-type="image" tabindex="5"><img src="https://www.peoai.cn/post-images/1630412169314.png" alt="clone成功" loading="lazy"></figure>
 <p>😬</p>
 ]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[Git 指定远程仓库使用不同秘钥]]></title>
-        <id>https://www.xihrni.com/post/git-zhi-ding-yuan-cheng-cang-ku-shi-yong-bu-tong-mi-yao/</id>
-        <link href="https://www.xihrni.com/post/git-zhi-ding-yuan-cheng-cang-ku-shi-yong-bu-tong-mi-yao/">
+        <id>https://www.peoai.cn/post/git-zhi-ding-yuan-cheng-cang-ku-shi-yong-bu-tong-mi-yao/</id>
+        <link href="https://www.peoai.cn/post/git-zhi-ding-yuan-cheng-cang-ku-shi-yong-bu-tong-mi-yao/">
         </link>
         <updated>2021-05-16T11:31:53.000Z</updated>
         <summary type="html"><![CDATA[<blockquote>
@@ -572,7 +572,7 @@ https://www.kaspersky.com.cn/resource-center/threats/lockbit-ransomware</p>
 <p>或使用</p>
 <pre><code class="language-shell">ssh-keygen -t ed25519 -C &quot;xihrni@126.com&quot;
 </code></pre>
-<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1652720009739.png" alt="ed25519" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://www.peoai.cn/post-images/1652720009739.png" alt="ed25519" loading="lazy"></figure>
 <h3 id="添加-git-config-配置文件">添加 Git config 配置文件</h3>
 <p>在 <code>.ssh</code> 目录下新建 <code>config</code> 文件添加如下代码（案例为两个不同远程仓库，根据需求修改）</p>
 <pre><code class="language-shell">vim ~/.ssh/config
@@ -590,15 +590,15 @@ Host gitee.com
   IdentityFile /User/xihrni/.ssh/id_rsa
   IdentitiesOnly yes
 </code></pre>
-<p><img src="https://www.xihrni.com/post-images/1652720900231.png" alt="config内容" loading="lazy"><br>
-<img src="https://www.xihrni.com/post-images/1652720905559.png" alt="秘钥文件目录" loading="lazy"></p>
+<p><img src="https://www.peoai.cn/post-images/1652720900231.png" alt="config内容" loading="lazy"><br>
+<img src="https://www.peoai.cn/post-images/1652720905559.png" alt="秘钥文件目录" loading="lazy"></p>
 <p>此时操作如上两个远程仓库时会调用指定的秘钥进行认证（记得将对应的公钥上传到远程仓库）</p>
 <blockquote>
 <p>可通过此命令进行远程仓库身份验证</p>
 </blockquote>
 <pre><code class="language-shell">ssh -T git@e.coding.net
 </code></pre>
-<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1652721303610.png" alt="验证通过" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://www.peoai.cn/post-images/1652721303610.png" alt="验证通过" loading="lazy"></figure>
 <p>😬</p>
 ]]></content>
     </entry>

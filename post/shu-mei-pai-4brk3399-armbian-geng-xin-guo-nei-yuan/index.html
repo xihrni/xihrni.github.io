@@ -2,13 +2,13 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>RK3399/树莓派基于 Armbian 的 Linux 系统更新国内源 | 我的世界</title>
-<link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1696991563354">
+<title>RK3399/树莓派基于 Armbian 的 Linux 系统更新国内源 | 小菠萝个人技术分享</title>
+<link rel="shortcut icon" href="https://www.peoai.cn/favicon.ico?v=1699242453563">
 <!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet"> -->
-<link href="https://www.xihrni.com/remixicon.css" rel="stylesheet">
-<link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="RK3399/树莓派基于 Armbian 的 Linux 系统更新国内源 | 我的世界 - Atom Feed"
-  href="https://www.xihrni.com/atom.xml">
+<link href="https://www.peoai.cn/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://www.peoai.cn/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="RK3399/树莓派基于 Armbian 的 Linux 系统更新国内源 | 小菠萝个人技术分享 - Atom Feed"
+  href="https://www.peoai.cn/atom.xml">
 <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700"> -->
 
 
@@ -16,19 +16,19 @@
 😳收了块RK3399（六核）的机器，听说比树莓派4B（四核）还强，用来给机器做上位机，提前让卖家刷好Linux系统，拿到手发现是 Ubuntu 20.04.6 LTS (Focal Fossa) ，登录机器上去无法更新软件包，轻车熟路的..." />
     <meta name="keywords" content="armbian,ubuntu,国内源,rk3399,树莓派,香橙派,linux" />
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css"> -->
-    <link rel="stylesheet" href="https://www.xihrni.com/katex.min.css">
+    <link rel="stylesheet" href="https://www.peoai.cn/katex.min.css">
     <!-- <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script> -->
-    <script src="https://www.xihrni.com/highlight.min.js"></script>
+    <script src="https://www.peoai.cn/highlight.min.js"></script>
   </head>
   <body>
     <div class="main">
       <div class="main-content">
         <div class="site-header">
-  <a href="https://www.xihrni.com">
-  <img class="avatar" src="https://www.xihrni.com/images/avatar.png?v=1696991563354" alt="">
+  <a href="https://www.peoai.cn">
+  <img class="avatar" src="https://www.peoai.cn/images/avatar.png?v=1699242453563" alt="">
   </a>
   <h1 class="site-title">
-    我的世界
+    小菠萝个人技术分享
   </h1>
   <p class="site-description">
     君子和而不同。穷则独善其身，达则兼济天下。
@@ -92,37 +92,37 @@
                 3 min read
               </span>
               
-                <a href="https://www.xihrni.com/tag/armbian/" class="post-tag">
+                <a href="https://www.peoai.cn/tag/armbian/" class="post-tag">
                   # armbian
                 </a>
               
-                <a href="https://www.xihrni.com/tag/ubuntu/" class="post-tag">
+                <a href="https://www.peoai.cn/tag/ubuntu/" class="post-tag">
                   # ubuntu
                 </a>
               
-                <a href="https://www.xihrni.com/tag/guo-nei-yuan/" class="post-tag">
+                <a href="https://www.peoai.cn/tag/guo-nei-yuan/" class="post-tag">
                   # 国内源
                 </a>
               
-                <a href="https://www.xihrni.com/tag/rk3399/" class="post-tag">
+                <a href="https://www.peoai.cn/tag/rk3399/" class="post-tag">
                   # rk3399
                 </a>
               
-                <a href="https://www.xihrni.com/tag/shu-mei-pai/" class="post-tag">
+                <a href="https://www.peoai.cn/tag/shu-mei-pai/" class="post-tag">
                   # 树莓派
                 </a>
               
-                <a href="https://www.xihrni.com/tag/xiang-cheng-pai/" class="post-tag">
+                <a href="https://www.peoai.cn/tag/xiang-cheng-pai/" class="post-tag">
                   # 香橙派
                 </a>
               
-                <a href="https://www.xihrni.com/tag/linux/" class="post-tag">
+                <a href="https://www.peoai.cn/tag/linux/" class="post-tag">
                   # linux
                 </a>
               
             </div>
             
-              <img class="post-feature-image" src="https://www.xihrni.com/post-images/shu-mei-pai-4brk3399-armbian-geng-xin-guo-nei-yuan.png" alt="">
+              <img class="post-feature-image" src="https://www.peoai.cn/post-images/shu-mei-pai-4brk3399-armbian-geng-xin-guo-nei-yuan.png" alt="">
             
             <div class="post-content-wrapper">
               <div class="post-content">
@@ -130,7 +130,7 @@
 <p>😳收了块RK3399（六核）的机器，听说比树莓派4B（四核）还强，用来给机器做上位机，提前让卖家刷好Linux系统，拿到手发现是 <code>Ubuntu 20.04.6 LTS (Focal Fossa)</code> ，登录机器上去无法更新软件包，轻车熟路的更改源后再次尝试，结果阿里云、腾讯云、清华云和网易云等源都无法更新，找了个遍发现全网几乎都是一样的方法，最后翻了很久发现原来是这个原因。。。</p>
 </blockquote>
 <!-- more -->
-<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1681875599326.png" alt="Ubuntu 20.04.6 LTS" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://www.peoai.cn/post-images/1681875599326.png" alt="Ubuntu 20.04.6 LTS" loading="lazy"></figure>
 <h3 id="常见方法">常见方法</h3>
 <ol>
 <li>打开配置文件</li>
@@ -174,7 +174,7 @@ deb-src https://mirrors.aliyun.com/ubuntu-ports/ focal-updates main restricted u
 deb https://mirrors.aliyun.com/ubuntu-ports/ focal-backports main restricted universe multiverse
 deb-src https://mirrors.aliyun.com/ubuntu-ports/ focal-backports main restricted universe multiverse
 </code></pre>
-<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1681876573798.png" alt="阿里云源" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://www.peoai.cn/post-images/1681876573798.png" alt="阿里云源" loading="lazy"></figure>
 <p>注意看就是地址最后面加了个 <code>-ports</code>，之后才顺利更新完成</p>
 <p>😬</p>
 
@@ -201,7 +201,7 @@ deb-src https://mirrors.aliyun.com/ubuntu-ports/ focal-backports main restricted
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://www.xihrni.com/post/git-yuan-cheng-ke-long-la-qu-ti-shi-permission-denied-publickey-jie-jue-ji-lu-for-windows-ban-ben/">
+            <a href="https://www.peoai.cn/post/git-yuan-cheng-ke-long-la-qu-ti-shi-permission-denied-publickey-jie-jue-ji-lu-for-windows-ban-ben/">
               <h3 class="post-title">
                 Git 远程克隆/拉取提示：&#39;Permission denied (publickey).&#39; 解决记录 for Windows版本
               </h3>
@@ -212,7 +212,7 @@ deb-src https://mirrors.aliyun.com/ubuntu-ports/ focal-backports main restricted
         
 
         <div class="site-footer">
-  Powered by <a class="margin-10-left-right" href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>|<a class="margin-10-left-right" href="https://beian.miit.gov.cn" target="_blank">粤ICP备2021115781号</a>
+  Powered by <a class="margin-10-left-right" href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>|<a class="margin-10-left-right" href="https://beian.miit.gov.cn" target="_blank">粤ICP备2023121828号</a>
 
 <script>
 var _hmt = _hmt || [];
@@ -223,7 +223,7 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
-  <a class="rss" href="https://www.xihrni.com/atom.xml" target="_blank">
+  <a class="rss" href="https://www.peoai.cn/atom.xml" target="_blank">
     <i class="ri-rss-line"></i> RSS
   </a>
 </div>

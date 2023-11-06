@@ -2,13 +2,13 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>PHP、Nginx和云存储跨域配置 | 我的世界</title>
-<link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1696991563354">
+<title>PHP、Nginx和云存储跨域配置 | 小菠萝个人技术分享</title>
+<link rel="shortcut icon" href="https://www.peoai.cn/favicon.ico?v=1699242453563">
 <!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet"> -->
-<link href="https://www.xihrni.com/remixicon.css" rel="stylesheet">
-<link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="PHP、Nginx和云存储跨域配置 | 我的世界 - Atom Feed"
-  href="https://www.xihrni.com/atom.xml">
+<link href="https://www.peoai.cn/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://www.peoai.cn/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="PHP、Nginx和云存储跨域配置 | 小菠萝个人技术分享 - Atom Feed"
+  href="https://www.peoai.cn/atom.xml">
 <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700"> -->
 
 
@@ -22,19 +22,19 @@ $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
 if (in_array($..." />
     <meta name="keywords" content="跨域,腾讯云,阿里云,php" />
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css"> -->
-    <link rel="stylesheet" href="https://www.xihrni.com/katex.min.css">
+    <link rel="stylesheet" href="https://www.peoai.cn/katex.min.css">
     <!-- <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script> -->
-    <script src="https://www.xihrni.com/highlight.min.js"></script>
+    <script src="https://www.peoai.cn/highlight.min.js"></script>
   </head>
   <body>
     <div class="main">
       <div class="main-content">
         <div class="site-header">
-  <a href="https://www.xihrni.com">
-  <img class="avatar" src="https://www.xihrni.com/images/avatar.png?v=1696991563354" alt="">
+  <a href="https://www.peoai.cn">
+  <img class="avatar" src="https://www.peoai.cn/images/avatar.png?v=1699242453563" alt="">
   </a>
   <h1 class="site-title">
-    我的世界
+    小菠萝个人技术分享
   </h1>
   <p class="site-description">
     君子和而不同。穷则独善其身，达则兼济天下。
@@ -98,25 +98,25 @@ if (in_array($..." />
                 1 min read
               </span>
               
-                <a href="https://www.xihrni.com/tag/kua-yu/" class="post-tag">
+                <a href="https://www.peoai.cn/tag/kua-yu/" class="post-tag">
                   # 跨域
                 </a>
               
-                <a href="https://www.xihrni.com/tag/teng-xun-yun/" class="post-tag">
+                <a href="https://www.peoai.cn/tag/teng-xun-yun/" class="post-tag">
                   # 腾讯云
                 </a>
               
-                <a href="https://www.xihrni.com/tag/a-li-yun/" class="post-tag">
+                <a href="https://www.peoai.cn/tag/a-li-yun/" class="post-tag">
                   # 阿里云
                 </a>
               
-                <a href="https://www.xihrni.com/tag/zKKwXlxOi/" class="post-tag">
+                <a href="https://www.peoai.cn/tag/zKKwXlxOi/" class="post-tag">
                   # php
                 </a>
               
             </div>
             
-              <img class="post-feature-image" src="https://www.xihrni.com/post-images/php-qian-duan-nginx-kua-yu-pei-zhi.png" alt="">
+              <img class="post-feature-image" src="https://www.peoai.cn/post-images/php-qian-duan-nginx-kua-yu-pei-zhi.png" alt="">
             
             <div class="post-content-wrapper">
               <div class="post-content">
@@ -124,7 +124,7 @@ if (in_array($..." />
 <p>😳前端调用接口或者JS静态文件浏览器都会出现跨域问题，禁止访问。所以需要在后端提供请求的时候带上允许跨域的提示</p>
 </blockquote>
 <!-- more -->
-<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1630573311514.png" alt="浏览器响应" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://www.peoai.cn/post-images/1630573311514.png" alt="浏览器响应" loading="lazy"></figure>
 <h3 id="php">PHP</h3>
 <pre><code class="language-php">$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
 if (in_array($origin, ['https://www.xihrni.com'])) {
@@ -157,11 +157,11 @@ server
 }
 </code></pre>
 <h3 id="腾讯云cos">腾讯云COS</h3>
-<p><img src="https://www.xihrni.com/post-images/1630654539279.png" alt="腾讯云COS" loading="lazy"><br>
-<img src="https://www.xihrni.com/post-images/1630654544865.png" alt="腾讯云COS" loading="lazy"></p>
+<p><img src="https://www.peoai.cn/post-images/1630654539279.png" alt="腾讯云COS" loading="lazy"><br>
+<img src="https://www.peoai.cn/post-images/1630654544865.png" alt="腾讯云COS" loading="lazy"></p>
 <h3 id="阿里云oss">阿里云OSS</h3>
-<p><img src="https://www.xihrni.com/post-images/1630654687527.png" alt="阿里云OSS" loading="lazy"><br>
-<img src="https://www.xihrni.com/post-images/1630654691767.png" alt="阿里云OSS" loading="lazy"></p>
+<p><img src="https://www.peoai.cn/post-images/1630654687527.png" alt="阿里云OSS" loading="lazy"><br>
+<img src="https://www.peoai.cn/post-images/1630654691767.png" alt="阿里云OSS" loading="lazy"></p>
 <p>😬</p>
 
               </div>
@@ -189,7 +189,7 @@ server
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://www.xihrni.com/post/git-ban-ben-kong-zhi-chang-yong-ming-ling/">
+            <a href="https://www.peoai.cn/post/git-ban-ben-kong-zhi-chang-yong-ming-ling/">
               <h3 class="post-title">
                 Git 版本控制常用命令
               </h3>
@@ -200,7 +200,7 @@ server
         
 
         <div class="site-footer">
-  Powered by <a class="margin-10-left-right" href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>|<a class="margin-10-left-right" href="https://beian.miit.gov.cn" target="_blank">粤ICP备2021115781号</a>
+  Powered by <a class="margin-10-left-right" href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>|<a class="margin-10-left-right" href="https://beian.miit.gov.cn" target="_blank">粤ICP备2023121828号</a>
 
 <script>
 var _hmt = _hmt || [];
@@ -211,7 +211,7 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
-  <a class="rss" href="https://www.xihrni.com/atom.xml" target="_blank">
+  <a class="rss" href="https://www.peoai.cn/atom.xml" target="_blank">
     <i class="ri-rss-line"></i> RSS
   </a>
 </div>

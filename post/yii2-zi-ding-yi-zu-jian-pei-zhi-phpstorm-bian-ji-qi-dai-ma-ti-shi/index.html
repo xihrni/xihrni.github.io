@@ -2,13 +2,13 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Yii2 自定义组件配置 PhpStorm 编辑器代码提示 | 我的世界</title>
-<link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1696991563354">
+<title>Yii2 自定义组件配置 PhpStorm 编辑器代码提示 | 小菠萝个人技术分享</title>
+<link rel="shortcut icon" href="https://www.peoai.cn/favicon.ico?v=1699242453563">
 <!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet"> -->
-<link href="https://www.xihrni.com/remixicon.css" rel="stylesheet">
-<link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="Yii2 自定义组件配置 PhpStorm 编辑器代码提示 | 我的世界 - Atom Feed"
-  href="https://www.xihrni.com/atom.xml">
+<link href="https://www.peoai.cn/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://www.peoai.cn/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Yii2 自定义组件配置 PhpStorm 编辑器代码提示 | 小菠萝个人技术分享 - Atom Feed"
+  href="https://www.peoai.cn/atom.xml">
 <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700"> -->
 
 
@@ -24,19 +24,19 @@ $config = [
         'admi..." />
     <meta name="keywords" content="phpstorm,代码提示,yii2" />
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css"> -->
-    <link rel="stylesheet" href="https://www.xihrni.com/katex.min.css">
+    <link rel="stylesheet" href="https://www.peoai.cn/katex.min.css">
     <!-- <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script> -->
-    <script src="https://www.xihrni.com/highlight.min.js"></script>
+    <script src="https://www.peoai.cn/highlight.min.js"></script>
   </head>
   <body>
     <div class="main">
       <div class="main-content">
         <div class="site-header">
-  <a href="https://www.xihrni.com">
-  <img class="avatar" src="https://www.xihrni.com/images/avatar.png?v=1696991563354" alt="">
+  <a href="https://www.peoai.cn">
+  <img class="avatar" src="https://www.peoai.cn/images/avatar.png?v=1699242453563" alt="">
   </a>
   <h1 class="site-title">
-    我的世界
+    小菠萝个人技术分享
   </h1>
   <p class="site-description">
     君子和而不同。穷则独善其身，达则兼济天下。
@@ -100,21 +100,21 @@ $config = [
                 3 min read
               </span>
               
-                <a href="https://www.xihrni.com/tag/phpstorm/" class="post-tag">
+                <a href="https://www.peoai.cn/tag/phpstorm/" class="post-tag">
                   # phpstorm
                 </a>
               
-                <a href="https://www.xihrni.com/tag/dai-ma-ti-shi/" class="post-tag">
+                <a href="https://www.peoai.cn/tag/dai-ma-ti-shi/" class="post-tag">
                   # 代码提示
                 </a>
               
-                <a href="https://www.xihrni.com/tag/yii2/" class="post-tag">
+                <a href="https://www.peoai.cn/tag/yii2/" class="post-tag">
                   # yii2
                 </a>
               
             </div>
             
-              <img class="post-feature-image" src="https://www.xihrni.com/post-images/yii2-zi-ding-yi-zu-jian-pei-zhi-phpstorm-bian-ji-qi-dai-ma-ti-shi.png" alt="">
+              <img class="post-feature-image" src="https://www.peoai.cn/post-images/yii2-zi-ding-yi-zu-jian-pei-zhi-phpstorm-bian-ji-qi-dai-ma-ti-shi.png" alt="">
             
             <div class="post-content-wrapper">
               <div class="post-content">
@@ -144,7 +144,7 @@ $config = [
 return $config;
 </code></pre>
 <p>当在使用的时候 PhpStorm 编辑器则会提示“Property accessed via magic method”信息，并且无法关联类也无法进行自动提示代码补全</p>
-<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1591321895158.png" alt="提示“Property accessed via magic method”信息" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://www.peoai.cn/post-images/1591321895158.png" alt="提示“Property accessed via magic method”信息" loading="lazy"></figure>
 <h3 id="创建声明类文件">创建声明类文件</h3>
 <p>给 IDE 一些提示的最好方法是使用自己的 Yii 文件，运行代码时它实际上并不使用。这个文件可以命名为 <code>Yii.php</code> ，在项目根目录创建。其内容如下：</p>
 <pre><code class="language-php">&lt;?php
@@ -203,9 +203,9 @@ class ConsoleApplication extends yii\console\Application
 <code>ConsoleApplication</code> 表示 Cli 环境下的 Yii 类</p>
 </blockquote>
 <p>由于已经有一个 Yii 的类了，所以 PhpStorm 编辑器会提示“Multiple Implementations”，我们需要将 <code>vendor/yiisoft/yii2/Yii.php</code> 文件标记为纯文本</p>
-<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1591322367077.png" alt="将  文件标记为纯文本" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://www.peoai.cn/post-images/1591322367077.png" alt="将  文件标记为纯文本" loading="lazy"></figure>
 <p>可以看到我们在给每个对应的类添加了 @property 文档注释，之后再去实际业务代码中会发现已经不会提示“Property accessed via magic method”信息了并且能像正常的类关联和自动提示代码补全</p>
-<figure data-type="image" tabindex="3"><img src="https://www.xihrni.com/post-images/1591322835443.png" alt="正常的类关联和自动提示代码补全" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="https://www.peoai.cn/post-images/1591322835443.png" alt="正常的类关联和自动提示代码补全" loading="lazy"></figure>
 <h3 id="忽略版本控制">忽略版本控制</h3>
 <p>可以将自定义的 <code>Yii.php</code> 加入到 <code>.gitignore</code> 忽略文件中提交到代码版本进行推送到线上协作，也可以加入到本地全局忽略文件不进行提交</p>
 <blockquote>
@@ -241,7 +241,7 @@ class ConsoleApplication extends yii\console\Application
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://www.xihrni.com/post/git-cong-yuan-cheng-la-qu-shu-ju-shi-ti-shi-you-have-not-concluded-your-merge-merge_head-exists/">
+            <a href="https://www.peoai.cn/post/git-cong-yuan-cheng-la-qu-shu-ju-shi-ti-shi-you-have-not-concluded-your-merge-merge_head-exists/">
               <h3 class="post-title">
                 Git 从远程拉取数据时提示：&#39;You have not concluded your merge (MERGE_HEAD exists).&#39; 解决方法
               </h3>
@@ -252,7 +252,7 @@ class ConsoleApplication extends yii\console\Application
         
 
         <div class="site-footer">
-  Powered by <a class="margin-10-left-right" href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>|<a class="margin-10-left-right" href="https://beian.miit.gov.cn" target="_blank">粤ICP备2021115781号</a>
+  Powered by <a class="margin-10-left-right" href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>|<a class="margin-10-left-right" href="https://beian.miit.gov.cn" target="_blank">粤ICP备2023121828号</a>
 
 <script>
 var _hmt = _hmt || [];
@@ -263,7 +263,7 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
-  <a class="rss" href="https://www.xihrni.com/atom.xml" target="_blank">
+  <a class="rss" href="https://www.peoai.cn/atom.xml" target="_blank">
     <i class="ri-rss-line"></i> RSS
   </a>
 </div>

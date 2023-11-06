@@ -2,13 +2,13 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Git 指定远程仓库使用不同秘钥 | 我的世界</title>
-<link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1696991563354">
+<title>Git 指定远程仓库使用不同秘钥 | 小菠萝个人技术分享</title>
+<link rel="shortcut icon" href="https://www.peoai.cn/favicon.ico?v=1699242453563">
 <!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet"> -->
-<link href="https://www.xihrni.com/remixicon.css" rel="stylesheet">
-<link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="Git 指定远程仓库使用不同秘钥 | 我的世界 - Atom Feed"
-  href="https://www.xihrni.com/atom.xml">
+<link href="https://www.peoai.cn/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://www.peoai.cn/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Git 指定远程仓库使用不同秘钥 | 小菠萝个人技术分享 - Atom Feed"
+  href="https://www.peoai.cn/atom.xml">
 <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700"> -->
 
 
@@ -23,19 +23,19 @@ ssh-keygen -t rsa -b 4096 -C &quot;xihrni@126.com&quot;
 ss..." />
     <meta name="keywords" content="ssh,秘钥,Coding,git" />
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css"> -->
-    <link rel="stylesheet" href="https://www.xihrni.com/katex.min.css">
+    <link rel="stylesheet" href="https://www.peoai.cn/katex.min.css">
     <!-- <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script> -->
-    <script src="https://www.xihrni.com/highlight.min.js"></script>
+    <script src="https://www.peoai.cn/highlight.min.js"></script>
   </head>
   <body>
     <div class="main">
       <div class="main-content">
         <div class="site-header">
-  <a href="https://www.xihrni.com">
-  <img class="avatar" src="https://www.xihrni.com/images/avatar.png?v=1696991563354" alt="">
+  <a href="https://www.peoai.cn">
+  <img class="avatar" src="https://www.peoai.cn/images/avatar.png?v=1699242453563" alt="">
   </a>
   <h1 class="site-title">
-    我的世界
+    小菠萝个人技术分享
   </h1>
   <p class="site-description">
     君子和而不同。穷则独善其身，达则兼济天下。
@@ -99,25 +99,25 @@ ss..." />
                 2 min read
               </span>
               
-                <a href="https://www.xihrni.com/tag/ssh/" class="post-tag">
+                <a href="https://www.peoai.cn/tag/ssh/" class="post-tag">
                   # ssh
                 </a>
               
-                <a href="https://www.xihrni.com/tag/mi-yao/" class="post-tag">
+                <a href="https://www.peoai.cn/tag/mi-yao/" class="post-tag">
                   # 秘钥
                 </a>
               
-                <a href="https://www.xihrni.com/tag/coding/" class="post-tag">
+                <a href="https://www.peoai.cn/tag/coding/" class="post-tag">
                   # Coding
                 </a>
               
-                <a href="https://www.xihrni.com/tag/9RuaOAU4j/" class="post-tag">
+                <a href="https://www.peoai.cn/tag/9RuaOAU4j/" class="post-tag">
                   # git
                 </a>
               
             </div>
             
-              <img class="post-feature-image" src="https://www.xihrni.com/post-images/git-zhi-ding-yuan-cheng-cang-ku-shi-yong-bu-tong-mi-yao.png" alt="">
+              <img class="post-feature-image" src="https://www.peoai.cn/post-images/git-zhi-ding-yuan-cheng-cang-ku-shi-yong-bu-tong-mi-yao.png" alt="">
             
             <div class="post-content-wrapper">
               <div class="post-content">
@@ -131,7 +131,7 @@ ss..." />
 <p>或使用</p>
 <pre><code class="language-shell">ssh-keygen -t ed25519 -C &quot;xihrni@126.com&quot;
 </code></pre>
-<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1652720009739.png" alt="ed25519" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://www.peoai.cn/post-images/1652720009739.png" alt="ed25519" loading="lazy"></figure>
 <h3 id="添加-git-config-配置文件">添加 Git config 配置文件</h3>
 <p>在 <code>.ssh</code> 目录下新建 <code>config</code> 文件添加如下代码（案例为两个不同远程仓库，根据需求修改）</p>
 <pre><code class="language-shell">vim ~/.ssh/config
@@ -149,15 +149,15 @@ Host gitee.com
   IdentityFile /User/xihrni/.ssh/id_rsa
   IdentitiesOnly yes
 </code></pre>
-<p><img src="https://www.xihrni.com/post-images/1652720900231.png" alt="config内容" loading="lazy"><br>
-<img src="https://www.xihrni.com/post-images/1652720905559.png" alt="秘钥文件目录" loading="lazy"></p>
+<p><img src="https://www.peoai.cn/post-images/1652720900231.png" alt="config内容" loading="lazy"><br>
+<img src="https://www.peoai.cn/post-images/1652720905559.png" alt="秘钥文件目录" loading="lazy"></p>
 <p>此时操作如上两个远程仓库时会调用指定的秘钥进行认证（记得将对应的公钥上传到远程仓库）</p>
 <blockquote>
 <p>可通过此命令进行远程仓库身份验证</p>
 </blockquote>
 <pre><code class="language-shell">ssh -T git@e.coding.net
 </code></pre>
-<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1652721303610.png" alt="验证通过" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://www.peoai.cn/post-images/1652721303610.png" alt="验证通过" loading="lazy"></figure>
 <p>😬</p>
 
               </div>
@@ -183,7 +183,7 @@ Host gitee.com
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://www.xihrni.com/post/a-li-yun-ecs-centos7-gua-zai-xin-ci-pan/">
+            <a href="https://www.peoai.cn/post/a-li-yun-ecs-centos7-gua-zai-xin-ci-pan/">
               <h3 class="post-title">
                 CentOS 挂载新磁盘（阿里云ECS）
               </h3>
@@ -194,7 +194,7 @@ Host gitee.com
         
 
         <div class="site-footer">
-  Powered by <a class="margin-10-left-right" href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>|<a class="margin-10-left-right" href="https://beian.miit.gov.cn" target="_blank">粤ICP备2021115781号</a>
+  Powered by <a class="margin-10-left-right" href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>|<a class="margin-10-left-right" href="https://beian.miit.gov.cn" target="_blank">粤ICP备2023121828号</a>
 
 <script>
 var _hmt = _hmt || [];
@@ -205,7 +205,7 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
-  <a class="rss" href="https://www.xihrni.com/atom.xml" target="_blank">
+  <a class="rss" href="https://www.peoai.cn/atom.xml" target="_blank">
     <i class="ri-rss-line"></i> RSS
   </a>
 </div>

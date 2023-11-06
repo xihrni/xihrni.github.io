@@ -2,13 +2,13 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>CentOS 挂载新磁盘（阿里云ECS） | 我的世界</title>
-<link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1696991563354">
+<title>CentOS 挂载新磁盘（阿里云ECS） | 小菠萝个人技术分享</title>
+<link rel="shortcut icon" href="https://www.peoai.cn/favicon.ico?v=1699242453563">
 <!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet"> -->
-<link href="https://www.xihrni.com/remixicon.css" rel="stylesheet">
-<link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="CentOS 挂载新磁盘（阿里云ECS） | 我的世界 - Atom Feed"
-  href="https://www.xihrni.com/atom.xml">
+<link href="https://www.peoai.cn/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://www.peoai.cn/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="CentOS 挂载新磁盘（阿里云ECS） | 小菠萝个人技术分享 - Atom Feed"
+  href="https://www.peoai.cn/atom.xml">
 <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700"> -->
 
 
@@ -24,19 +24,19 @@
 /dev/vdc 就是新添加的..." />
     <meta name="keywords" content="挂载磁盘,阿里云,centos" />
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css"> -->
-    <link rel="stylesheet" href="https://www.xihrni.com/katex.min.css">
+    <link rel="stylesheet" href="https://www.peoai.cn/katex.min.css">
     <!-- <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script> -->
-    <script src="https://www.xihrni.com/highlight.min.js"></script>
+    <script src="https://www.peoai.cn/highlight.min.js"></script>
   </head>
   <body>
     <div class="main">
       <div class="main-content">
         <div class="site-header">
-  <a href="https://www.xihrni.com">
-  <img class="avatar" src="https://www.xihrni.com/images/avatar.png?v=1696991563354" alt="">
+  <a href="https://www.peoai.cn">
+  <img class="avatar" src="https://www.peoai.cn/images/avatar.png?v=1699242453563" alt="">
   </a>
   <h1 class="site-title">
-    我的世界
+    小菠萝个人技术分享
   </h1>
   <p class="site-description">
     君子和而不同。穷则独善其身，达则兼济天下。
@@ -100,21 +100,21 @@
                 2 min read
               </span>
               
-                <a href="https://www.xihrni.com/tag/gua-zai-ci-pan/" class="post-tag">
+                <a href="https://www.peoai.cn/tag/gua-zai-ci-pan/" class="post-tag">
                   # 挂载磁盘
                 </a>
               
-                <a href="https://www.xihrni.com/tag/a-li-yun/" class="post-tag">
+                <a href="https://www.peoai.cn/tag/a-li-yun/" class="post-tag">
                   # 阿里云
                 </a>
               
-                <a href="https://www.xihrni.com/tag/centos/" class="post-tag">
+                <a href="https://www.peoai.cn/tag/centos/" class="post-tag">
                   # centos
                 </a>
               
             </div>
             
-              <img class="post-feature-image" src="https://www.xihrni.com/post-images/a-li-yun-ecs-centos7-gua-zai-xin-ci-pan.png" alt="">
+              <img class="post-feature-image" src="https://www.peoai.cn/post-images/a-li-yun-ecs-centos7-gua-zai-xin-ci-pan.png" alt="">
             
             <div class="post-content-wrapper">
               <div class="post-content">
@@ -126,7 +126,7 @@
 <p>先查看当前磁盘信息</p>
 <pre><code class="language-shell">&gt; fdisk -l
 </code></pre>
-<p><img src="https://www.xihrni.com/post-images/1609294893165.png" alt="fdisk -l" loading="lazy"><br>
+<p><img src="https://www.peoai.cn/post-images/1609294893165.png" alt="fdisk -l" loading="lazy"><br>
 <code>/dev/vdc</code> 就是新添加的磁盘</p>
 <h3 id="创建分区">创建分区</h3>
 <p>进入分区模式</p>
@@ -141,16 +141,16 @@
 <li>输入 <code>p</code> 查看分区情况</li>
 <li>输入 <code>w</code> 开始分区，并且分区完成后会自动退出分区模式</li>
 </ol>
-<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1609295585447.png" alt="fdisk -u" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://www.peoai.cn/post-images/1609295585447.png" alt="fdisk -u" loading="lazy"></figure>
 <p>查看新分区信息</p>
 <pre><code class="language-shell">&gt; fdisk -lu /dev/vdc
 </code></pre>
-<figure data-type="image" tabindex="2"><img src="https://www.xihrni.com/post-images/1609296021975.png" alt="fdisk -lu" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://www.peoai.cn/post-images/1609296021975.png" alt="fdisk -lu" loading="lazy"></figure>
 <h3 id="创建文件系统">创建文件系统</h3>
 <p>创建一个ext4文件系统</p>
 <pre><code class="language-shell">&gt; mkfs -t ext4 /dev/vdc1
 </code></pre>
-<figure data-type="image" tabindex="3"><img src="https://www.xihrni.com/post-images/1609296123347.png" alt="mkfs -t" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="https://www.peoai.cn/post-images/1609296123347.png" alt="mkfs -t" loading="lazy"></figure>
 <h3 id="挂载分区">挂载分区</h3>
 <p>写入新分区信息，启动开机自动挂载分区</p>
 <blockquote>
@@ -188,7 +188,7 @@
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://www.xihrni.com/post/mysql-tiao-jian-pi-liang-geng-xin-yu-cha-ru-php-shi-xian/">
+            <a href="https://www.peoai.cn/post/mysql-tiao-jian-pi-liang-geng-xin-yu-cha-ru-php-shi-xian/">
               <h3 class="post-title">
                 MySQL 条件批量更新与插入（PHP实现）
               </h3>
@@ -199,7 +199,7 @@
         
 
         <div class="site-footer">
-  Powered by <a class="margin-10-left-right" href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>|<a class="margin-10-left-right" href="https://beian.miit.gov.cn" target="_blank">粤ICP备2021115781号</a>
+  Powered by <a class="margin-10-left-right" href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>|<a class="margin-10-left-right" href="https://beian.miit.gov.cn" target="_blank">粤ICP备2023121828号</a>
 
 <script>
 var _hmt = _hmt || [];
@@ -210,7 +210,7 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
-  <a class="rss" href="https://www.xihrni.com/atom.xml" target="_blank">
+  <a class="rss" href="https://www.peoai.cn/atom.xml" target="_blank">
     <i class="ri-rss-line"></i> RSS
   </a>
 </div>

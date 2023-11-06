@@ -2,13 +2,13 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>基于 Armbian 的 Linux 系统更新国内源（2 | 我的世界</title>
-<link rel="shortcut icon" href="https://www.xihrni.com/favicon.ico?v=1696991563354">
+<title>基于 Armbian 的 Linux 系统更新国内源（2 | 小菠萝个人技术分享</title>
+<link rel="shortcut icon" href="https://www.peoai.cn/favicon.ico?v=1699242453563">
 <!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet"> -->
-<link href="https://www.xihrni.com/remixicon.css" rel="stylesheet">
-<link rel="stylesheet" href="https://www.xihrni.com/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="基于 Armbian 的 Linux 系统更新国内源（2 | 我的世界 - Atom Feed"
-  href="https://www.xihrni.com/atom.xml">
+<link href="https://www.peoai.cn/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://www.peoai.cn/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="基于 Armbian 的 Linux 系统更新国内源（2 | 小菠萝个人技术分享 - Atom Feed"
+  href="https://www.peoai.cn/atom.xml">
 <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700"> -->
 
 
@@ -21,19 +21,19 @@
 ..." />
     <meta name="keywords" content="debain,armbian,国内源,rk3399,树莓派,香橙派" />
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css"> -->
-    <link rel="stylesheet" href="https://www.xihrni.com/katex.min.css">
+    <link rel="stylesheet" href="https://www.peoai.cn/katex.min.css">
     <!-- <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script> -->
-    <script src="https://www.xihrni.com/highlight.min.js"></script>
+    <script src="https://www.peoai.cn/highlight.min.js"></script>
   </head>
   <body>
     <div class="main">
       <div class="main-content">
         <div class="site-header">
-  <a href="https://www.xihrni.com">
-  <img class="avatar" src="https://www.xihrni.com/images/avatar.png?v=1696991563354" alt="">
+  <a href="https://www.peoai.cn">
+  <img class="avatar" src="https://www.peoai.cn/images/avatar.png?v=1699242453563" alt="">
   </a>
   <h1 class="site-title">
-    我的世界
+    小菠萝个人技术分享
   </h1>
   <p class="site-description">
     君子和而不同。穷则独善其身，达则兼济天下。
@@ -97,33 +97,33 @@
                 1 min read
               </span>
               
-                <a href="https://www.xihrni.com/tag/debain/" class="post-tag">
+                <a href="https://www.peoai.cn/tag/debain/" class="post-tag">
                   # debain
                 </a>
               
-                <a href="https://www.xihrni.com/tag/armbian/" class="post-tag">
+                <a href="https://www.peoai.cn/tag/armbian/" class="post-tag">
                   # armbian
                 </a>
               
-                <a href="https://www.xihrni.com/tag/guo-nei-yuan/" class="post-tag">
+                <a href="https://www.peoai.cn/tag/guo-nei-yuan/" class="post-tag">
                   # 国内源
                 </a>
               
-                <a href="https://www.xihrni.com/tag/rk3399/" class="post-tag">
+                <a href="https://www.peoai.cn/tag/rk3399/" class="post-tag">
                   # rk3399
                 </a>
               
-                <a href="https://www.xihrni.com/tag/shu-mei-pai/" class="post-tag">
+                <a href="https://www.peoai.cn/tag/shu-mei-pai/" class="post-tag">
                   # 树莓派
                 </a>
               
-                <a href="https://www.xihrni.com/tag/xiang-cheng-pai/" class="post-tag">
+                <a href="https://www.peoai.cn/tag/xiang-cheng-pai/" class="post-tag">
                   # 香橙派
                 </a>
               
             </div>
             
-              <img class="post-feature-image" src="https://www.xihrni.com/post-images/ji-yu-armbian-de-linux-xi-tong-geng-xin-guo-nei-yuan-2.png" alt="">
+              <img class="post-feature-image" src="https://www.peoai.cn/post-images/ji-yu-armbian-de-linux-xi-tong-geng-xin-guo-nei-yuan-2.png" alt="">
             
             <div class="post-content-wrapper">
               <div class="post-content">
@@ -131,12 +131,12 @@
 <p>😳帮一个群友给他的电视盒子换国内源，硬件是电视盒子系统是 <code>Debain</code>。最开我以为是他和我上次一样没有找到合适的源地址，然后一顿操作，结果还是不行。在最后搞了2个小时后，重新认真看了一下错误提示，发现原来是本地时间不对</p>
 </blockquote>
 <!-- more -->
-<figure data-type="image" tabindex="1"><img src="https://www.xihrni.com/post-images/1681887197960.png" alt="更新软件包报错" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://www.peoai.cn/post-images/1681887197960.png" alt="更新软件包报错" loading="lazy"></figure>
 <h3 id="更新时间">更新时间</h3>
 <p>认真读完错误提示后，发现他意思是文件已经过期了 x 天 x 小时什么的，我一想怎么会过期呢（最开始是以为源太老了），然后查看了一眼系统时间，果然对不上，原来问题出在这，更新时间后，重新换源一切正常~</p>
 <blockquote>
 <p>忘记截图，网上找的<br>
-<img src="https://www.xihrni.com/post-images/1681887477767.png" alt="时间对不上" loading="lazy"></p>
+<img src="https://www.peoai.cn/post-images/1681887477767.png" alt="时间对不上" loading="lazy"></p>
 </blockquote>
 <p>网络通畅的话就用这行命令同步时间</p>
 <pre><code class="language-shell">hwclock -s
@@ -171,7 +171,7 @@
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://www.xihrni.com/post/shu-mei-pai-4brk3399-armbian-geng-xin-guo-nei-yuan/">
+            <a href="https://www.peoai.cn/post/shu-mei-pai-4brk3399-armbian-geng-xin-guo-nei-yuan/">
               <h3 class="post-title">
                 RK3399/树莓派基于 Armbian 的 Linux 系统更新国内源
               </h3>
@@ -182,7 +182,7 @@
         
 
         <div class="site-footer">
-  Powered by <a class="margin-10-left-right" href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>|<a class="margin-10-left-right" href="https://beian.miit.gov.cn" target="_blank">粤ICP备2021115781号</a>
+  Powered by <a class="margin-10-left-right" href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>|<a class="margin-10-left-right" href="https://beian.miit.gov.cn" target="_blank">粤ICP备2023121828号</a>
 
 <script>
 var _hmt = _hmt || [];
@@ -193,7 +193,7 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
-  <a class="rss" href="https://www.xihrni.com/atom.xml" target="_blank">
+  <a class="rss" href="https://www.peoai.cn/atom.xml" target="_blank">
     <i class="ri-rss-line"></i> RSS
   </a>
 </div>
